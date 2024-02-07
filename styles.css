@@ -1,0 +1,49 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  margin: 20px;
+}
+
+.navbar a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  margin-bottom: 15px;
+}
+
+
+/* For tablets */
+@media (max-width: 768px) {
+  .navbar {
+      position: static;
+      margin: 0;
+      padding: 20px;
+  }
+
+  .navbar a {
+      display: inline-block;
+      margin: 0 10px;
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+  body {
+      font-size: 18px;
+  }
+
+  .navbar a {
+      display: block;
+      margin: 10px 0;
+  }
+}
+
+.profile-pic {
+  height: 200px;
+  width: 150px;
+}

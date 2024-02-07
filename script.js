@@ -1,0 +1,1 @@
+// For now, the script.js file is empty. You can add interactivity to your website using JavaScript.
