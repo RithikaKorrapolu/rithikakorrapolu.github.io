@@ -9,46 +9,43 @@ body {
 
 /* Main Container */
 .container {
-    display: flex;
-    flex-direction: column; /* Content is vertically aligned */
-    margin: 20px; /* Add padding for the main content */
+    margin: 0 auto; /* Center content horizontally */
+    max-width: 800px; /* Limit the content width */
+    padding: 20px;
 }
 
 /* Content Area */
 .content {
-    max-width: 600px;
-    margin: 0 auto; /* Center content horizontally */
-    padding-bottom: 100px; /* Add spacing to avoid overlap with the menu */
+    margin-top: 20px; /* Add space from the top */
 }
 
 /* Menu Styling */
 .menu {
-    position: fixed; /* Keeps the menu fixed on the screen */
-    top: 20px; /* Space from the top */
-    right: 20px; /* Space from the right */
-    width: auto; /* Automatically adjust the width of the menu */
+    position: fixed; /* Fix the menu in place */
+    top: 20px; /* Position 20px from the top */
+    right: 20px; /* Position 20px from the right */
+    text-align: right; /* Align text to the right */
 }
 
 /* Menu Links */
 .menu ul {
-    list-style: none;
-    padding: 0;
+    list-style: none; /* Remove bullet points */
     margin: 0;
-    text-align: right; /* Align menu items to the right */
+    padding: 0;
 }
 
 .menu li {
-    margin-bottom: 15px; /* Space between menu items */
+    margin: 5px 0; /* Add spacing between menu items */
 }
 
 .menu a {
-    text-decoration: none;
-    color: #007acc; /* Blue links */
+    text-decoration: none; /* Remove underline from links */
+    color: #007acc; /* Link color */
     font-weight: bold;
+    font-size: 14px;
     transition: color 0.3s ease;
 }
 
 .menu a:hover {
     color: #005f99; /* Darker blue on hover */
 }
-
