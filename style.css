@@ -7,45 +7,41 @@ body {
     background-color: #f9f9f9;
 }
 
-/* Main Container */
+/* Content Container */
 .container {
-    margin: 0 auto; /* Center content horizontally */
-    max-width: 800px; /* Limit the content width */
-    padding: 20px;
-}
-
-/* Content Area */
-.content {
-    margin-top: 20px; /* Add space from the top */
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 40px 20px; /* Add space around the content */
 }
 
 /* Menu Styling */
 .menu {
-    position: fixed; /* Fix the menu in place */
-    top: 20px; /* Position 20px from the top */
-    right: 20px; /* Position 20px from the right */
-    text-align: right; /* Align text to the right */
+    position: fixed; /* Fix the menu in the top-right corner */
+    top: 20px; /* Space from the top */
+    right: 20px; /* Space from the right */
+    text-align: right; /* Align menu items to the right */
 }
 
 /* Menu Links */
 .menu ul {
-    list-style: none; /* Remove bullet points */
+    list-style: none; /* Remove bullets */
     margin: 0;
     padding: 0;
 }
 
 .menu li {
-    margin: 5px 0; /* Add spacing between menu items */
+    margin-bottom: 10px; /* Space between links */
 }
 
 .menu a {
-    text-decoration: none; /* Remove underline from links */
+    text-decoration: none; /* Remove underline */
     color: #007acc; /* Link color */
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px; /* Match Patrick's menu font size */
     transition: color 0.3s ease;
 }
 
 .menu a:hover {
     color: #005f99; /* Darker blue on hover */
 }
+
