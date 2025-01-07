@@ -1,10 +1,9 @@
-// Log a message to the browser console
-console.log("Welcome to my personal website!");
-
-// Example of adding interactivity
-document.addEventListener("DOMContentLoaded", function() {
-    const heading = document.querySelector("h1");
-    heading.addEventListener("click", function() {
-        alert("You clicked the heading!");
+// Example: Log clicks on menu items
+document.addEventListener("DOMContentLoaded", function () {
+    const menuLinks = document.querySelectorAll(".menu a");
+    menuLinks.forEach(link => {
+        link.addEventListener("click", function () {
+            console.log(`Navigated to ${this.getAttribute("href")}`);
+        });
     });
 });
