@@ -10,8 +10,8 @@ body {
 /* Main Content Area */
 .content {
     max-width: 800px;
-    margin: 100px auto; /* Centers the content */
-    padding: 20px;
+    margin: 40px auto; /* Centers the content */
+    padding-left: 20px;
 }
 
 /* Menu Styling */
