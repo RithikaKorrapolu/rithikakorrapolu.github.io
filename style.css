@@ -55,16 +55,19 @@ body {
         max-width: calc(100% - 140px); /* Adjust content width for smaller screens */
         margin: 20px 0 20px 20px; /* Reduce vertical margins */
         padding: 0 10px; /* Further reduce left padding */
+        box-sizing: border-box; /* Ensure padding is included in width */
+        overflow: hidden; /* Prevent overflow caused by child elements */
     }
 }
 
 .about-image {
-    max-width: 100%; /* Ensure the image is responsive */
-    width: 100%;
-    height: auto; /* Maintain the aspect ratio */
-    margin: 20px 0; /* Add vertical spacing */
-    border-radius: 10px; /* Optional: Add rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    display: block; /* Ensures it behaves as a block-level element */
+    max-width: 100%; /* Ensures the image doesn't exceed its container's width */
+    width: auto; /* Use natural width if smaller than container */
+    height: auto; /* Maintain aspect ratio */
+    margin: 20px auto; /* Center the image and add vertical space */
+    border-radius: 10px; /* Optional: Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow */
 }
 
 /* Testimonials Section */
