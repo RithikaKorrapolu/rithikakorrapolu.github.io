@@ -23,7 +23,7 @@ body {
 }
 
 .menu li {
-    margin-bottom: 10px;
+    margin-bottom: 4px;
 }
 
 .menu a {
@@ -34,7 +34,7 @@ body {
 }
 
 .menu a:hover {
-    color: #005f99;
+    color: #175e01;
 }
 
 /* Content Area */
