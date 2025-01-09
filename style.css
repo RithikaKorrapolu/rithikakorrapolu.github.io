@@ -62,13 +62,13 @@ body {
 
 .about-image {
     display: block; /* Ensures it behaves as a block-level element */
-    max-width: 100%; /* Ensures the image doesn't exceed its container's width */
-    width: auto; /* Use natural width if smaller than container */
+    width: 20%; /* Set the image width to 20% of the container */
     height: auto; /* Maintain aspect ratio */
-    margin: 20px auto; /* Center the image and add vertical space */
+    margin: 20px auto; /* Center the image and add vertical spacing */
     border-radius: 10px; /* Optional: Rounded corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow */
 }
+
 
 /* Testimonials Section */
 .testimonials {
