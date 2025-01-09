@@ -58,11 +58,21 @@ body {
         box-sizing: border-box; /* Ensure padding is included in width */
         overflow: hidden; /* Prevent overflow caused by child elements */
     }
+    .about-image {
+        display: block; /* Ensures it behaves as a block-level element */
+        width: 20%; /* Default: 20% of the container width */
+        max-width: 150px; /* Set a maximum width to prevent it from being too large on desktop */
+        height: auto; /* Maintain aspect ratio */
+        margin: 20px auto; /* Center the image and add vertical spacing */
+        border-radius: 10px; /* Optional: Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow */
+    }
 }
 
 .about-image {
     display: block; /* Ensures it behaves as a block-level element */
-    width: 20%; /* Set the image width to 20% of the container */
+    width: 20%; /* Default: 20% of the container width */
+    max-width: 150px; /* Set a maximum width to prevent it from being too large on desktop */
     height: auto; /* Maintain aspect ratio */
     margin: 20px auto; /* Center the image and add vertical spacing */
     border-radius: 10px; /* Optional: Rounded corners */
