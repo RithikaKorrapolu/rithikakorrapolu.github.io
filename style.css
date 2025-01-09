@@ -40,7 +40,7 @@ body {
 /* Content Area */
 .content {
     max-width: calc(100% - 160px); /* Reserve space for the menu */
-    margin: 40px 0; /* Remove auto-centering for more control */
+    margin: 40px 0 40px 40px; /* Remove auto-centering for more control */
     padding: 0 10px; /* Reduce left padding for a tighter fit */
     box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
@@ -53,8 +53,8 @@ body {
 
     .content {
         max-width: calc(100% - 140px); /* Adjust content width for smaller screens */
-        margin: 20px 0; /* Reduce vertical margins */
-        padding: 0 5px; /* Further reduce left padding */
+        margin: 20px 0 20px 20px; /* Reduce vertical margins */
+        padding: 0 10px; /* Further reduce left padding */
     }
 }
 
