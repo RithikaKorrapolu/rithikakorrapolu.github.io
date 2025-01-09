@@ -39,22 +39,22 @@ body {
 
 /* Content Area */
 .content {
-    max-width: calc(100% - 180px); /* Reserve space for the menu */
-    margin: 40px auto;
-    padding: 0 20px;
-    box-sizing: border-box; /* Include padding in width calculation */
+    max-width: calc(100% - 160px); /* Reserve space for the menu */
+    margin: 40px 0; /* Remove auto-centering for more control */
+    padding: 0 10px; /* Reduce left padding for a tighter fit */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
 
 /* Media Query for Smaller Screens */
 @media (max-width: 768px) {
     .menu {
-        width: 120px; /* Narrow the menu on smaller screens */
+        width: 120px; /* Narrow menu width on smaller screens */
     }
 
     .content {
-        max-width: calc(100% - 140px); /* Reserve enough space for the narrower menu */
-        margin: 20px auto;
-        padding: 0 15px; /* Adjust padding for a tighter fit */
+        max-width: calc(100% - 140px); /* Adjust content width for smaller screens */
+        margin: 20px 0; /* Reduce vertical margins */
+        padding: 0 5px; /* Further reduce left padding */
     }
 }
 
