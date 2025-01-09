@@ -9,11 +9,11 @@ body {
 
 /* Menu Styling */
 .menu {
-    position: fixed; /* Keep the menu fixed on the right */
+    position: fixed; /* Fix the menu on the right */
     top: 20px; /* Distance from the top */
     right: 20px; /* Distance from the right */
+    width: 140px; /* Set a fixed width for the menu */
     text-align: right;
-    width: 150px; /* Set a fixed width for the menu to avoid overlap */
 }
 
 .menu ul {
@@ -39,7 +39,7 @@ body {
 
 /* Content Area */
 .content {
-    max-width: calc(100% - 200px); /* Account for the menu's width */
+    max-width: calc(100% - 180px); /* Reserve space for the menu */
     margin: 40px auto;
     padding: 0 20px;
     box-sizing: border-box; /* Include padding in width calculation */
@@ -47,16 +47,17 @@ body {
 
 /* Media Query for Smaller Screens */
 @media (max-width: 768px) {
-    .content {
-        max-width: calc(100% - 130px); /* Reduce the space left for the menu */
-        margin: 20px auto;
-        padding: 0 10px; /* Reduce padding to make it closer to the right */
+    .menu {
+        width: 120px; /* Narrow the menu on smaller screens */
     }
 
-    .menu {
-        width: 120px; /* Narrower menu for smaller screens */
+    .content {
+        max-width: calc(100% - 140px); /* Reserve enough space for the narrower menu */
+        margin: 20px auto;
+        padding: 0 15px; /* Adjust padding for a tighter fit */
     }
 }
+
 
 /* Testimonials Section */
 .testimonials {
