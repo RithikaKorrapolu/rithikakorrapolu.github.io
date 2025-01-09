@@ -10,9 +10,9 @@ body {
 
 /* Main Content Area */
 .content {
-    max-width: 800px;
-    margin: 40px auto; /* Centers the content */
-    padding-left: 20px;
+    max-width: 600px; /* Reduce the maximum width for smaller screens */
+    margin: 40px auto; /* Center horizontally */
+    padding: 0 20px; /* Add padding for smaller screens */
 }
 
 /* Menu Styling */
