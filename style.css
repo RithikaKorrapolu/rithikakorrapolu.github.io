@@ -53,24 +53,12 @@ body {
 }
 
 /* Media Query for Smaller Screens */
+/* Media Query for Smaller Screens */
 @media (max-width: 768px) {
-    .menu {
-        position: relative; /* Change from fixed to relative */
-        text-align: center; /* Center-align the menu */
-        margin: 20px auto; /* Add spacing around the menu */
-        top: 0;
-        right: 0;
-    }
-
-    .menu ul {
-        display: flex;
-        flex-direction: column; /* Stack menu items vertically */
-        align-items: center; /* Center menu items */
-        padding: 0;
-    }
-
     .content {
-        margin: 20px; /* Reduce the margin to fit smaller screens */
+        max-width: 400px; /* Further reduce the width for smaller screens */
+        margin: 20px auto; /* Adjust margins for tighter screens */
+        padding: 0 10px; /* Add smaller padding */
     }
 }
 
