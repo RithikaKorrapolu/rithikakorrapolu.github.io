@@ -1,64 +1,60 @@
-/* General Reset 2*/
+/* General Reset */
 body {
     margin: 0;
-    padding: 0;
     font-family: Arial, sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #f9f9f9;
 }
 
-/* Main Content Area */
-.content {
-    max-width: 600px; /* Reduce the maximum width for smaller screens */
-    margin: 40px auto; /* Center horizontally */
-    padding: 0 20px; /* Add padding for smaller screens */
-}
-
 /* Menu Styling */
 .menu {
-    position: fixed; /* Keeps the menu in the top-right corner */
-    top: 20px;       /* Distance from the top */
-    right: 20px;     /* Distance from the right */
+    position: fixed; /* Keep the menu fixed on the right */
+    top: 20px; /* Distance from the top */
+    right: 20px; /* Distance from the right */
     text-align: right;
+    width: 150px; /* Set a fixed width for the menu to avoid overlap */
 }
 
 .menu ul {
-    list-style: none; /* Remove bullets */
+    list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .menu li {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .menu a {
-    text-decoration: none; /* No underline */
+    text-decoration: none;
     color: #007acc;
     font-weight: bold;
-    font-size: 16px;
     transition: color 0.3s ease;
 }
 
 .menu a:hover {
-    color: #037101; /* Darker blue on hover */
+    color: #005f99;
 }
 
 /* Content Area */
 .content {
-    max-width: 800px;
+    max-width: calc(100% - 200px); /* Account for the menu's width */
     margin: 40px auto;
     padding: 0 20px;
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
 /* Media Query for Smaller Screens */
-/* Media Query for Smaller Screens */
 @media (max-width: 768px) {
     .content {
-        max-width: 400px; /* Further reduce the width for smaller screens */
-        margin: 20px auto; /* Adjust margins for tighter screens */
-        padding: 0 10px; /* Add smaller padding */
+        max-width: calc(100% - 180px); /* Further reduce the content width */
+        margin: 20px auto;
+        padding: 0 10px;
+    }
+
+    .menu {
+        width: 120px; /* Narrower menu for smaller screens */
     }
 }
 
