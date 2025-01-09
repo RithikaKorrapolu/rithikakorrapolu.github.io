@@ -48,16 +48,15 @@ body {
 /* Media Query for Smaller Screens */
 @media (max-width: 768px) {
     .content {
-        max-width: calc(100% - 180px); /* Further reduce the content width */
+        max-width: calc(100% - 130px); /* Reduce the space left for the menu */
         margin: 20px auto;
-        padding: 0 10px;
+        padding: 0 10px; /* Reduce padding to make it closer to the right */
     }
 
     .menu {
         width: 120px; /* Narrower menu for smaller screens */
     }
 }
-
 
 /* Testimonials Section */
 .testimonials {
