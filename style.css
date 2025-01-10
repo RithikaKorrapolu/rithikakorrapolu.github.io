@@ -7,6 +7,26 @@ body {
     background-color: #f9f9f9;
 }
 
+body.home {
+    background-color: #f9f9f9; /* Light gray */
+}
+
+body.about {
+    background-color: #FA4224; /* Light gray */
+}
+
+body.likes {
+    background-color: #910909; /* Light gray */
+}
+
+body.learnings{
+    background-color: #d5cb13; /* Light gray */
+}
+
+body.contact {
+    background-color: #16d27a; /* Light gray */
+}
+
 /* Menu Styling */
 .menu {
     position: fixed; /* Fix the menu on the right */
@@ -23,7 +43,7 @@ body {
 }
 
 .menu li {
-    margin-bottom: 3px;
+    margin-bottom: 0px;
 }
 
 .menu a {
@@ -44,7 +64,23 @@ body {
     padding: 0 10px; /* Reduce left padding for a tighter fit */
     box-sizing: border-box; /* Ensure padding doesn't affect width */
 }
+.about-image {
+    display: block; /* Ensures it behaves as a block-level element */
+    width: 40%; /* Default: 20% of the container width */
+    max-width: 150px; /* Set a maximum width to prevent it from being too large on desktop */
+    height: auto; /* Maintain aspect ratio */
+    margin: 20px auto; /* Center the image and add vertical spacing */
+    border-radius: 10px; /* Optional: Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow */
+}
 
+.home-image {
+    width: 50%; /* Make the image span the full width of the container */
+    height: auto; /* Maintain the aspect ratio */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    margin-top: 20px; /* Add space above the image */
+}
 /* Media Query for Smaller Screens */
 @media (max-width: 768px) {
     .menu {
@@ -60,23 +96,22 @@ body {
     }
     .about-image {
         display: block; /* Ensures it behaves as a block-level element */
-        width: 20%; /* Default: 20% of the container width */
+        width: 40%; /* Default: 20% of the container width */
         max-width: 150px; /* Set a maximum width to prevent it from being too large on desktop */
         height: auto; /* Maintain aspect ratio */
         margin: 20px auto; /* Center the image and add vertical spacing */
         border-radius: 10px; /* Optional: Rounded corners */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow */
     }
-}
 
-.about-image {
-    display: block; /* Ensures it behaves as a block-level element */
-    width: 20%; /* Default: 20% of the container width */
-    max-width: 150px; /* Set a maximum width to prevent it from being too large on desktop */
-    height: auto; /* Maintain aspect ratio */
-    margin: 20px auto; /* Center the image and add vertical spacing */
-    border-radius: 10px; /* Optional: Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow */
+    .home-image {
+        width: 100%; /* Make the image span the full width of the container */
+        height: auto; /* Maintain the aspect ratio */
+        border-radius: 10px; /* Optional: Add rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+        margin-top: 20px; /* Add space above the image */
+    }
+    
 }
 
 
