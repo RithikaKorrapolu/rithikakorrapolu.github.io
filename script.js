@@ -33,18 +33,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     async function showAllMessagesInstantly() {
-        // First, clear any existing messages to prevent duplicates
-        chatMessages.innerHTML = '';
+        // Check if messages are already displayed
+        const existingMessages = chatMessages.children.length;
         
-        // Show all initial messages instantly
-        initialMessages.forEach(message => {
-            chatMessages.appendChild(createMessage(message.text));
-        });
-        scrollToBottom();
+        if (existingMessages === 0) {
+            // Only show initial messages if there are no messages displayed
+            initialMessages.forEach(message => {
+                chatMessages.appendChild(createMessage(message.text));
+            });
+            scrollToBottom();
+        }
         
-        // Important change: We only check if they've seen the initial messages
-        // Removed the check for hasShownReturnMessages since we want them to appear every time
-        if (hasSeenMessages()) {
+        // Show return messages only if we have existing messages
+        // (meaning we've been here before) but just got back to the page
+        if (hasSeenMessages() && document.visibilityState === 'visible') {
             console.log('Showing return messages for returning visitor');
             
             // Add a small pause before showing the typing indicator
@@ -56,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 typingIndicator.remove();
     
-                // Add each return message with a small delay
+                // Add only the return messages
                 for (const message of returnMessages) {
                     chatMessages.appendChild(createMessage(message.text));
                     scrollToBottom();
