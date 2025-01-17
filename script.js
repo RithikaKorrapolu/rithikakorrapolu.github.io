@@ -42,30 +42,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 chatMessages.appendChild(createMessage(message.text));
             });
             scrollToBottom();
-        }
-        
-        // Show return messages only if we have existing messages
-        // (meaning we've been here before) but just got back to the page
-        if (hasSeenMessages() && document.visibilityState === 'visible') {
-            console.log('Showing return messages for returning visitor');
-            
-            // Add a small pause before showing the typing indicator
-            await new Promise(resolve => setTimeout(resolve, 500));
-            
-            try {
-                // Show typing indicator for return messages
-                const typingIndicator = await showTypingIndicator();
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                typingIndicator.remove();
     
-                // Add only the return messages
-                for (const message of returnMessages) {
-                    chatMessages.appendChild(createMessage(message.text));
-                    scrollToBottom();
-                    await new Promise(resolve => setTimeout(resolve, 800));
+            // Only show return messages if we haven't shown them before in this session
+            if (hasSeenMessages() && !sessionStorage.getItem('hasShownReturnMessages')) {
+                console.log('Showing return messages for returning visitor');
+                
+                // Add a small pause before showing the typing indicator
+                await new Promise(resolve => setTimeout(resolve, 500));
+                
+                try {
+                    // Show typing indicator for return messages
+                    const typingIndicator = await showTypingIndicator();
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    typingIndicator.remove();
+    
+                    // Add only the return messages
+                    for (const message of returnMessages) {
+                        chatMessages.appendChild(createMessage(message.text));
+                        scrollToBottom();
+                        await new Promise(resolve => setTimeout(resolve, 800));
+                    }
+    
+                    // Mark that we've shown the return messages
+                    sessionStorage.setItem('hasShownReturnMessages', 'true');
+                } catch (error) {
+                    console.error('Error showing return messages:', error);
                 }
-            } catch (error) {
-                console.error('Error showing return messages:', error);
             }
         }
     }
