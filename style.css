@@ -205,9 +205,9 @@ ul ul {
 #chat-container {
     position: fixed;
     top: 40%;
-    left: 25%;  /* Move even further left */
-    transform: translate(-25%, -50%);  /* Adjust transform to match new left value */
-    width: 600px;  /* increased width */
+    left: 50%;  /* Center horizontally */
+    transform: translate(-50%, -50%);  /* Center both vertically and horizontally */
+    width: 600px;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -215,6 +215,7 @@ ul ul {
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    margin-right: 160px;  /* Add space for menu on right */
 }
 
 /* Messages Container Area */
@@ -399,23 +400,24 @@ ul ul {
 /* Responsive Design */
 @media (max-width: 768px) {
     #chat-container {
-        width: 65%;  /* Use percentage instead of calc */
-        left: 25%;
-        max-height: 60vh;
+        width: 65%;
+        left: 22%;  /* Move left on tablets */
+        transform: translate(-15%, -50%);  /* Adjust transform for new position */
+        margin-right: 0;  /* Remove desktop margin */
     }
 }
 
 @media (max-width: 480px) {
     #chat-container {
-        width: 65%;  /* Consistent width on mobile */
-        left: 15%;   /* Move further left to avoid menu */
+        width: 65%;
+        left: 15%;
         transform: translate(-10%, -50%);
-        margin-right: 100px; /* Extra space for menu */
+        margin-right: 100px;  /* Space for mobile menu */
     }
     
     .chat-bubble {
-        max-width: 80%;  /* Slightly narrower bubbles on mobile */
-        font-size: 16px; /* Smaller text on mobile */
+        max-width: 80%;
+        font-size: 16px;
     }
 
     .chat-header-text {
