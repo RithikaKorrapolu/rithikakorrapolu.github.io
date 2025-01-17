@@ -36,38 +36,43 @@ document.addEventListener('DOMContentLoaded', function() {
         // Check if messages are already displayed
         const existingMessages = chatMessages.children.length;
         
+        // First time loading messages in this session
         if (existingMessages === 0) {
-            // Only show initial messages if there are no messages displayed
+            // Show initial messages instantly
             initialMessages.forEach(message => {
                 chatMessages.appendChild(createMessage(message.text));
             });
             scrollToBottom();
     
-            // Only show return messages if we haven't shown them before in this session
+            // Only show welcome back messages on the first return visit
             if (hasSeenMessages() && !sessionStorage.getItem('hasShownReturnMessages')) {
-                console.log('Showing return messages for returning visitor');
-                
-                // Add a small pause before showing the typing indicator
                 await new Promise(resolve => setTimeout(resolve, 500));
                 
                 try {
-                    // Show typing indicator for return messages
                     const typingIndicator = await showTypingIndicator();
                     await new Promise(resolve => setTimeout(resolve, 1000));
                     typingIndicator.remove();
     
-                    // Add only the return messages
+                    // Add return messages
                     for (const message of returnMessages) {
                         chatMessages.appendChild(createMessage(message.text));
                         scrollToBottom();
                         await new Promise(resolve => setTimeout(resolve, 800));
                     }
-    
-                    // Mark that we've shown the return messages
+                    
+                    // Mark that return messages have been shown
                     sessionStorage.setItem('hasShownReturnMessages', 'true');
                 } catch (error) {
                     console.error('Error showing return messages:', error);
                 }
+            }
+    
+            // If we've already shown return messages in a previous load, add them instantly
+            if (sessionStorage.getItem('hasShownReturnMessages')) {
+                returnMessages.forEach(message => {
+                    chatMessages.appendChild(createMessage(message.text));
+                });
+                scrollToBottom();
             }
         }
     }
@@ -118,23 +123,22 @@ document.addEventListener('DOMContentLoaded', function() {
         markMessagesAsSeen();
     }
 
-    function initializeChat() {
-        // Log the current state when initializing
-        console.log('Initializing chat with state:', {
-            hasSeenMessages: hasSeenMessages(),
-            hasShownReturnMessages: sessionStorage.getItem('hasShownReturnMessages')
-        });
-    
-        if (hasSeenMessages()) {
-            // For returning visitors in the same session
-            console.log('Showing messages instantly for returning visitor');
-            showAllMessagesInstantly();
-        } else {
-            // For first-time visitors
-            console.log('Showing animated messages for first-time visitor');
-            animateMessages();
-        }
+function initializeChat() {
+    console.log('Initializing chat with state:', {
+        hasSeenMessages: hasSeenMessages(),
+        hasShownReturnMessages: sessionStorage.getItem('hasShownReturnMessages')
+    });
+
+    if (hasSeenMessages()) {
+        console.log('Showing messages instantly for returning visitor');
+        showAllMessagesInstantly();
+    } else {
+        console.log('Showing animated messages for first-time visitor');
+        animateMessages();
+        // Set initial message seen flag
+        markMessagesAsSeen();
     }
+}
 
     initializeChat();
 });
