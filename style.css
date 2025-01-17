@@ -207,7 +207,7 @@ ul ul {
     top: 40%;
     left: 25%;  /* Move even further left */
     transform: translate(-25%, -50%);  /* Adjust transform to match new left value */
-    width: 400px;  /* Reduced width */
+    width: 600px;  /* increased width */
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -399,7 +399,7 @@ ul ul {
 /* Responsive Design */
 @media (max-width: 768px) {
     #chat-container {
-        width: 60%;  /* Use percentage instead of calc */
+        width: 65%;  /* Use percentage instead of calc */
         left: 25%;
         max-height: 60vh;
     }
@@ -407,9 +407,15 @@ ul ul {
 
 @media (max-width: 480px) {
     #chat-container {
-        width: 65%;  /* Slightly wider on mobile */
-        left: 25%;
-        max-height: 60vh;
+        width: 65%;  /* Consistent width on mobile */
+        left: 15%;   /* Move further left to avoid menu */
+        transform: translate(-10%, -50%);
+        margin-right: 100px; /* Extra space for menu */
+    }
+    
+    .chat-bubble {
+        max-width: 80%;  /* Slightly narrower bubbles on mobile */
+        font-size: 16px; /* Smaller text on mobile */
     }
 
     .chat-header-text {
