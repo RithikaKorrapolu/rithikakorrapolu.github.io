@@ -42,13 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         scrollToBottom();
         
-        // Important change: We want to show return messages if we've seen the initial messages
-        // but haven't shown the return messages yet
-        if (hasSeenMessages() && !sessionStorage.getItem('hasShownReturnMessages')) {
-            // Let's add some console.log statements to help us debug
-            console.log('Should show return messages now');
-            console.log('Has seen messages:', hasSeenMessages());
-            console.log('Has shown return messages:', sessionStorage.getItem('hasShownReturnMessages'));
+        // Important change: We only check if they've seen the initial messages
+        // Removed the check for hasShownReturnMessages since we want them to appear every time
+        if (hasSeenMessages()) {
+            console.log('Showing return messages for returning visitor');
             
             // Add a small pause before showing the typing indicator
             await new Promise(resolve => setTimeout(resolve, 500));
@@ -65,18 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     scrollToBottom();
                     await new Promise(resolve => setTimeout(resolve, 800));
                 }
-                
-                // Mark that we've shown the return messages
-                sessionStorage.setItem('hasShownReturnMessages', 'true');
-                console.log('Return messages shown and marked');
             } catch (error) {
                 console.error('Error showing return messages:', error);
             }
-        } else {
-            console.log('Skipping return messages because:', {
-                hasSeenMessages: hasSeenMessages(),
-                hasShownReturnMessages: sessionStorage.getItem('hasShownReturnMessages')
-            });
         }
     }
 
