@@ -205,29 +205,25 @@ ul ul {
 #chat-container {
     position: fixed;
     top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* width: 500px; */
-    width: auto;
+    left: 25%;  /* Move even further left */
+    transform: translate(-25%, -50%);  /* Adjust transform to match new left value */
+    width: 400px;  /* Reduced width */
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     overflow: hidden;
-    /* Base maximum width that accounts for menu space and padding */
-    max-width: calc(100% - 200px); /* Increased from 180px to provide more spacing */
-    max-height: 70vh;  /* Set maximum height relative to viewport height */
-    display: flex;     /* Enable flex layout */
-    flex-direction: column;  /* Stack children vertically */
+    display: flex;
+    flex-direction: column;
 }
 
 /* Messages Container Area */
 #chat-messages {
     padding: 1.5rem;
-    overflow-y: auto;  /* Enable vertical scrolling */
-    flex-grow: 1;      /* Allow this section to grow and scroll */
-    max-height: calc(70vh - 70px);  /* Subtract header height */
-    scroll-behavior: smooth; /* Add smooth scrolling */
+    overflow-y: auto;
+    flex-grow: 1;
+    max-height: 60vh;
+    scroll-behavior: smooth;
 }
 
 /* Individual Message Styling */
@@ -403,35 +399,20 @@ ul ul {
 /* Responsive Design */
 @media (max-width: 768px) {
     #chat-container {
-        width: calc(100% - 200px);
-        left: 40%;
-        max-height: 70vh;  /* Maintain consistent max height */
-    }
-    
-    #chat-messages {
-        padding: 1rem;
-    }
-    
-    .chat-bubble {
-        font-size: 16px;
+        width: 60%;  /* Use percentage instead of calc */
+        left: 25%;
+        max-height: 60vh;
     }
 }
 
 @media (max-width: 480px) {
     #chat-container {
-        max-width: calc(100% - 50px); /* This is capping the size! */
-        width: 65%;
-        left: 35%
+        width: 65%;  /* Slightly wider on mobile */
+        left: 25%;
+        max-height: 60vh;
     }
 
-    .chat-bubble {
-        font-size: 15px;
-        padding: 12px 16px;
-    }
-
-    .chat-avatar {
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
+    .chat-header-text {
+        font-size: 16px;
     }
 }
