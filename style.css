@@ -205,9 +205,10 @@ ul ul {
 #chat-container {
     position: fixed;
     top: 40%;
-    left: 50%;  /* Center horizontally */
-    transform: translate(-50%, -50%);  /* Center both vertically and horizontally */
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 600px;
+    height: 500px;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -215,15 +216,14 @@ ul ul {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    margin-right: 160px;  /* Add space for menu on right */
+    margin-right: 160px;
 }
 
 /* Messages Container Area */
 #chat-messages {
     padding: 1.5rem;
-    overflow-y: auto;
-    flex-grow: 1;
-    max-height: 60vh;
+    overflow-y: auto;  /* This enables scrolling */
+    height: calc(100% - 20px);  /* Full height minus header height */
     scroll-behavior: smooth;
 }
 
@@ -317,18 +317,20 @@ ul ul {
     align-items: center;
     color: white;
     flex-shrink: 0;  /* Prevent header from shrinking */
+    height: 20px;  /* Fixed header height */
+    min-height: 20px;  /* Ensures header doesn't shrink */
 
 }
 
 .chat-header-content {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
 }
 
 .chat-header-icon {
-    width: 36px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
     background-color: white;
     color: #3761D9;
     border-radius: 50%;
@@ -336,11 +338,11 @@ ul ul {
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .chat-header-text {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     color: white;
 }
@@ -397,7 +399,15 @@ ul ul {
         transform: translateY(0);
     }
 }
-/* Responsive Design */
+/* Responsive Design - adjusted breakpoints */
+@media (max-width: 1024px) {
+    #chat-container {
+        width: 65%;
+        left: 30%;
+        transform: translate(-25%, -50%);
+        margin-right: 160px;  /* Maintain space for menu */
+    }
+}
 @media (max-width: 768px) {
     #chat-container {
         width: 65%;
@@ -410,9 +420,10 @@ ul ul {
 @media (max-width: 480px) {
     #chat-container {
         width: 65%;
+        height: 400px;
         left: 15%;
         transform: translate(-10%, -50%);
-        margin-right: 100px;  /* Space for mobile menu */
+        margin-right: 100px;
     }
     
     .chat-bubble {
