@@ -422,13 +422,13 @@ ul ul {
     #chat-container {
         /* Position */
         position: fixed;
-        top: 270px;  /* Start below menu */
+        top: 260px;  /* Start below menu */
         left: 50%;   /* Center horizontally */
         transform: translate(-50%, 0);  /* Center the container but don't move vertically */
         
         /* Size */
-        width: 80%;  /* Take up 70% of screen width */
-        height: 60vh;  /* Take up 60% of viewport height */
+        width: 80%;  /* Take up 80% of screen width */
+        height: 55vh;  /* Take up 60% of viewport height */
         
         /* Reset other positioning */
         margin: 0;
