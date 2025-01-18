@@ -258,6 +258,7 @@ ul ul {
     border: 2px solid #3b82f6;  /* Optional: adds a nice border */
 }
 
+
 /* Message Bubble Design */
 .chat-bubble {
     background-color: white;
@@ -419,19 +420,32 @@ ul ul {
 
 @media (max-width: 480px) {
     #chat-container {
-        width: 65%;
-        height: 400px;
-        left: 15%;
-        transform: translate(-10%, -50%);
-        margin-right: 100px;
-    }
-    
-    .chat-bubble {
-        max-width: 80%;
-        font-size: 16px;
+        /* Position */
+        position: fixed;
+        top: 270px;  /* Start below menu */
+        left: 50%;   /* Center horizontally */
+        transform: translate(-50%, 0);  /* Center the container but don't move vertically */
+        
+        /* Size */
+        width: 80%;  /* Take up 70% of screen width */
+        height: 60vh;  /* Take up 60% of viewport height */
+        
+        /* Reset other positioning */
+        margin: 0;
+        
+        /* Maintain other properties */
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        z-index: 1000;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
     }
 
-    .chat-header-text {
-        font-size: 16px;
+    #chat-messages {
+        height: calc(100% - 20px);  /* Account for header */
+        overflow-y: auto;
+        padding: 1rem;
     }
 }
