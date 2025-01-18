@@ -123,22 +123,55 @@ document.addEventListener('DOMContentLoaded', function() {
         markMessagesAsSeen();
     }
 
-function initializeChat() {
-    console.log('Initializing chat with state:', {
-        hasSeenMessages: hasSeenMessages(),
-        hasShownReturnMessages: sessionStorage.getItem('hasShownReturnMessages')
-    });
+    function initializeChat() {
+        console.log('Initializing chat with state:', {
+            hasSeenMessages: hasSeenMessages(),
+            hasShownReturnMessages: sessionStorage.getItem('hasShownReturnMessages')
+        });
 
-    if (hasSeenMessages()) {
-        console.log('Showing messages instantly for returning visitor');
-        showAllMessagesInstantly();
-    } else {
-        console.log('Showing animated messages for first-time visitor');
-        animateMessages();
-        // Set initial message seen flag
-        markMessagesAsSeen();
+        if (hasSeenMessages()) {
+            console.log('Showing messages instantly for returning visitor');
+            showAllMessagesInstantly();
+        } else {
+            console.log('Showing animated messages for first-time visitor');
+            animateMessages();
+            // Set initial message seen flag
+            markMessagesAsSeen();
+        }
     }
-}
 
+    // Initialize menu functionality after everything else
+    function initializeMenu() {
+        const menuButton = document.querySelector('.menu-button');
+        const headerMenu = document.querySelector('.header-menu');
+        
+        if (!menuButton || !headerMenu) {
+            console.error('Menu elements not found!');
+            return;
+        }
+
+        // Toggle menu when clicking the menu button
+        menuButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            headerMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!headerMenu.contains(e.target) && !menuButton.contains(e.target)) {
+                headerMenu.classList.remove('active');
+            }
+        });
+        
+        // Close menu when clicking a menu item
+        headerMenu.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                headerMenu.classList.remove('active');
+            }
+        });
+    }
+
+    // Start the chat and menu
     initializeChat();
+    initializeMenu();
 });

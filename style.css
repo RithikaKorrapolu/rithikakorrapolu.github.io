@@ -29,12 +29,78 @@ body.contact {
 
 /* Menu Styling */
 .menu {
-    position: fixed; /* Fix the menu on the right */
-    top: 40px; /* Distance from the top */
-    right: 20px; /* Distance from the right */
-    width: 140px; /* Set a fixed width for the menu */
-    text-align: right;
+    display: none;
 }
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Menu button styling */
+.menu-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Header menu styling */
+.header-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 4px 0;
+    z-index: 1000;
+    min-width: 120px;
+    width: fit-content
+}
+
+.header-menu.active {
+    display: block;
+    animation: slideDown 0.2s ease-out;
+}
+
+.header-menu a {
+    display: block;
+    padding: 4px 12px;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;  /* Prevent text wrapping */
+
+}
+
+.header-menu a:hover {
+    color: #007acc;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 .menu ul {
     list-style: none;
@@ -223,7 +289,7 @@ ul ul {
 #chat-messages {
     padding: 1.5rem;
     overflow-y: auto;  /* This enables scrolling */
-    height: calc(100% - 20px);  /* Full height minus header height */
+    height: calc(100% - 60px);  /* Full height minus header height */
     scroll-behavior: smooth;
 }
 
@@ -311,16 +377,16 @@ ul ul {
 /* Header Styling */
 .chat-header {
     background-color: #3761D9;
-    padding: 18px 24px;
+    padding: 1rem 1.5rem;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: white;
-    flex-shrink: 0;  /* Prevent header from shrinking */
-    height: 20px;  /* Fixed header height */
-    min-height: 20px;  /* Ensures header doesn't shrink */
-
+    flex-shrink: 0;
+    height: 60px;  /* Set a fixed height */
+    box-sizing: border-box;
+    position: relative;
 }
 
 .chat-header-content {
@@ -356,6 +422,7 @@ ul ul {
     cursor: pointer;
     padding: 0;
     line-height: 1;
+    display: none;
 }
 
 /* Typing Indicator Animation */
@@ -422,13 +489,13 @@ ul ul {
     #chat-container {
         /* Position */
         position: fixed;
-        top: 260px;  /* Start below menu */
+        top: 20px;  /* Start below menu */
         left: 50%;   /* Center horizontally */
         transform: translate(-50%, 0);  /* Center the container but don't move vertically */
         
         /* Size */
-        width: 80%;  /* Take up 80% of screen width */
-        height: 50vh;  /* Take up 60% of viewport height */
+        width: 90%;  /* Take up 80% of screen width */
+        height: 80vh;  /* Take up 60% of viewport height */
         
         /* Reset other positioning */
         margin: 0;
@@ -444,7 +511,7 @@ ul ul {
     }
 
     #chat-messages {
-        height: calc(100% - 20px);  /* Account for header */
+        height: calc(100% - 60px);  /* Account for header */
         overflow-y: auto;
         padding: 1rem;
     }
