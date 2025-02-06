@@ -18,11 +18,15 @@ body {
     overflow: hidden;
     min-width: 320px;
     width: 100%;
-    position: relative;
+    height: 100%;
+    position: fixed;
 }
 
 .main-container {
-    height: 100vh;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
     display: flex;
     flex-direction: column;
     background-color: #1a1a1a;
@@ -246,6 +250,12 @@ video {
     .main-container {
         padding: 1rem 1rem 0 1rem;
         height: 100dvh; /* Use dynamic viewport height */
+    }
+
+    body, .main-container {
+        position: fixed;
+        overflow: hidden;
+        touch-action: none;
     }
 
     .name {
