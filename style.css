@@ -226,10 +226,18 @@ video {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+    .main-container {
+        padding: 1rem 1rem 0 1rem;
+        height: 100dvh; /* Use dynamic viewport height */
+    }
     .name-overlay {
         bottom: 1.5rem;
         left: 1.5rem;
         padding: 0.5rem 1rem;
+    }
+
+    .video-container {
+        height: calc(100dvh - 70px); /* Adjust for smaller navbar */
     }
     
     .video-controls {
@@ -238,10 +246,23 @@ video {
     }
     
     .navbar {
-        padding: 1rem;
+        padding: 0.75rem;
+        margin: 0 -1rem;
     }
-    
+
     .nav-links {
         gap: 1.25rem;
+    }
+    .menu-popup {
+        right: 1rem;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
+
+/* Fix iOS Safari bottom bar issues */
+@supports (-webkit-touch-callout: none) {
+    .main-container {
+        padding-bottom: env(safe-area-inset-bottom);
     }
 }
