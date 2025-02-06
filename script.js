@@ -25,8 +25,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Menu toggle functionality
     menuTrigger.addEventListener('click', function(event) {
-        event.stopPropagation(); // Prevent click from immediately triggering document click
+        event.stopPropagation();
         menuPopup.classList.toggle('hidden');
+        this.classList.toggle('active');    
     });
 
     // Close menu when clicking outside
