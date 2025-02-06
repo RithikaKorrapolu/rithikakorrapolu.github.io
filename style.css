@@ -1,518 +1,247 @@
-/* General Reset */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #000000;
-    background-color: #f9f9f9;
-}
-
-body.home {
-    background-color: #f9f9f9; /* Light gray */
-}
-
-body.about {
-    background-color: #f9f9f9; /* Light gray */
-}
-
-body.likes {
-    background-color: #f9f9f9; /* Light gray */
-}
-
-body.learnings{
-    background-color: #f9f9f9; /* Light gray */
-}
-
-body.contact {
-    background-color: #f9f9f9; /* Light gray */
-}
-
-/* Menu Styling */
-.menu {
-    display: none;
-}
-
-.header-controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-/* Menu button styling */
-.menu-button {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
-    transition: background-color 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.menu-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Header menu styling */
-.header-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 4px 0;
-    z-index: 1000;
-    min-width: 120px;
-    width: fit-content
-}
-
-.header-menu.active {
-    display: block;
-    animation: slideDown 0.2s ease-out;
-}
-
-.header-menu a {
-    display: block;
-    padding: 4px 12px;
-    color: #333;
-    text-decoration: none;
-    transition: color 0.2s;
-    white-space: nowrap;  /* Prevent text wrapping */
-
-}
-
-.header-menu a:hover {
-    color: #007acc;
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-
-.menu ul {
-    list-style: none;
+/* style.css */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-.menu li {
-    margin-bottom: 0px;
-}
-
-.menu a {
-    text-decoration: none;
-    color: #007acc;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.menu a:hover {
-    color: #175e01;
-}
-
-/* Content Area */
-.content {
-    max-width: calc(100% - 160px); /* Reserve space for the menu */
-    margin: 40px 0 40px 40px; /* Remove auto-centering for more control */
-    padding: 0 10px; /* Reduce left padding for a tighter fit */
-    box-sizing: border-box; /* Ensure padding doesn't affect width */
-}
-.about-image {
-    width: 30%; /* Make the image span the full width of the container */
-    height: auto; /* Maintain the aspect ratio */
-    border-radius: 10px; /* Optional: Add rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
-    margin-top: 20px; /* Add space above the image */
-}
-
-.home-image {
-    width: 50%; /* Make the image span the full width of the container */
-    height: auto; /* Maintain the aspect ratio */
-    border-radius: 10px; /* Optional: Add rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
-    margin-top: 20px; /* Add space above the image */
-}
-.content h1 {
-    font-family: 'Poppins', sans-serif; /* Use your chosen font */
-    font-size: 42px; /* Adjust the size */
-    font-weight: 700; /* Adjust the weight */
-    text-shadow: 0.2px 0.2px 0 #000000;
-    color: #000000; /* Change the color if needed */
-    text-align: left; /* Center-align the text */
-    margin-bottom: 0px; /* Reduce space below the header */
-    margin-top: 2px;
-}
-.content p {
-    font-family: 'Lexend', sans-serif; /* Use your chosen font */
-    font-size:20px; /* Adjust the size */
-    font-weight: 400; /* Adjust the weight */
-    margin-top: 0px; /* Reduce space above the paragraph */
-    margin-bottom: 10px; /* Adjust the space below the paragraph */
-}
-
-
-.bold-italic {
-    /* font-weight: bold; */
-    font-style: italic;
-    color: #000000; /* Optional: Adjust the color */
-}
-
-.redstrike{
-    color: rgb(0, 0, 0);
-    font-weight: bold;
-    text-decoration: line-through;
-    text-decoration-color: rgb(0, 0, 0); /* Changes the strikethrough line color */
-    text-decoration-thickness: 2px; /* Optional: Adjust the thickness of the line */
-}
-
-.like-btn {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px 10px;
-    margin-left: 10px;
-    font-size: 14px;
-    cursor: pointer;
-    color: #333;
-    transition: background-color 0.3s ease;
-}
-
-.like-btn:hover {
-    background-color: #e6e6e6;
-}
-
-.like-count {
-    font-weight: bold;
-    color: #007acc;
-}
-
-@keyframes pop {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.5); /* Increase size slightly */
-    }
-    100% {
-        transform: scale(1); /* Return to normal size */
-    }
-}
-
-.like-count {
-    display: inline-block; /* Ensure the counter behaves like an element */
-    transition: transform 0.2s ease-in-out; /* Smooth transition for the pop effect */
-}
-
-.like-count.pop {
-    animation: pop 0.3s ease-in-out; /* Apply the pop animation */
-}
-
-
-.button {
-    display: inline-block; /* Makes the link behave like a button */
-    padding: 10px 20px; /* Adds space inside the button */
-    background-color: #007acc; /* Button background color */
-    color: #fff; /* Button text color */
-    text-decoration: none; /* Removes underline from the link */
-    font-size: 16px; /* Adjust font size */
-    border-radius: 5px; /* Rounds the corners */
-    text-align: center; /* Centers the text */
-    transition: background-color 0.3s ease; /* Smooth hover effect */
-}
-
-.button:hover {
-    background-color: #005f99; /* Darker shade on hover */
-}
-
-details {
-    margin-bottom: 15px; /* Add space between collapsible sections */
-}
-
-summary {
-    font-size: 20px; /* Adjust the size of the section headers */
-    font-weight: bold;
-    cursor: pointer; /* Indicate that it's clickable */
-    padding: 10px;
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    list-style: none; /* Remove default list styling */
-}
-
-details[open] summary {
-    background-color: #eaeaea; /* Highlight open sections */
-}
-
-ul {
-    margin: 10px 20px; /* Add space between the list and the edge */
-    padding-left: 20px;
-    list-style-type: disc; /* Default list styling */
-}
-
-ul ul {
-    list-style-type: circle; /* Sub-list styling */
-}
-
-
-/* Main Chat Container */
-#chat-container {
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 600px;
-    height: 500px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: #1a1a1a;
+    color: white;
+    min-height: 100vh;
     overflow: hidden;
+}
+
+.main-container {
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    margin-right: 160px;
+    background-color: #1a1a1a;
+    padding: 1.5rem 1.5rem 0 1.5rem;
 }
 
-/* Messages Container Area */
-#chat-messages {
-    padding: 1.5rem;
-    overflow-y: auto;  /* This enables scrolling */
-    height: calc(100% - 60px);  /* Full height minus header height */
-    scroll-behavior: smooth;
+/* Video container styles */
+.video-container {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    height: calc(100vh - 80px); /* Adjust based on navbar height */
+    overflow: hidden;
+    border-radius: 1rem;
+    background-color: #000;
 }
 
-/* Individual Message Styling */
-.chat-message {
+video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+/* Name overlay styles */
+.name-overlay {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.75rem;
     display: flex;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 0.5s ease forwards;
+    align-items: center;
+    gap: 0.75rem;
+    z-index: 10;
+    backdrop-filter: blur(8px);
 }
 
-/* Avatar Design */
-.chat-avatar {
-    width: 45px;
-    height: 45px;
-    background-color: #3b82f6;
-    border-radius: 50%;
+.mic-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 16px;
-    font-weight: 500;
-    margin-right: 15px;
-    flex-shrink: 0;
-    background-image: url('pro pic web.jpg');  /* Replace with your image path */
-    background-size: cover;  /* This ensures the image covers the circle completely */
-    background-position: center;  /* Centers the image */
-    background-repeat: no-repeat;
-    border: 2px solid #3b82f6;  /* Optional: adds a nice border */
 }
 
-
-/* Message Bubble Design */
-.chat-bubble {
-    background-color: white;
-    padding: 15px 20px;
-    border-radius: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    color: #374151;
-    font-size: 18px;
-    max-width: 85%;
-    line-height: 1.5;
-}
-
-/* Link styling within chat bubbles */
-.chat-link {
-    color: #3761D9;  /* Matches your header blue color */
-    text-decoration: none;
+.mic-icon {
+    stroke: currentColor;
     position: relative;
-    padding-bottom: 1px;
-    transition: color 0.2s ease;
 }
 
-/* Animated underline effect */
-.chat-link::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #3761D9;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
+.mic-path {
+    stroke: currentColor;
 }
 
-/* Hover effects */
-.chat-link:hover {
-    color: #2850c8;  /* Slightly darker shade on hover */
+.mic-stand {
+    stroke: currentColor;
 }
 
-.chat-link:hover::after {
-    transform: scaleX(1);
+.mute-line {
+    transition: opacity 0.2s;
+    stroke: #ff0000; /* Using your theme's red color */
 }
 
-/* Active state */
-.chat-link:active {
-    color: #1f40a0;  /* Even darker when clicked */
+.mute-line.hidden {
+    opacity: 0;
 }
 
-/* Header Styling */
-.chat-header {
-    background-color: #3761D9;
-    padding: 1rem 1.5rem;
-    width: 100%;
+.name {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+/* Navigation bar styles */
+.navbar {
+    position: relative; /* Add this */
+    background-color: rgba(26, 26, 26, 0.95);
+    padding: 1.5rem;
+    z-index: 1000;
+    margin: 0 -1.5rem;
+}
+
+.nav-content {
+    padding: 0 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: white;
-    flex-shrink: 0;
-    height: 60px;  /* Set a fixed height */
-    box-sizing: border-box;
-    position: relative;
+    width: 100%;
 }
 
-.chat-header-content {
+.site-title {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.75rem;
+    font-size: 1.2rem; /* Increased font size */
 }
 
-.chat-header-icon {
-    width: 28px;
-    height: 28px;
-    background-color: white;
-    color: #3761D9;
-    border-radius: 50%;
+.site-title span {
+    font-size: 1.2rem; /* Ensure all spans are same size */
+}
+
+.separator {
+    color: #ff2a00;
+    font-size: 1.2rem;
+}
+
+.current-page {
+    color: #ff2a00;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #ff413b;
+}
+
+/* Add to your style.css */
+.menu-trigger {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.chat-header-text {
-    font-size: 18px;
-    font-weight: 500;
-    color: white;
-}
-
-.chat-close {
-    color: white;
-    font-size: 28px;
+    font-size: 1.2rem; /* Match other text size */
+    gap: 0.5rem;
     background: none;
     border: none;
+    color: white;
     cursor: pointer;
     padding: 0;
-    line-height: 1;
+    transition: color 0.2s;
+}
+
+.menu-trigger:hover {
+    color: #ff2a00; /* Your theme red color */
+}
+
+.menu-trigger span {
+    font-size: 1.2rem; 
+    font-weight: 400;
+}
+
+.jumping-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.menu-popup {
+    position: absolute;
+    right: 2rem;
+    bottom: calc(100% + 1rem);
+    background-color: rgba(26, 26, 26, 0.95);
+    padding: 1rem;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 30;
+}
+
+/*speech bubble triangle */
+.menu-popup::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; /* Smaller triangle */
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid rgba(26, 26, 26, 0.95);
+}
+
+
+/* Back to original menu item sizes */
+.menu-popup a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.menu-popup a:hover {
+    color: #ff413b;
+}
+
+.hidden {
     display: none;
 }
 
-/* Typing Indicator Animation */
-.typing-indicator {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeIn 0.5s ease forwards;
-}
-
-.typing-dots {
-    display: flex;
-    gap: 4px;
-    background-color: white;
-    padding: 8px 16px;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.dot {
-    width: 8px;
-    height: 8px;
-    background-color: #9CA3AF;
-    border-radius: 50%;
-}
-
-.dot:nth-child(1) { animation: bounce 0.9s infinite; }
-.dot:nth-child(2) { animation: bounce 0.9s infinite 0.3s; }
-.dot:nth-child(3) { animation: bounce 0.9s infinite 0.6s; }
-
-/* Animations */
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-/* Responsive Design - adjusted breakpoints */
-@media (max-width: 1024px) {
-    #chat-container {
-        width: 65%;
-        left: 30%;
-        transform: translate(-25%, -50%);
-        margin-right: 160px;  /* Maintain space for menu */
-    }
-}
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    #chat-container {
-        width: 65%;
-        left: 22%;  /* Move left on tablets */
-        transform: translate(-15%, -50%);  /* Adjust transform for new position */
-        margin-right: 0;  /* Remove desktop margin */
+    .name-overlay {
+        bottom: 1.5rem;
+        left: 1.5rem;
+        padding: 0.5rem 1rem;
     }
-}
-
-@media (max-width: 480px) {
-    #chat-container {
-        /* Position */
-        position: fixed;
-        top: 20px;  /* Start below menu */
-        left: 50%;   /* Center horizontally */
-        transform: translate(-50%, 0);  /* Center the container but don't move vertically */
-        
-        /* Size */
-        width: 90%;  /* Take up 80% of screen width */
-        height: 80vh;  /* Take up 60% of viewport height */
-        
-        /* Reset other positioning */
-        margin: 0;
-        
-        /* Maintain other properties */
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-        z-index: 1000;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
+    
+    .video-controls {
+        bottom: 1.5rem;
+        right: 1.5rem;
     }
-
-    #chat-messages {
-        height: calc(100% - 60px);  /* Account for header */
-        overflow-y: auto;
+    
+    .navbar {
         padding: 1rem;
+    }
+    
+    .nav-links {
+        gap: 1.25rem;
     }
 }
