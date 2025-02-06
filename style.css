@@ -201,8 +201,8 @@ video {
 
 .menu-popup {
     position: absolute;
-    right: 2rem;
-    bottom: calc(100% + 1rem);
+    right: 1.5rem;
+    bottom: 100%;
     background-color: rgba(26, 26, 26, 0.95);
     padding: 1rem;
     border-radius: 0.75rem;
@@ -210,21 +210,9 @@ video {
     flex-direction: column;
     gap: 0.75rem;
     z-index: 30;
+    max-height: 80vh;
+    overflow-y: auto;
 }
-
-/*speech bubble triangle */
-.menu-popup::after {
-    content: '';
-    position: absolute;
-    bottom: -10px; /* Smaller triangle */
-    right: 20px;
-    width: 0;
-    height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid rgba(26, 26, 26, 0.95);
-}
-
 
 /* Back to original menu item sizes */
 .menu-popup a {
@@ -252,6 +240,13 @@ video {
 
     .name {
         font-size: 0.9rem;
+    }
+
+    .site-title a,
+    .current-page,
+    .menu-trigger span,
+    .separator {
+        font-size: 1rem;
     }
 
     .mic-icon {
@@ -292,18 +287,8 @@ video {
     }
     .menu-popup {
         right: 1rem;
-        max-height: 80vh;
-        overflow-y: auto;
     }
-    .menu-popup::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        right: 15px;
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-top: 8px solid rgba(26, 26, 26, 0.95);
-    }
+
 }
 
 /* Fix iOS Safari bottom bar issues */

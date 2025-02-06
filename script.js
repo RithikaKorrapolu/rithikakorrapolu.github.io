@@ -27,13 +27,15 @@ document.addEventListener('DOMContentLoaded', function() {
     menuTrigger.addEventListener('click', function(event) {
         event.stopPropagation();
         menuPopup.classList.toggle('hidden');
-        this.classList.toggle('active');    
+        this.classList.toggle('active');
     });
 
     // Close menu when clicking outside
     document.addEventListener('click', function(event) {
         if (!menuTrigger.contains(event.target) && !menuPopup.contains(event.target)) {
             menuPopup.classList.add('hidden');
+            menuTrigger.classList.remove('active'); // Add this line
+
         }
     });
 
