@@ -70,6 +70,7 @@ video {
     gap: 0.75rem;
     z-index: 10;
     backdrop-filter: blur(8px);
+    cursor: pointer;
 }
 
 .mic-toggle {
@@ -243,6 +244,89 @@ video {
     display: none;
 }
 
+.content-container {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    border-radius: 1rem;
+    background-color: #000;
+    padding: 2rem;
+}
+
+/* Add to your style.css */
+.info-button {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 20;
+}
+
+.info-trigger {
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    width: 54px;
+    height: 54px;
+}
+
+.info-trigger svg {
+    width: 44px;
+    height: 44px;
+}
+
+.info-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    padding: 2rem;
+    border-radius: 1rem;
+    z-index: 30;
+    max-width: 90%;
+    width: 600px;
+}
+
+.info-content {
+    position: relative;
+    color: white;
+    padding-top: 0.75rem;
+}
+
+.info-content p {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.close-button {
+    position: absolute;
+    top: -1.5rem;
+    right: -1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.info-trigger.active {
+    background: white;
+    color: black;
+}
+
+.info-trigger.active svg {
+    stroke: black;
+}
 
 
 /* Responsive adjustments */
@@ -307,6 +391,21 @@ video {
     }
     .menu-popup {
         right: 1rem;
+    }
+
+    .content-container {
+        height: calc(100dvh - 90px);
+        padding: 1.5rem;
+    }
+
+    .info-button {
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    .info-popup {
+        width: 85%;
+        padding: 1.5rem;
     }
 
 }

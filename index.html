@@ -16,6 +16,29 @@
                 <source src="thattaya.webm" type="video/webm">
                 Oh shoot, your browser doesn't support the video I have. It's a video of people in my family welcoming you to my website. Feel free to explore other parts of my website! 
             </video>
+
+            <div class="info-button">
+                <button class="info-trigger">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"></circle>
+                        <text x="12" y="18" text-anchor="middle" font-size="16" font-family="Times New Roman" font-weight="bold" fill="currentColor">i</text>
+                     </svg>
+                </button>
+            </div>
+
+            <div class="info-popup hidden">
+                <div class="info-content">
+                    <button class="close-button">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                    <p>This is a video of my thathaya (grandfather). He grew up in a small village in India, selling milk from one buffalo to pay for his education. He owned two shirts and two pants that he hand washed every day for a year. He now has two PhD's.</p>
+                    <p>Sometimes, he falls asleep when I'm talking to him and then will wake up and start laughing.</p>
+                    <p>In his 60s, he started a yoga clinic in his neighborhood.</p>
+                </div>
+            </div>
             
             <!-- Name Overlay -->
             <div class="name-overlay">
@@ -47,14 +70,15 @@
         
             <div class="menu-popup hidden">
                 <a href="about.html">about</a>
-                <a href="#">likes</a>
-                <a href="#">work-ish</a>
+                <a href="likes.html">likes</a>
+                <a href="workish.html">work-ish</a>
                 <a href="#">nobody</a>
                 <a href="contact.html">connect</a>
             </div>
         </nav>
     </div>
 
+    <script src="main.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

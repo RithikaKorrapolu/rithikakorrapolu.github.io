@@ -1,12 +1,8 @@
-// script.js
+// script.js - Video functionality only
 document.addEventListener('DOMContentLoaded', function() {
     const welcomeVideo = document.getElementById('welcomeVideo');
-    const micToggle = document.querySelector('.mic-toggle');
     const muteLine = document.querySelector('.mute-line');
-    const menuTrigger = document.querySelector('.menu-trigger');
-    const menuPopup = document.querySelector('.menu-popup');
 
-    // Video initial state
     welcomeVideo.muted = true;
     muteLine.classList.remove('hidden');
     welcomeVideo.autoplay = true;
@@ -17,34 +13,16 @@ document.addEventListener('DOMContentLoaded', function() {
         welcomeVideo.play();
     });
 
-    // Mic toggle functionality
-    micToggle.addEventListener('click', function() {
+    const nameOverlay = document.querySelector('.name-overlay');
+    nameOverlay.addEventListener('click', function() {
         welcomeVideo.muted = !welcomeVideo.muted;
         muteLine.classList.toggle('hidden', !welcomeVideo.muted);
     });
 
-    // Menu toggle functionality
-    menuTrigger.addEventListener('click', function(event) {
-        event.stopPropagation();
-        menuPopup.classList.toggle('hidden');
-        this.classList.toggle('active');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        if (!menuTrigger.contains(event.target) && !menuPopup.contains(event.target)) {
-            menuPopup.classList.add('hidden');
-            menuTrigger.classList.remove('active'); // Add this line
-
-        }
-    });
-
-    // Video error handling
     welcomeVideo.addEventListener('error', function(e) {
         console.error('Error loading video:', e);
     });
 
-    // Fullscreen functionality
     document.addEventListener('keydown', function(e) {
         if (e.key === 'f' || e.key === 'F') {
             if (!document.fullscreenElement) {
@@ -55,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Video size management
     function updateVideoSize() {
         const container = welcomeVideo.parentElement;
         const containerWidth = container.offsetWidth;
@@ -76,4 +53,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
     welcomeVideo.addEventListener('loadedmetadata', updateVideoSize);
     window.addEventListener('resize', updateVideoSize);
+});
+
+// Add to your script.js
+document.addEventListener('DOMContentLoaded', function() {
+    const infoTrigger = document.querySelector('.info-trigger');
+    const infoPopup = document.querySelector('.info-popup');
+    const closeButton = document.querySelector('.close-button');
+
+    infoTrigger.addEventListener('click', () => {
+        infoPopup.classList.toggle('hidden');
+        infoTrigger.classList.toggle('active');
+    });
+
+    closeButton.addEventListener('click', () => {
+        infoPopup.classList.add('hidden');
+    });
+
+    // Close popup when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!infoPopup.contains(e.target) && !infoTrigger.contains(e.target)) {
+            infoPopup.classList.add('hidden');
+        }
+    });
 });
