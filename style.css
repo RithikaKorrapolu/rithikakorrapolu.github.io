@@ -403,16 +403,16 @@ video {
 .quote {
     font-style: italic;
     color: #888;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 .quote-author {
     color: #888;
-    margin-bottom: 1rem; /* Reduced from 2rem */
+    margin-bottom: 0.5rem; /* Reduced from 2rem */
 }
 
 .quote-container {
-    margin-bottom: 1rem; /* Added to control spacing */
+    margin-bottom: 0.5rem; /* Added to control spacing */
 }
 
 .link {
@@ -481,20 +481,11 @@ video {
     height: 32px;
 }
 
-.slide-counter {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    color: #888;
-    font-size: 0.875rem;
-}
-
 .testimonial-box {
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 1rem;
     padding: 2rem;
-    margin: 2rem 0;
 }
 
 .slide-content ol {
@@ -507,6 +498,20 @@ video {
     margin-bottom: 1rem;
     line-height: 1.5;
 }
+
+.subtitle-container {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+}
+
+.slide-counter {
+    color: #888;
+    font-size: 0.875rem;
+    font-style: italic; /* Added to match subtitle style */
+
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
@@ -638,15 +643,17 @@ video {
 
     .testimonial-box {
         padding: 1.5rem;
-        margin: 1rem 0;
+        margin-top: 0;
+        margin-top: 0; /* Match the right column's padding-top */
+
     }
 
     .quote-container {
-        margin-bottom: 0.75rem; /* Smaller gap on mobile */
+        margin-bottom: 0.35rem; /* Smaller gap on mobile */
     }
 
     .quote-author {
-        margin-bottom: 0.75rem; /* Smaller gap on mobile */
+        margin-bottom: 0.35rem; /* Smaller gap on mobile */
     }
 
 }

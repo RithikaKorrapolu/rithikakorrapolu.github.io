@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <img src="family.jpg" alt="Family photo" class="slide-image">
                         </div>
                         <div class="slide-column-right">
-                            <p>Born in 1997, I was raised in <a href="#" class="link">Paradise</a> by my earnest and hard working family. My mom's dream was to come to America so my parents immigrated with 70$ in their pocket. My dad worked at a school cafeteria at first. They saved enough so that they could both go to school. My dad became an engineer, my mom a nurse. They sent money home to their families every month. They made it. I live in NYC now and get to see them often.</p>
+                            <p>Born in 1997, I was raised in <a href="https://en.wikipedia.org/wiki/New_Jersey" class="link" target="_blank">Paradise</a> by my earnest, loving family. My mom's dream was to come to America, so my parents immigrated with $70 in their pocket. They lived in a single room that had mold and dust. My dad was a teaching assistant and worked at the school cafeteria. They saved enough so that they could both finish their school here. My dad became an engineer, my mom a nurse. They sent money home to their families every month. They made it. I live in NYC now and get to see them often.</p>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                         </div>
                         <div class="slide-column-right">
-                            <p>I'm allergic to tree nuts. I'll start crying if you try to teach me about the <a href="#" class="link">stock market</a>. Sometimes, I pretend like I understand what someone is saying even though I don't because I don't want them to think I'm dumb. It happens the most with new people in my life. I also need to get better at handling feedback more objectively. I can be overly sensitive. I'll strive to be stronger in these areas.</p>
+                            <p>I'm allergic to tree nuts. I don't fully understand how the stock market works and I'll start crying if you try to explain it to me. Sometimes, I pretend like I understand what someone is saying even though I don't because I don't want them to think I'm dumb. It mostly happens with new people. I also need to get better at handling feedback more objectively. I can be overly sensitive. I'll strive to be stronger in these areas.</p>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <img src="strengths.jpg" alt="Photo in office" class="slide-image">
                         </div>
                         <div class="slide-column-right">
-                            <p>I know two magic tricks. I am generally optimistic about people and humanity. A friend told me once I have a disarming personality. I really hope that's true - I want people to feel safe and sincere and playful when they talk to me. Also, I'm pretty sure I can do the <a href="#" class="link">macarena</a> to any song.</p>
+                            <p>I know two magic tricks. I am generally optimistic about people and humanity. A friend told me once I have a disarming personality. I hope that's true - I want people to feel safe and sincere and playful when they talk to me. I think I'm capable of that. Also, I'm pretty sure I can do the <a href="#" class="link">macarena</a> to any song.</p>
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <img src="hobbies.jpg" alt="Photo with hat" class="slide-image">
                         </div>
                         <div class="slide-column-right">
-                            <p>I like doing bad improv. I really like getting my friends to do bad improv. I work part-time at bars and restaurants. And think everyone should. I host dinners and workout and practice how I'm going to dance at the next party I get invited to. I collect gadgets. I love pranks. More stuff I like <a href="#" class="link">here</a>.</p>
+                            <p>I like doing bad improv. I really like getting my friends to do bad improv. I work part-time at bars and restaurants. I host dinners and workout and practice how I'm going to dance at the next party I get invited to. I collect gadgets. I love pranks. More stuff I like <a href="#" class="link">here</a>.</p>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div class="slide-main">
                         <div class="slide-column-left">
-                        <h2>Testimonials</h2>
+                        <h2>Testimonials, The End</h2>
                             <div class="testimonial-box">
                                 <p class="quote">"Even though you have hair, I can see you being one of those people that has a bunch of weird wigs."</p>
                                 <p class="quote-author">- one of my best friends</p>
@@ -153,14 +153,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function updateSlide() {
         console.log("Updating to slide:", currentSlide);
-        const slideContent = slides[currentSlide].content;
+        
+        // Get the slide content
+        let slideContent = slides[currentSlide].content;
+        
+        // Replace the existing subtitle line with our new container version
+        slideContent = slideContent.replace(
+            '<p class="subtitle">A slideshow</p>',
+            `<div class="subtitle-container">
+                <p class="subtitle">A slideshow</p>
+                <span class="slide-counter">${currentSlide + 1}/${slides.length}</span>
+            </div>`
+        );
+        
+        // Add the navigation
         contentContainer.innerHTML = `
             ${slideContent}
             <div class="navigation ${currentSlide === 0 ? 'first-slide' : ''}">
                 ${currentSlide > 0 ? createNavButton('prev').outerHTML : ''}
                 ${currentSlide < slides.length - 1 ? createNavButton('next').outerHTML : ''}
             </div>
-            <div class="slide-counter">${currentSlide + 1}/${slides.length}</div>
         `;
     
         // Add event listeners to new buttons
