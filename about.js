@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="slide-content">
                     <div class="slide-header">
                         <h1>What I'm about</h1>
-                        <p class="subtitle">A slideshow</p>
+                        <p class="subtitle">slideshow -</p>
                     </div>
                     <div class="slide-main">
                         <div class="slide-column-left">
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="slide-content">
                     <div class="slide-header">
                         <h1>What I'm about</h1>
-                        <p class="subtitle">A slideshow</p>
+                        <p class="subtitle">slideshow -</p>
                     </div>
                     <div class="slide-main">
                         <div class="slide-column-left">
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="slide-content">
                     <div class="slide-header">
                         <h1>What I'm about</h1>
-                        <p class="subtitle">A slideshow</p>
+                        <p class="subtitle">slideshow -</p>
                     </div>
                     <div class="slide-main">
                         <div class="slide-column-left">
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="slide-content">
                     <div class="slide-header">
                         <h1>What I'm about</h1>
-                        <p class="subtitle">A slideshow</p>
+                        <p class="subtitle">slideshow -</p>
                     </div>
                     <div class="slide-main">
                         <div class="slide-column-left">
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="slide-content">
                     <div class="slide-header">
                         <h1>What I'm about</h1>
-                        <p class="subtitle">A slideshow</p>
+                        <p class="subtitle">slideshow -</p>
                     </div>
                     <div class="slide-main">
                         <div class="slide-column-left">
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="slide-content">
                     <div class="slide-header">
                         <h1>What I'm about</h1>
-                        <p class="subtitle">A slideshow</p>
+                        <p class="subtitle">slideshow -</p>
                     </div>
                     <div class="slide-main">
                         <div class="slide-column-left">
@@ -157,14 +157,23 @@ document.addEventListener('DOMContentLoaded', function() {
         // Get the slide content
         let slideContent = slides[currentSlide].content;
         
-        // Replace the existing subtitle line with our new container version
-        slideContent = slideContent.replace(
-            '<p class="subtitle">A slideshow</p>',
-            `<div class="subtitle-container">
-                <p class="subtitle">A slideshow</p>
-                <span class="slide-counter">${currentSlide + 1}/${slides.length}</span>
-            </div>`
-        );
+        // Find the slide header div
+        const headerRegex = /<div class="slide-header">([\s\S]*?)<\/div>/;
+        const headerMatch = slideContent.match(headerRegex);
+        
+        if (headerMatch) {
+            const headerContent = headerMatch[1];
+            const newHeader = `
+                <div class="slide-header">
+                    <h1>What I'm about</h1>
+                    <div class="subtitle-container">
+                        <p class="subtitle">slideshow -</p>
+                        <span class="slide-counter">${currentSlide + 1}/${slides.length}</span>
+                    </div>
+                </div>
+            `;
+            slideContent = slideContent.replace(headerRegex, newHeader);
+        }
         
         // Add the navigation
         contentContainer.innerHTML = `
@@ -175,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
     
-        // Add event listeners to new buttons
+        // Add event listeners to buttons
         const prevButton = contentContainer.querySelector('.nav-prev');
         const nextButton = contentContainer.querySelector('.nav-next');
         
