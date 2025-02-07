@@ -320,20 +320,227 @@ video {
 }
 
 .info-trigger.active {
-    background: white;
-    color: black;
+    background: #FC3323;
+    color: white;
 }
 
 .info-trigger.active svg {
-    stroke: black;
+    stroke: none;
+}
+.slide-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
 }
 
+.slide-column-left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.slide-column-right {
+    padding-top: 3.5rem; /* This pushes the text down to align with image */
+}
+
+.slide-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.slide-content h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.slide-header {
+    text-align: left;
+    margin-left: 0;
+    margin-bottom: 3rem;
+}
+
+.slide-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.slide-section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem; /* Add padding for arrows */
+}
+
+.slide-section h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.slide-section p {
+    width: 800px;
+    margin: 1rem 0;
+}
+
+
+.subtitle {
+    font-style: italic;
+    color: #888;
+    margin-bottom: 0.5rem;
+}
+
+.slide-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    object-fit: cover;
+}
+
+.quote {
+    font-style: italic;
+    color: #888;
+    margin-bottom: 0.5rem;
+}
+
+.quote-author {
+    color: #888;
+    margin-bottom: 1rem; /* Reduced from 2rem */
+}
+
+.quote-container {
+    margin-bottom: 1rem; /* Added to control spacing */
+}
+
+.link {
+    color: #3B82F6;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+
+.navigation {
+    position: fixed;
+    top: 50%;
+    width: 100%;
+    left: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Special case for first slide */
+.navigation.first-slide {
+    justify-content: flex-end;
+}
+
+.navigation.first-slide .nav-prev {
+    display: none;
+}
+
+.nav-button {
+    pointer-events: auto;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+/* Ensure spacing between buttons when both are present */
+.nav-prev {
+    margin-right: -1rem;
+}
+
+.nav-next {
+    margin-left: -1rem;
+}
+
+.nav-button:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: scale(1.05);
+}
+
+.nav-button svg {
+    width: 32px;
+    height: 32px;
+}
+
+.slide-counter {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    color: #888;
+    font-size: 0.875rem;
+}
+
+.testimonial-box {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.slide-content ol {
+    list-style-position: inside;
+    margin: 1rem 0;
+    padding-left: 1rem;
+}
+
+.slide-content ol li {
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .slide-content {
+        max-width: 800px;
+    }
+}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .main-container {
         padding: 1rem 1rem 0 1rem;
         height: 100dvh; /* Use dynamic viewport height */
+    }
+
+    .slide-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .slide-content {
+        padding: 1rem;
+    }
+
+    .slide-header {
+        margin-bottom: 2rem;
+    }
+
+    .slide-column-right {
+        padding-top: 0; /* Remove padding on mobile */
+    }
+
+    .navigation {
+        padding: 0 1rem;
     }
 
     body, .main-container {
@@ -402,12 +609,62 @@ video {
         top: 1rem;
         right: 1rem;
     }
+
+    .info-trigger {
+        width: 42px;
+        height: 42px;
+        padding: 0.5rem;
+    }
+
+    .info-trigger svg {
+        width: 32px;
+        height: 32px;
+    }
     
     .info-popup {
         width: 85%;
         padding: 1.5rem;
     }
 
+    .nav-button {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .nav-button svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .testimonial-box {
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+
+    .quote-container {
+        margin-bottom: 0.75rem; /* Smaller gap on mobile */
+    }
+
+    .quote-author {
+        margin-bottom: 0.75rem; /* Smaller gap on mobile */
+    }
+
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 480px) {
+    .slide-content {
+        padding: 1rem;
+    }
+
+    .slide-header h1 {
+        font-size: 2rem;
+    }
+
+    .nav-button {
+        width: 48px;
+        height: 48px;
+    }
 }
 
 /* Fix iOS Safari bottom bar issues */
