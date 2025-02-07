@@ -513,6 +513,250 @@ video {
 
 }
 
+/*contact page related*/
+
+/* Add these styles to your existing style.css */
+.contact-container {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.contact-title {
+    font-size: 2.25rem;
+    margin-bottom: 0.75rem;
+    color: white;
+}
+
+.contact-subtitle {
+    color: #9ca3af;
+    margin-bottom: 2rem;
+    font-style: italic;
+    font-size: 0.875rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-label {
+    display: block;
+    color: white;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+    width: 100%;
+    background-color: #171717;
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    color: white;
+}
+
+.form-textarea {
+    min-height: 8rem;
+    resize: vertical;
+}
+
+.form-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+}
+
+.social-icon {
+    width: 36px;  /* Reduced from 1.5rem */
+    height: 36px; /* Reduced from 1.5rem */
+}
+
+.social-links {
+    display: flex;
+    gap: 0.75rem;    /* Increased from 1rem */
+    margin: 0;    /* Removed margin since we'll position it differently */
+}
+
+.social-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.send-button {
+    background-color: #ef4444;
+    color: white;
+    padding: 0.4rem 1.25rem;  /* Smaller padding */
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-left: auto;  /* Forces right alignment */
+}
+
+.send-button:hover {
+    background-color: #dc2626;
+}
+
+.tagline {
+    text-align: center;
+    color: #9ca3af;
+    font-style: italic;
+    font-size: 0.875rem;
+    margin: 0;  /* Remove any existing margins */
+}
+
+.checkbox-group {
+    background-color: #171717;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+}
+
+.checkbox-label {
+    padding: 8px 12px;  /* Reduced padding to bring rows closer */
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+/* Style the dropdown text */
+.checkbox-label span {
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+/* Hover effect */
+.checkbox-label:hover {
+    background-color: rgba(255, 255, 255, 0.1);  /* Slight white overlay on hover */
+}
+
+/* Style the checkboxes */
+.checkbox-label input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid white;
+    border-radius: 3px;
+    background-color: transparent;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Style the checkbox when checked */
+.checkbox-label input[type="checkbox"]:checked {
+    background-color: white;
+}
+
+/* Add checkmark when checked */
+.checkbox-label input[type="checkbox"]:checked::after {
+    content: none;
+    position: absolute;
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;  /* Changed from center to flex-end */
+    margin-top: 2rem;
+}
+
+.tagline {
+    /* Remove text-align: center; */
+    color: #9ca3af;
+    font-style: italic;
+    font-size: 0.875rem;
+}
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-trigger {
+    width: 100%;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 0.25rem;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: inherit;  /* Match parent font */
+    font-size: 1rem;      /* Match other labels */
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    padding: 8px 0;  /* Reduced padding */
+    z-index: 10;
+    margin-top: 4px;
+
+}
+
+.dropdown-text {
+    color: white;
+}
+
+.dropdown-content.hidden {
+    display: none;
+}
+
+.dropdown-arrow {
+    transition: transform 0.2s;
+}
+
+.dropdown-trigger[aria-expanded="true"] .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Update form footer styles */
+.form-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: fit-content;  /* This ensures it only takes up the space it needs */
+    margin-left: auto;   /* This pushes it to the right */
+    gap: 0.8rem;
+}
+
+.tagline {
+    color: #9ca3af;
+    font-style: italic;
+    font-size: 0.875rem;
+}
+
+
+.required {
+    color: #ef4444;  /* Same as your send button color */
+    margin-left: 0.25rem;
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
@@ -666,7 +910,53 @@ video {
     .quote-author {
         margin-bottom: 0.35rem; /* Smaller gap on mobile */
     }
+/* Reduce spacing between form fields */
+    .form-group {
+        margin-bottom: 1rem;  /* Reduced from 2rem */
+    }
 
+    .form-label {
+        margin-bottom: 0.35rem;  /* Reduced from 0.75rem */
+    }
+
+    .form-grid {
+        gap: 0.5rem;  /* Reduced from 1rem */
+    }
+
+    /* Rearrange footer elements for mobile */
+    .form-actions {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 1rem;
+    }
+
+    .form-footer {
+        order: 1;  /* Show footer first */
+        width: 100%;
+        align-items: flex-end;
+        gap: 0.35rem;  /* Reduced from 0.5rem/1rem */
+        
+    }
+
+    .social-links {
+        order: 2;  /* Show social links second */
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 1rem;
+    }
+
+    /* Adjust spacing for tagline and send button */
+    .tagline {
+        margin-bottom: 0.5rem;
+    }
+
+
+}
+
+@media (max-width: 640px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Additional mobile optimizations */

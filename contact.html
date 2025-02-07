@@ -1,39 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-   <title>Connect - Rithika's Website</title>
-   <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Connect - Rithika's Website</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <div class="main-container">
-       <div class="content-container">
-           <!-- Connect content here -->
-       </div>
+    <div class="main-container">
+        <div class="content-container">
+            <div class="contact-container">
+                <h1 class="contact-title">Talk to me, chief</h1>
+                <p class="contact-subtitle">You can email me directly at rkrox24@gmail.com or fill out this handy form:</p>
+                
+                <form id="contact-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Name<span class="required">*</span></label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email<span class="required">*</span></label>
+                            <input type="email" class="form-input" required>
+                        
+                        </div>
+                    </div>
 
-       <nav class="navbar">
-           <div class="nav-content">
-               <div class="site-title">
-                   <a href="index.html">Rithika's website</a>
-                   <span class="separator">|</span>
-                   <span class="current-page">connect</span>
-               </div>
-               
-               <button class="menu-trigger">
-                   <span>menu</span>
-               </button>
-           </div>
-       
-           <div class="menu-popup hidden">
-            <a href="about.html">about</a>
-            <a href="likes.html">likes</a>
-            <a href="workish.html">work-ish</a>
-            <a href="#">nobody</a>
-            <a href="contact.html">connect</a>
+                    <div class="form-group">
+                        <label class="form-label">What's got you reaching out?</label>
+                        <div class="dropdown-container">
+                            <button type="button" class="dropdown-trigger" onclick="toggleDropdown(event)">
+                                <span class="dropdown-text"></span>
+                                <svg class="dropdown-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <div class="dropdown-content hidden">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="reason" value="collaborate">
+                                    <span>Interest in collaborating on a project</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="reason" value="advice">
+                                    <span>Seeking advice</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="reason" value="chat">
+                                    <span>Casual chit chat</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="reason" value="feedback">
+                                    <span>Providing feedback</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="reason" value="incident">
+                                    <span>You know about the incident at the Home Depot parking lot and you just want to talk...</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="reason" value="other">
+                                    <span>Other mysterious thing not listed here</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Message<span class="required">*</span></label>
+                        <textarea class="form-textarea" required></textarea>
+                    </div>
+
+                    <!-- Replace your current footer section with this -->
+<div class="form-actions">
+    <div class="social-links">
+        <a href="https://x.com/rithika24k" class="social-icon" target="_blank" rel="noopener noreferrer">
+            <img src="x.jpg" alt="X">
+        </a>
+        <a href="https://www.linkedin.com/in/rithikakorrapolu/" class="social-icon" target="_blank" rel="noopener noreferrer">
+            <img src="linkedin.jpg" alt="LinkedIn">
+        </a>
+        <a href="https://rithikakorrapolu.substack.com/?utm_source=substack&utm_medium=web&utm_campaign=substack_profile" class="social-icon" target="_blank" rel="noopener noreferrer">
+            <img src="substack.jpg" alt="Substack">
+        </a>
+        <a href="https://www.youtube.com/@TheBigSuitShow" class="social-icon" target="_blank" rel="noopener noreferrer">
+            <img src="youtube.jpg" alt="YouTube">
+        </a>
+    </div>
+    <div class="form-footer">
+        <p class="tagline">We are the future. Believe.</p>
+        <button type="submit" class="send-button">Send</button>
+    </div>
+</div>
+                </form>
+            </div>
         </div>
-       </nav>
-   </div>
-   <script src="main.js"></script>
+
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="site-title">
+                    <a href="index.html">Rithika's website</a>
+                    <span class="separator">|</span>
+                    <span class="current-page">connect</span>
+                </div>
+                
+                <button class="menu-trigger">
+                    <span>menu</span>
+                </button>
+            </div>
+        
+            <div class="menu-popup hidden">
+                <a href="about.html">about</a>
+                <a href="likes.html">likes</a>
+                <a href="workish.html">work-ish</a>
+                <a href="#">nobody</a>
+                <a href="contact.html">connect</a>
+            </div>
+        </nav>
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>
