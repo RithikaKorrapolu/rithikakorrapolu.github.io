@@ -241,7 +241,7 @@ video {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .content-container {
@@ -611,6 +611,47 @@ video {
     background-color: #dc2626;
 }
 
+/* Add this to your style.css */
+@keyframes firework {
+    0% { transform: translate(0, 0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translate(-20px, -20px); opacity: 0; }
+}
+
+.firework {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #FFD700;
+    pointer-events: none;
+}
+
+.firework:before, .firework:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #FFD700;
+    transform-origin: center;
+}
+
+.firework:before {
+    animation: firework 0.6s ease-out;
+    transform: rotate(45deg);
+}
+
+.firework:after {
+    animation: firework 0.6s ease-out;
+    transform: rotate(-45deg);
+}
+
+.send-button.success {
+    background-color: #4CAF50;
+    transition: background-color 0.3s ease;
+}
+
 .tagline {
     text-align: center;
     color: #9ca3af;
@@ -626,16 +667,19 @@ video {
 }
 
 .checkbox-label {
-    padding: 8px 12px;  /* Reduced padding to bring rows closer */
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 24px 1fr;  /* Fixed width for checkbox, rest for text */
+    gap: 12px;
+    padding: 8px 12px;
+    align-items: start;  /* Align items to top */
     transition: background-color 0.2s;
 }
 
 /* Style the dropdown text */
 .checkbox-label span {
     font-size: 1rem;
-    line-height: 1.2;
+    line-height: 1;
+    
 }
 
 /* Hover effect */
@@ -652,7 +696,8 @@ video {
     border: 2px solid white;
     border-radius: 3px;
     background-color: transparent;
-    margin-right: 10px;
+    margin: 0;
+    place-self: start;  /* Keep checkbox at top */
     position: relative;
     cursor: pointer;
 }
