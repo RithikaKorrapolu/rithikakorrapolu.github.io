@@ -377,10 +377,11 @@ video {
 
 .slide-section h2,
 .slide-main h2 {
-    font-size: 1.25rem;
+    font-size: 1.75rem;
     font-weight: 500;
     margin-bottom: 0.5rem; /* Reduced from 2rem */
 }
+
 
 .slide-section p {
     width: 800px;
@@ -959,7 +960,7 @@ video {
     }
 /* Reduce spacing between form fields */
     .form-group {
-        margin-bottom: 1rem;  /* Reduced from 2rem */
+        margin-bottom: 0.5rem;  /* Reduced from 2rem */
     }
 
     .form-label {
@@ -967,7 +968,7 @@ video {
     }
 
     .form-grid {
-        gap: 0.5rem;  /* Reduced from 1rem */
+        gap: 0.35rem;  /* Reduced from 1rem */
     }
 
     /* Rearrange footer elements for mobile */
