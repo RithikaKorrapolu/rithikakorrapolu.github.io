@@ -532,7 +532,7 @@ video {
     color: #9ca3af;
     margin-bottom: 2rem;
     font-style: italic;
-    font-size: 0.875rem;
+    font-size: 1rem;
 }
 
 .form-grid {
@@ -562,12 +562,14 @@ video {
     border-radius: 0.25rem;
     padding: 0.5rem 0.75rem;
     color: white;
+    font-size: 1rem;
 }
 
 .form-textarea {
     min-height: 8rem;
     resize: vertical;
 }
+
 
 .form-select {
     appearance: none;
@@ -656,7 +658,7 @@ video {
     text-align: center;
     color: #9ca3af;
     font-style: italic;
-    font-size: 0.875rem;
+    font-size: 1rem;
     margin: 0;  /* Remove any existing margins */
 }
 
@@ -993,6 +995,10 @@ video {
     /* Adjust spacing for tagline and send button */
     .tagline {
         margin-bottom: 0.5rem;
+    }
+
+    .contact-title {
+        font-size: 1.75rem; /* Smaller font size to fit on one line */
     }
 
 
