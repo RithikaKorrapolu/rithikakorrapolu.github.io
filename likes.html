@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Likes - Rithika's Website</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <div class="main-container">
-        <div class="content-container">
-            <!-- Your likes content will go here -->
+        <div id="likes-root" class="content-container">
+            <!-- React will render here -->
         </div>
 
         <nav class="navbar">
             <div class="nav-content">
                 <div class="site-title">
-                    <a href="index.html">Rithika's website</a>
+                    <a href="/">Rithika's website</a>
                     <span class="separator">|</span>
                     <span class="current-page">likes</span>
                 </div>
@@ -26,14 +26,14 @@
             </div>
         
             <div class="menu-popup hidden">
-                <a href="about.html">about</a>
-                <a href="likes.html">likes</a>
-                <a href="workish.html">work-ish</a>
+                <a href="/about.html">about</a>
+                <a href="/likes.html">likes</a>
+                <a href="/workish.html">work-ish</a>
                 <a href="#">nobody</a>
-                <a href="contact.html">connect</a>
+                <a href="/contact.html">connect</a>
             </div>
         </nav>
     </div>
-    <script src="main.js"></script>
+    <script type="module" src="/src/likes.jsx"></script>
 </body>
 </html>

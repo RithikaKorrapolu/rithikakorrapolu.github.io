@@ -1,0 +1,31 @@
+{
+  "name": "rithikakorrapolu.github.io",
+  "version": "1.0.0",
+  "description": "personal website on github",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RithikaKorrapolu/rithikakorrapolu.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RithikaKorrapolu/rithikakorrapolu.github.io/issues"
+  },
+  "homepage": "https://github.com/RithikaKorrapolu/rithikakorrapolu.github.io#readme",
+  "dependencies": {
+    "lucide-react": "^0.475.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.1.0"
+  }
+}

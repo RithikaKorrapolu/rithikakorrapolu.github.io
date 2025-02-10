@@ -1,5 +1,12 @@
-// Menu functionality - shared across all pages
-function initializeMenu() {
+// Export menu functionality for use in other files
+
+// Initialize EmailJS if it exists
+if (typeof emailjs !== 'undefined') {
+    emailjs.init("IQQqJBlmNLVOkWWax");
+}
+
+export function initializeMenu() {
+    console.log('Initializing contact page');
     const menuTrigger = document.querySelector('.menu-trigger');
     const menuPopup = document.querySelector('.menu-popup');
 
@@ -19,151 +26,8 @@ function initializeMenu() {
     }
 }
 
-function initializeContactPage() {
-    // Initialize dropdown
-    const dropdownTrigger = document.querySelector('.dropdown-trigger');
-    const dropdownContent = document.querySelector('.dropdown-content');
-    
-    if (dropdownTrigger && dropdownContent) {
-        // Initialize dropdown state
-        dropdownTrigger.setAttribute('aria-expanded', 'false');
-        
-        // Add checkbox listeners
-        const checkboxes = document.querySelectorAll('.checkbox-label input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', updateSelectionCount);
-        });
-    }
-
-    // Initialize form submission
-    const form = document.getElementById('contact-form');
-    if (form) {
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Get form data
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            const reasons = document.getElementById('selected-reasons').value;
-
-            // Show loading state
-            const sendButton = form.querySelector('.send-button');
-            const originalButtonText = sendButton.textContent;
-            sendButton.textContent = 'Sending...';
-            sendButton.disabled = true;
-
-            // TESTING MODE: Comment out EmailJS send and use this instead
-           // handleSuccess();
-
-            // PRODUCTION MODE: Uncomment this when ready to actually send emails
-            
-            emailjs.send(
-                'service_b566mfj',
-                'template_ea9zmeh',
-                {
-                    from_name: name,
-                    from_email: email,
-                    message: message,
-                    reasons: reasons
-                }
-            ).then(handleSuccess, handleError);
-            
-
-            // Success handler function
-            function handleSuccess() {
-                // Success animation
-                sendButton.textContent = 'Sent!';
-                sendButton.classList.add('success');
-                
-                // Create fireworks
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => {
-                        const firework = document.createElement('div');
-                        firework.className = 'firework';
-                        
-                        // Random position around the button
-                        const buttonRect = sendButton.getBoundingClientRect();
-                        const randomX = buttonRect.x + Math.random() * buttonRect.width;
-                        const randomY = buttonRect.y + Math.random() * buttonRect.height;
-                        
-                        firework.style.left = randomX + 'px';
-                        firework.style.top = randomY + 'px';
-                        
-                        document.body.appendChild(firework);
-                        
-                        // Remove firework element after animation
-                        setTimeout(() => {
-                            firework.remove();
-                        }, 1000);
-                    }, i * 100);
-                }
-                
-                // Reset form and button after delay
-                setTimeout(() => {
-                    form.reset();
-                    updateSelectionCount();
-                    sendButton.textContent = originalButtonText;
-                    sendButton.classList.remove('success');
-                    sendButton.disabled = false;
-                }, 2000);
-            }
-
-            // Error handler function
-            function handleError(error) {
-                console.error('Failed to send message:', error);
-                alert('Failed to send message. Please try again.');
-                
-                // Reset button
-                sendButton.textContent = originalButtonText;
-                sendButton.disabled = false;
-            }
-        });
-    }
-
-    }
-
-// Dropdown toggle function - needs to be global
-function toggleDropdown(event) {
-    event.preventDefault();
-    const trigger = event.currentTarget;
-    const content = trigger.nextElementSibling;
-    const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
-    
-    trigger.setAttribute('aria-expanded', !isExpanded);
-    content.classList.toggle('hidden');
-    
-    if (!isExpanded) {
-        const closeDropdown = function(e) {
-            if (!trigger.contains(e.target) && !content.contains(e.target)) {
-                trigger.setAttribute('aria-expanded', 'false');
-                content.classList.add('hidden');
-                document.removeEventListener('click', closeDropdown);
-            }
-        };
-        document.addEventListener('click', closeDropdown);
-    }
-}
-
-// Selection count update function - needs to be global
-function updateSelectionCount() {
-    const checkboxes = document.querySelectorAll('.checkbox-label input[type="checkbox"]:checked');
-    const dropdownText = document.querySelector('.dropdown-text');
-    const selectedReasonsInput = document.getElementById('selected-reasons');
-    
-    if (checkboxes.length === 0) {
-        dropdownText.textContent = '';
-        selectedReasonsInput.value = '';
-    } else {
-        dropdownText.textContent = `${checkboxes.length} selected`;
-        selectedReasonsInput.value = Array.from(checkboxes)
-            .map(cb => cb.nextElementSibling.textContent)
-            .join(', ');
-    }
-}
-
-// Home page functionality
-function initializeHomePage() {
+// Export home page functionality
+export function initializeHomePage() {
     const welcomeVideo = document.getElementById('welcomeVideo');
     const muteLine = document.querySelector('.mute-line');
     const nameOverlay = document.querySelector('.name-overlay');
@@ -239,9 +103,153 @@ function initializeHomePage() {
         });
     }
 }
+// Export contact page functionality
+export function initializeContactPage() {
+    console.log('Initializing contact page');
+    // Initialize dropdown
+    const dropdownTrigger = document.querySelector('.dropdown-trigger');
+    const dropdownContent = document.querySelector('.dropdown-content');
+    
+    if (dropdownTrigger && dropdownContent) {
+        console.log('Found dropdown elements');
+        // Initialize dropdown state
+        dropdownTrigger.setAttribute('aria-expanded', 'false');
+        
+        // Add click handler to dropdown trigger
+        dropdownTrigger.addEventListener('click', toggleDropdown);
+        
+        // Add checkbox listeners
+        const checkboxes = document.querySelectorAll('.checkbox-label input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateSelectionCount);
+        });
+    }
 
-// About page functionality
-function initializeAboutPage() {
+    // Initialize form submission
+    const form = document.getElementById('contact-form');
+    if (form) {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const reasons = document.getElementById('selected-reasons').value;
+
+            // Show loading state
+            const sendButton = form.querySelector('.send-button');
+            const originalButtonText = sendButton.textContent;
+            sendButton.textContent = 'Sending...';
+            sendButton.disabled = true;
+
+            // TESTING MODE: Comment out EmailJS send and use this instead
+            // handleSuccess();
+
+            // PRODUCTION MODE: Uncomment this when ready to actually send emails
+            emailjs.send(
+                'service_b566mfj',
+                'template_ea9zmeh',
+                {
+                    from_name: name,
+                    from_email: email,
+                    message: message,
+                    reasons: reasons
+                }
+            ).then(handleSuccess, handleError);
+
+            function handleSuccess() {
+                // Success animation
+                sendButton.textContent = 'Sent!';
+                sendButton.classList.add('success');
+                
+                // Create fireworks
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const firework = document.createElement('div');
+                        firework.className = 'firework';
+                        
+                        // Random position around the button
+                        const buttonRect = sendButton.getBoundingClientRect();
+                        const randomX = buttonRect.x + Math.random() * buttonRect.width;
+                        const randomY = buttonRect.y + Math.random() * buttonRect.height;
+                        
+                        firework.style.left = randomX + 'px';
+                        firework.style.top = randomY + 'px';
+                        
+                        document.body.appendChild(firework);
+                        
+                        // Remove firework element after animation
+                        setTimeout(() => {
+                            firework.remove();
+                        }, 1000);
+                    }, i * 100);
+                }
+                
+                // Reset form and button after delay
+                setTimeout(() => {
+                    form.reset();
+                    updateSelectionCount();
+                    sendButton.textContent = originalButtonText;
+                    sendButton.classList.remove('success');
+                    sendButton.disabled = false;
+                }, 2000);
+            }
+
+            function handleError(error) {
+                console.error('Failed to send message:', error);
+                alert('Failed to send message. Please try again.');
+                
+                // Reset button
+                sendButton.textContent = originalButtonText;
+                sendButton.disabled = false;
+            }
+        });
+    }
+}
+
+// Export dropdown toggle function
+export function toggleDropdown(event) {
+    console.log('Toggle dropdown called');
+    event.preventDefault();
+    const trigger = event.currentTarget;
+    const content = trigger.nextElementSibling;
+    const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+    
+    trigger.setAttribute('aria-expanded', !isExpanded);
+    content.classList.toggle('hidden');
+    
+    if (!isExpanded) {
+        const closeDropdown = function(e) {
+            if (!trigger.contains(e.target) && !content.contains(e.target)) {
+                trigger.setAttribute('aria-expanded', 'false');
+                content.classList.add('hidden');
+                document.removeEventListener('click', closeDropdown);
+            }
+        };
+        document.addEventListener('click', closeDropdown);
+    }
+}
+
+// Export selection count update function
+export function updateSelectionCount() {
+    console.log('Update selection count called');
+    const checkboxes = document.querySelectorAll('.checkbox-label input[type="checkbox"]:checked');
+    const dropdownText = document.querySelector('.dropdown-text');
+    const selectedReasonsInput = document.getElementById('selected-reasons');
+    
+    if (checkboxes.length === 0) {
+        dropdownText.textContent = '';
+        selectedReasonsInput.value = '';
+    } else {
+        dropdownText.textContent = `${checkboxes.length} selected`;
+        selectedReasonsInput.value = Array.from(checkboxes)
+            .map(cb => cb.nextElementSibling.textContent)
+            .join(', ');
+    }
+}
+// Export about page functionality
+export function initializeAboutPage() {
     const contentContainer = document.querySelector('.content-container');
     if (!contentContainer) return;
 
@@ -447,18 +455,21 @@ function initializeAboutPage() {
 }
 
 // Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    // Always initialize menu
-    initializeMenu();
-    
-    // Initialize page-specific functionality
-    const currentPage = document.querySelector('.current-page').textContent.toLowerCase();
-    
-    if (currentPage === 'home') {
-        initializeHomePage();
-    } else if (currentPage === 'about') {
-        initializeAboutPage();
-    } else if (currentPage === 'connect') {
-        initializeContactPage();
-    }
-});
+if (document.querySelector('.current-page')?.textContent.toLowerCase() !== 'likes') {
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM loaded');
+        initializeMenu();
+        
+        const currentPage = document.querySelector('.current-page')?.textContent.toLowerCase();
+        console.log('Current page:', currentPage);
+        
+        if (currentPage === 'connect') {
+            console.log('Starting contact page initialization');
+            initializeContactPage();
+        } else if (currentPage === 'home') {
+            initializeHomePage();
+        } else if (currentPage === 'about') {
+            initializeAboutPage();
+        }
+    });
+}

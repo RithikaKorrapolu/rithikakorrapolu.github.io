@@ -805,6 +805,83 @@ video {
     margin-left: 0.25rem;
 }
 
+.likes-container {
+    min-height: 100vh;
+    background-color: #000;
+    color: white;
+    padding: 2rem;
+}
+
+.likes-content {
+    max-width: 64rem;
+    margin: 0 auto;
+}
+
+.likes-header {
+    margin-bottom: 2rem;
+}
+
+.likes-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.likes-quote {
+    color: #9ca3af;
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+
+.likes-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.shuffle-button, .filter-button {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}
+
+.shuffle-button:hover, .filter-button:hover {
+    color: white;
+}
+
+.likes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+
+.likes-card {
+    width: 300px; /* Adjust as needed */
+    height: 350px; /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 12px;
+    background-color: #000000; /* Ensure contrast */
+  }
+
+  .likes-image {
+    width: 100%;  /* Make image fill card */
+    height: 200px; /* Consistent height */
+    object-fit: cover; /* Prevent stretching */
+    border-radius: 8px;
+  }
+
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
@@ -1000,6 +1077,18 @@ video {
 
     .contact-title {
         font-size: 1.75rem; /* Smaller font size to fit on one line */
+    }
+
+    .likes-container {
+        padding: 1rem;
+    }
+    
+    .likes-header h1 {
+        font-size: 2rem;
+    }
+    
+    .likes-grid {
+        grid-template-columns: 1fr;
     }
 
 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Connect - Rithika's Website</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
@@ -12,24 +12,24 @@
         <div class="content-container">
             <div class="contact-container">
                 <h1 class="contact-title">Talk to me, chief</h1>
-                <p class="contact-subtitle">You can email me directly at rkrox24@gmail.com or fill out this handy form:</p>
+                <p class="contact-subtitle">You can email me directly at rkrox24@gmail.com, fill out the handy form, or do <a href="#" class="link">this</a> other 3rd thing</p>
                 
                 <form id="contact-form">
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label">Name<span class="required">*</span></label>
-                            <input type="text" id="name" class="form-input" required>
+                            <input type="text" id="name" class="form-input" required placeholder="Michael Scott">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Email<span class="required">*</span></label>
-                            <input type="email" id="email" class="form-input" required>
+                            <input type="email" id="email" class="form-input" required placeholder="agent.michael.scarn.fbi.real@aol.com">
                         </div>
                     </div>
-
+                
                     <div class="form-group">
-                        <label class="form-label">What's got you reaching out?</label>
+                        <label class="form-label">What's bringing you my way?</label>
                         <div class="dropdown-container">
-                            <button type="button" class="dropdown-trigger" onclick="toggleDropdown(event)">
+                            <button type="button" class="dropdown-trigger">
                                 <span class="dropdown-text"></span>
                                 <svg class="dropdown-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none">
                                     <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -58,31 +58,32 @@
                                 </label>
                                 <label class="checkbox-label">
                                     <input type="checkbox" name="reason" value="other">
-                                    <span>Other mysterious thing not listed here</span>
+                                    <span>Other mysterious reason not listed here</span>
                                 </label>
                             </div>
                         </div>
                     </div>
-
+                
                     <div class="form-group">
                         <label class="form-label">Message<span class="required">*</span></label>
-                        <textarea id="message" class="form-textarea" required></textarea>
+                        <textarea id="message" class="form-textarea" required placeholder="."></textarea>
                     </div>
+                
 
                     <!-- Replace your current footer section with this -->
 <div class="form-actions">
     <div class="social-links">
         <a href="https://x.com/rithika24k" class="social-icon" target="_blank" rel="noopener noreferrer">
-            <img src="x.jpg" alt="X">
+            <img src="/x.jpg" alt="X">
         </a>
         <a href="https://www.linkedin.com/in/rithikakorrapolu/" class="social-icon" target="_blank" rel="noopener noreferrer">
-            <img src="linkedin.jpg" alt="LinkedIn">
+            <img src="/linkedin.jpg" alt="LinkedIn">
         </a>
         <a href="https://rithikakorrapolu.substack.com/?utm_source=substack&utm_medium=web&utm_campaign=substack_profile" class="social-icon" target="_blank" rel="noopener noreferrer">
-            <img src="substack.jpg" alt="Substack">
+            <img src="/substack.jpg" alt="Substack">
         </a>
         <a href="https://www.youtube.com/@TheBigSuitShow" class="social-icon" target="_blank" rel="noopener noreferrer">
-            <img src="youtube.jpg" alt="YouTube">
+            <img src="/youtube.jpg" alt="YouTube">
         </a>
     </div>
     <div class="form-footer">
@@ -117,13 +118,16 @@
             </div>
         </nav>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script>
+    <!-- <script>
         (function() {
             // TODO: Replace with your actual EmailJS public key
             emailjs.init("IQQqJBlmNLVOkWWax");
         })();
-    </script>
-    <script src="main.js"></script>
+    </script> -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script type="module">
+    emailjs.init("IQQqJBlmNLVOkWWax");
+</script>
+<script type="module" src="/main.js"></script>
 </body>
 </html>
