@@ -882,11 +882,323 @@ video {
     border-radius: 8px;
   }
 
+  /* Additional Likes Page Styles */
+.likes-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .likes-header {
+    margin-bottom: 3rem;
+  }
+  
+  .likes-header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .likes-quote {
+    font-style: italic;
+    color: #9ca3af;
+    margin-bottom: 2rem;
+  }
+  
+  .likes-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .shuffle-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #9ca3af;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .categories {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .category-button {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  
+  .category-button:hover,
+  .category-button.active {
+    opacity: 1;
+  }
+  
+  .likes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .likes-card {
+    background: #111;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .category-label {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 0.875rem;
+    color: #9ca3af;
+  }
+  
+  .card-content {
+    padding: 1rem;
+  }
+  
+  .likes-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+  
+  .card-info {
+    margin-top: 1rem;
+  }
+  
+  .card-info h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .music-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem;
+    border-radius: 9999px;
+  }
+  
+  .music-controls button {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+  
+  .music-controls img {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .quote {
+    font-size: 1.5rem;
+    padding: 2rem;
+  }
+  
+  .quote .author {
+    font-size: 1rem;
+    color: #9ca3af;
+    margin-top: 1rem;
+  }
+  .likes-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #000;
+    color: #fff;
+    border-radius: 15px;
+    font-family: Arial, sans-serif;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+
+.likes-container h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.likes-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.quote {
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.2rem;
+    position: relative;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.quote cite {
+    display: block;
+    font-size: 0.9rem;
+    text-align: right;
+    margin-top: 0.5rem;
+}
+/* Simple Likes Page Styling */
+.simple-likes-container {
+    padding: 2rem;
+    background-color: #000;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.simple-likes-container h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.simple-quote {
+    font-style: italic;
+    text-align: left;
+    margin-bottom: 3rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+}
+
+.simple-quote p {
+    line-height: 1.5;
+}
+
+.simple-quote cite {
+    display: inline;
+    font-size: 1rem;
+}
+
+.simple-likes-list {
+    list-style-position: outside;
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+}
+
+.simple-likes-list li {
+    padding: 0.2rem 0;
+    line-height: 1.4;
+}
+
+/* Portfolio-specific styles to add to your CSS file */
+
+.portfolio-section {
+    padding: 2rem 0;
+    color: white;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    text-align: left;
+}
+
+.portfolio-quote {
+    font-style: italic;
+    margin: 0.75rem 0;
+    text-align: left;
+    max-width: 100%;
+    color: #888; /* Gray text color for quotes */
+
+}
+
+.portfolio-quote p {
+    margin: 0.25rem 0;
+    color: #888; /* Gray text color for quotes */
+
+}
+
+.portfolio-quote.small {
+    font-size: 0.95rem;
+    margin: 0.75rem 0;
+    color: #888; /* Gray text color for quotes */
+
+}
+
+.quote-author {
+    margin-top: 0.1rem;
+    text-align: left;
+    color: #888; /* Gray text color for quotes */
+
+}
+
+.portfolio-intro {
+    margin: 0.75rem 0;
+    max-width: 100%;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.highlight {
+    color: #FC3323;
+}
+
+.project-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.project-card {
+    background-color: #111;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.project-title {
+    padding: 1rem;
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
     .slide-content {
         max-width: 800px;
+    }
+    
+    .project-gallery {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -1091,34 +1403,74 @@ video {
         grid-template-columns: 1fr;
     }
 
-
-}
-
-@media (max-width: 640px) {
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Additional mobile optimizations */
-@media (max-width: 480px) {
-    .slide-content {
+    .likes-content {
         padding: 1rem;
-    }
+      }
+    
+      .likes-header h1 {
+        font-size: 2rem;
+      }
+    
+      .likes-controls {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+    
+      .categories {
+        flex-wrap: wrap;
+      }
+    
+      .likes-grid {
+        grid-template-columns: 1fr;
+      }
 
-    .slide-header h1 {
+      .likes-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .likes-controls {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .likes-list {
+        padding-left: 1.5rem;
+    }
+    
+    .likes-list li::before {
+        left: -1.5rem;
+    }
+    .simple-likes-container {
+        padding: 1.5rem;
+    }
+    
+    .simple-likes-container h1 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .simple-quote {
+        margin-bottom: 2rem;
+    }
+    
+    .simple-likes-list {
+        padding-left: 1.5rem;
+    }
+    
+    /* Portfolio responsive */
+    .project-gallery {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .section-title {
         font-size: 2rem;
     }
-
-    .nav-button {
-        width: 48px;
-        height: 48px;
-    }
-}
-
-/* Fix iOS Safari bottom bar issues */
-@supports (-webkit-touch-callout: none) {
-    .main-container {
-        padding-bottom: env(safe-area-inset-bottom);
+    
+    .portfolio-intro, .portfolio-quote {
+        max-width: 100%;
     }
 }

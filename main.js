@@ -6,7 +6,7 @@ if (typeof emailjs !== 'undefined') {
 }
 
 export function initializeMenu() {
-    console.log('Initializing contact page');
+    console.log('Initializing menu');
     const menuTrigger = document.querySelector('.menu-trigger');
     const menuPopup = document.querySelector('.menu-popup');
 
@@ -103,6 +103,7 @@ export function initializeHomePage() {
         });
     }
 }
+
 // Export contact page functionality
 export function initializeContactPage() {
     console.log('Initializing contact page');
@@ -248,6 +249,7 @@ export function updateSelectionCount() {
             .join(', ');
     }
 }
+
 // Export about page functionality
 export function initializeAboutPage() {
     const contentContainer = document.querySelector('.content-container');
@@ -269,7 +271,7 @@ export function initializeAboutPage() {
                             <img src="family.jpg" alt="Family photo" class="slide-image">
                         </div>
                         <div class="slide-column-right">
-                            <p>Born in 1997, I was raised in <a href="https://en.wikipedia.org/wiki/New_Jersey" class="link" target="_blank">Paradise</a> by my earnest, loving family. My mom's dream was to come to America, so my parents immigrated with $70 in their pocket. They lived in a single room that had mold and dust. My dad was a teaching assistant and worked at the school cafeteria. They saved enough so that they could both finish their school here. My dad became an engineer, my mom a nurse. They sent money home to their families every month. They made it. I live in NYC now and get to see them often.</p>
+                            <p>Born in 1997, I was raised in <a href="https://en.wikipedia.org/wiki/New_Jersey" class="link" target="_blank" rel="noopener noreferrer">Paradise</a> by my earnest, loving family. The best parts of me came from them. I live in NYC now but still visit them often.</p>
                         </div>
                     </div>
                 </div>
@@ -286,13 +288,11 @@ export function initializeAboutPage() {
                         <div class="slide-column-left">
                             <h2>Weaknesses</h2>
                             <img src="weaknesses.jpg" alt="Childhood photo" class="slide-image">
-                            <div class="quote-container">
-                                <p class="quote">"I'm so embarrassed. I'm not a real person yet."</p>
-                                <p class="quote-author">- From Frances Ha</p>
-                            </div>
                         </div>
                         <div class="slide-column-right">
-                            <p>I'm allergic to tree nuts. I don't fully understand how the stock market works and I'll start crying if you try to explain it to me. Sometimes, I pretend like I understand what someone is saying even though I don't because I don't want them to think I'm dumb. It mostly happens with new people. I also need to get better at handling feedback more objectively. I can be overly sensitive. I'll strive to be stronger in these areas.</p>
+                                <p><em>"I'm so embarrassed. I'm not a real person yet" - Frances Ha</em></p>
+                                <br>
+                            <p>I'm allergic to tree nuts. I don't fully understand how the stock market works. I generally cry when I get really frustrated. Sometimes, I pretend like I understand what someone is saying even though I don't because I don't want them to think I'm dumb. It mostly happens with new people. I also need to get better at handling feedback more objectively. I can be overly sensitive. I'll strive to be stronger in these areas.</p>
                         </div>
                     </div>
                 </div>
@@ -311,7 +311,7 @@ export function initializeAboutPage() {
                             <img src="strengths.jpg" alt="Photo in office" class="slide-image">
                         </div>
                         <div class="slide-column-right">
-                            <p>I know two magic tricks. I am generally optimistic about people and humanity. A friend told me once I have a disarming personality. I hope that's true - I want people to feel safe and sincere and playful when they talk to me. I think I'm capable of that. Also, I'm pretty sure I can do the <a href="#" class="link">macarena</a> to any song.</p>
+                            <p>I know two magic tricks. I am generally optimistic about people and humanity. A friend told me once I have a disarming personality. I hope that's true - I want people to feel safe and sincere and playful when they talk to me. I think I'm capable of that. Also, I'm pretty sure I can do the macarena to any song.</p>
                         </div>
                     </div>
                 </div>
@@ -330,8 +330,8 @@ export function initializeAboutPage() {
                             <img src="work.jpg" alt="Big Suit Show photo" class="slide-image">
                         </div>
                         <div class="slide-column-right">
-                            <p>I'm on the <a href="#" class="link">Responsible AI team</a> at Microsoft. I help set product policy around emerging AI technologies and domains. My job is cool.</p>
-                            <p><br>I'm also working on a comedy talk show with my friend Crystal. It's called <a href="#" class="link">The Big Suit Show</a>. I love making it so much. You should check it out.</p>
+                            <p>I'm on the <a href="https://www.linkedin.com/in/rithikakorrapolu/" class="link" target="_blank" rel="noopener noreferrer">Responsible AI team</a> at Microsoft. I help set product policy around emerging AI technologies and domains. My job is cool.</p>
+                            <p><br>I'm also working on a variety show with my friend Crystal. It's called <a href="https://www.youtube.com/@TheBigSuitShow" class="link" target="_blank" rel="noopener noreferrer">The Big Suit Show</a>. I love making it so much. You should check it out.</p>
                         </div>
                     </div>
                 </div>
@@ -350,7 +350,7 @@ export function initializeAboutPage() {
                             <img src="hobbies.jpg" alt="Photo with hat" class="slide-image">
                         </div>
                         <div class="slide-column-right">
-                            <p>I like doing bad improv. I really like getting my friends to do bad improv. I work part-time at bars and restaurants. I host dinners and workout and practice how I'm going to dance at the next party I get invited to. I collect gadgets. I love pranks. More stuff I like <a href="#" class="link">here</a>.</p>
+                            <p>I like doing bad improv. I really like getting my friends to do bad improv. I work part-time at bars and restaurants. I host dinners and workout and practice different dance moves in front of my mirror. I collect gadgets. I love pranks. More stuff I like <a href="likes.html" class="link" target="_blank" rel="noopener noreferrer">here</a>.</p>
                         </div>
                     </div>
                 </div>
@@ -365,15 +365,13 @@ export function initializeAboutPage() {
                     </div>
                     <div class="slide-main">
                         <div class="slide-column-left">
-                        <h2>Testimonials, The End</h2>
-                            <div class="testimonial-box">
-                                <p class="quote">"Even though you have hair, I can see you being one of those people that has a bunch of weird wigs."</p>
-                                <p class="quote-author">- one of my best friends</p>
-                            </div>
+                        <h2>The End</h2>
+                                 <p><em>"You don't meet the people you love. You recognize them." - Anna Gavalda</em></p>
+                                <br>
+                            <p>In general, I hope this presentation inspired you to fly free and reach for the stars and say "I love you" more.</p>
+                            <p>And if you want to talk, come <a href="contact.html" class="link" target="_blank" rel="noopener noreferrer">here</a></p>
                         </div>
                         <div class="slide-column-right">
-                            <p>In general, I hope this presentation inspires you to fly free and reach for the stars and say "I love you" more.</p>
-                            <p>And if you want to talk, come <a href="#" class="link">here</a></p>
                         </div>
                     </div>
                 </div>
@@ -454,22 +452,54 @@ export function initializeAboutPage() {
     updateSlide();
 }
 
-// Initialize everything when DOM is loaded
-if (document.querySelector('.current-page')?.textContent.toLowerCase() !== 'likes') {
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM loaded');
-        initializeMenu();
-        
-        const currentPage = document.querySelector('.current-page')?.textContent.toLowerCase();
-        console.log('Current page:', currentPage);
-        
-        if (currentPage === 'connect') {
-            console.log('Starting contact page initialization');
-            initializeContactPage();
-        } else if (currentPage === 'home') {
-            initializeHomePage();
-        } else if (currentPage === 'about') {
-            initializeAboutPage();
-        }
-    });
+// Portfolio page functionality
+export function initializePortfolioPage() {
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    // Add fade-in animation for project cards
+    if (projectCards.length > 0) {
+        projectCards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100 * index);
+        });
+
+        // Add hover effect enhancement
+        projectCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+                card.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = 'none';
+            });
+        });
+    }
 }
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded');
+    initializeMenu();
+    
+    const currentPage = document.querySelector('.current-page')?.textContent.toLowerCase();
+    console.log('Current page:', currentPage);
+    
+    if (currentPage === 'connect') {
+        console.log('Starting contact page initialization');
+        initializeContactPage();
+    } else if (currentPage === 'home') {
+        initializeHomePage();
+    } else if (currentPage === 'about') {
+        initializeAboutPage();
+    } else if (currentPage === 'portfolio') {
+        initializePortfolioPage();
+    }
+});

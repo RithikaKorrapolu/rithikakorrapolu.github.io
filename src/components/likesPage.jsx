@@ -1,50 +1,99 @@
-import React, { useState } from 'react';
-import { Shuffle, Filter } from 'lucide-react';
-import { likesData } from '../../data/likesData.js'; // Adjust path if needed
+import React, { useState, useEffect } from 'react';
+import { Shuffle } from 'lucide-react';
+import {
+  MusicCard,
+  QuoteCard,
+  FilmCard,
+  ArtCard,
+  RandomCard,
+  WritingCard
+} from './cardComponents';
+import { likesData, CATEGORY_THEMES, getAllItems, shuffleItems } from '../../data/likesData';
 
 const LikesPage = () => {
-  // Combine all categories into a single list
-  const [items, setItems] = useState([...likesData.music, ...likesData.quotes]);
+  const [items, setItems] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  useEffect(() => {
+    const allItems = getAllItems();
+    setItems(allItems);
+  }, []);
+
+  const handleShuffle = () => {
+    setItems(shuffleItems(items));
+  };
+
+  const handleFilter = (category) => {
+    setSelectedCategory(category === selectedCategory ? null : category);
+  };
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.code === 'Space') {
+        event.preventDefault();
+        handleShuffle();
+      }
+    };
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [items]);
+
+  const filteredItems = selectedCategory
+    ? items.filter(item => item.type === selectedCategory)
+    : items;
 
   return (
-    <div className="likes-container">
+    <div className="content-container">
       <div className="likes-content">
         <div className="likes-header">
           <h1>Things I Like</h1>
           <p className="likes-quote">
             "It should be enough. To make something beautiful should be enough. It isn't. It should be."
-            <br />- Richard Silken
+            <br />-Richard Silken
           </p>
           
           <div className="likes-controls">
-            <button className="shuffle-button">
-              <Shuffle size={24} />
-              <span>Hit spacebar to shuffle and see more</span>
+            <button 
+              onClick={handleShuffle}
+              className="shuffle-button"
+            >
+              <Shuffle />
+              Hit spacebar to shuffle and see more
             </button>
-            <button className="filter-button">
-              <Filter size={24} />
-            </button>
+            
+            <div className="categories">
+              {Object.entries(CATEGORY_THEMES).map(([key, { label }]) => (
+                <button
+                  key={key}
+                  onClick={() => handleFilter(key)}
+                  className={`category-button ${selectedCategory === key ? 'active' : ''}`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-        
-        {/* Render grid items */}
+
         <div className="likes-grid">
-          {items.map((item) => (
-            <div key={item.id} className="likes-card">
-              {item.type === 'music' ? (
-                <>
-                  <img src={item.image} alt={item.title} className="likes-image" />
-                  <h3>{item.title}</h3>
-                  <p>{item.artist}</p>
-                </>
-              ) : (
-                <>
-                  <p className="quote-text">"{item.text}"</p>
-                  <p className="quote-author">- {item.author}</p>
-                </>
-              )}
-            </div>
-          ))}
+          {filteredItems.map(item => {
+            switch (item.type) {
+              case 'music':
+                return <MusicCard key={item.id} {...item} />;
+              case 'quote':
+                return <QuoteCard key={item.id} {...item} />;
+              case 'film':
+                return <FilmCard key={item.id} {...item} />;
+              case 'art':
+                return <ArtCard key={item.id} {...item} />;
+              case 'random':
+                return <RandomCard key={item.id} {...item} />;
+              case 'writing':
+                return <WritingCard key={item.id} {...item} />;
+              default:
+                return null;
+            }
+          })}
         </div>
       </div>
     </div>

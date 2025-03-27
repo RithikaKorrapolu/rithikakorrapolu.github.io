@@ -1,18 +1,32 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import LikesPage from './src/components/likesPage.jsx';
-import { initializeMenu } from './main.js';
-
-// Initialize React
-const container = document.getElementById('likes-root');
-if (container) {
-    const root = createRoot(container);
-    root.render(
-        <React.StrictMode>
-            <LikesPage />
-        </React.StrictMode>
-    );
-}
-
-// Initialize menu after DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeMenu);
+// likes.js
+export const initializeMenu = () => {
+    const menuTrigger = document.querySelector('.menu-trigger');
+    const menuPopup = document.querySelector('.menu-popup');
+  
+    if (menuTrigger && menuPopup) {
+      menuTrigger.addEventListener('click', () => {
+        const isExpanded = menuTrigger.getAttribute('aria-expanded') === 'true';
+        
+        menuTrigger.setAttribute('aria-expanded', !isExpanded);
+        menuPopup.classList.toggle('hidden');
+        
+        if (!isExpanded) {
+          menuTrigger.classList.add('active');
+        } else {
+          menuTrigger.classList.remove('active');
+        }
+      });
+  
+      // Close menu when clicking outside
+      document.addEventListener('click', (event) => {
+        if (!menuTrigger.contains(event.target) && !menuPopup.contains(event.target)) {
+          menuPopup.classList.add('hidden');
+          menuTrigger.setAttribute('aria-expanded', 'false');
+          menuTrigger.classList.remove('active');
+        }
+      });
+    }
+  };
+  
+  // Initialize the menu when the file loads
+  document.addEventListener('DOMContentLoaded', initializeMenu);
