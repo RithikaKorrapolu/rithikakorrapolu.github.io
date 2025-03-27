@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MuseumGPT - Rithika's Website</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        /* Keep the existing container structure but allow content to be wider */
+        .contact-container {
+            width: 100%;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        
+        .rai-section {
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+        
+        .rai-text {
+            width: 100%;
+        }
+        
+        .rai-link {
+            color: #4169E1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .rai-link:hover {
+            text-decoration: underline;
+        }
+        
+        .rai-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .rai-text h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .project-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .project-images img {
+            max-width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: cover;
+        }
+        
+        .concept-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .project-section {
+            margin-top: 3rem;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="content-container">
+            <div class="contact-container">
+                <h1 class="contact-title">About MuseumGPT</h1>
+                <p class="concept-subtitle">Concept: A custom GPT chatbot that acts as your personal, digital art curator</p>
+                
+                <div class="rai-section">
+                    <div class="rai-text">
+                        <div class="project-section">
+                            <h2>The Problem</h2>
+                            <p>I'm really bad at organizing my digital "art". Whenever I save things digitally, it's saved all over the place on different apps, different devices, etc. For example, I'll bookmark tweets but never go back to them, screenshot texts, and save quotes and advice on random notes or notion pages. When I want to find the specific thing I saved a few months later or want to draw inspiration, I can't remember where it is.</p>
+                            
+                            <div class="project-images">
+                                <img src="/images/museum1.jpg" alt="Messy desktop with many files and folders">
+                            </div>
+                        </div>
+                        
+                        <div class="project-section">
+                            <h2>My Approach / Solution</h2>
+                            <p>How can I reduce the friction for me to save and organize all my digital art in one place?</p>
+                            
+                            <p>Approach: I created a custom GPT where I can upload all my saved digital art in one place (through chat) and it automatically tags and organizes my inputs (in my notion database through Zapier agents). Then, when I want to find something later, I can just message my GPT and it will retrieve exactly what I'm looking for. Basically, it acts as a digital, personal art curator.</p>
+                            
+                            <p>For example, I found this poem by Mahmoud Darwish that I liked "On the train you wanted to swap seats. You wanted the window and I wanted to look at you". Instead of saving it somewhere random in my notes, I just messaged my GPT to save this quote and it saved it in my notion database with a few attributes like content, sentiment, type, date, etc. Later, I told my GPT I was feeling like a simp / romantic and it searched and retrieved this poem from my notion database based on the parameters (see screenshots below)</p>
+                            
+                            <div class="project-images">
+                                <img src="/images/museum2.jpg" alt="MuseumGPT interface showing a conversation">
+                            </div>
+                            <div class="project-images">
+                                <img src="/images/museum3.jpg" alt="MuseumGPT interface showing a conversation">
+                            </div>
+                            
+                            <p>Future Plans: For the future, I'd like the make it multi-modal so I can input and output a combination of text, songs, images, and more based on what I'm feeling.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="site-title">
+                    <a href="index.html">Rithika's website</a>
+                    <span class="separator">|</span>
+                    <span class="current-page">portfolio project</span>
+                </div>
+                
+                <button class="menu-trigger">
+                    <span>menu</span>
+                </button>
+            </div>
+        
+            <div class="menu-popup hidden">
+                <a href="about.html">about</a>
+                <a href="likes.html">likes</a>
+                <a href="portfolio.html">portfolio</a>
+                <a href="contact.html">connect</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Load your main.js last -->
+    <script type="module" src="/main.js"></script>
+</body>
+</html>

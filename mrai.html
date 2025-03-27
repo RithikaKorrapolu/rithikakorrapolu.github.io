@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Responsible AI - Rithika's Website</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        /* Keep the existing container structure but allow content to be wider */
+        .contact-container {
+            width: 100%;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        
+        .rai-section {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 3rem;
+            gap: 1.5rem;
+            width: 100%;
+        }
+        
+        .rai-text {
+            flex: 1;
+        }
+        
+        .rai-image {
+            flex: 0 0 auto; /* Don't let the image grow */
+            max-width: 100%;
+        }
+        
+        .rai-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+        
+        .rai-link {
+            color: #4169E1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .rai-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* For larger screens, make sections horizontal */
+        @media (min-width: 768px) {
+            .rai-section {
+                flex-direction: row;
+                align-items: flex-start; /* Align items to the top */
+            }
+            
+            .rai-text {
+                flex: 1;
+                padding-right: 2rem;
+            }
+            
+            .rai-image {
+                flex: 0 0 45%; /* Make image take up less space */
+                max-width: 45%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="content-container">
+            <div class="contact-container">
+                <h1 class="contact-title">Responsible AI Technical Guidance + Demos</h1>
+                <p class="contact-subtitle">As a PM on the responsible AI engineering team at Microsoft, I drove the strategy to develop and launch technical implementation guidance, policy, and playbooks for teams to deploy generative AI models (like GPT-4) responsibly. I also streamlined the process to educate and onboard customers onto our safety system to use with our Azure OpenAI Service. I work on Agentic AI stuff now! Reach out if you want to talk shop!</p>
+                
+                <p class="contact-subtitle">Below are examples of external facing resources I've championed by working with research, policy, and design experts from across the company</p>
+                
+                <div class="rai-section">
+                    <div class="rai-text">
+                        <h2>Azure OpenAI Implementation</h2>
+                        <p>Organized and outlined technical recommendations and resources to help customers design, develop, deploy, and use AI systems that implement the Azure OpenAI models responsibly.</p>
+                        <a href="https://learn.microsoft.com/en-us/legal/cognitive-services/openai/overview" class="rai-link" target="_blank" rel="noopener noreferrer">Overview of Responsible AI Practices for Azure OpenAI Models</a>
+                    </div>
+                    <div class="rai-image">
+                        <img src="/images/mitigationlayers.jpg" alt="Mitigation layers diagram showing User Experience, Metaprompt & Grounding, Safety System, and Model layers" />
+                    </div>
+                </div>
+                
+                <div class="rai-section">
+                    <div class="rai-text">
+                        <h2>Prompt Engineering Resources</h2>
+                        <p>Lead a multi-disciplinary team to develop a library of system prompt and prompt engineering resources based on common product use cases, domains, etc.</p>
+                        <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/system-message" class="rai-link" target="_blank" rel="noopener noreferrer">System message framework and templates</a>
+                    </div>
+                    <div class="rai-image">
+                        <img src="/images/metaprompt.jpg" alt="Example Metaprompt Template: Retail Company Chatbot showing prompt engineering guidelines" />
+                    </div>
+                </div>
+                
+                <div class="rai-section">
+                    <div class="rai-text">
+                        <h2>Azure OpenAI Access Framework</h2>
+                        <p>Updated the framework and process which is used to limit the access and use of Azure OpenAI (for appropriate use cases), including limiting access to the ability to modify content filters and/or abuse monitoring.</p>
+                        <a href="https://learn.microsoft.com/en-us/legal/cognitive-services/openai/limited-access?context=%2Fazure%2Fai-services%2Fopenai%2Fcontext%2Fcontext" class="rai-link" target="_blank" rel="noopener noreferrer">Limited Access to Azure OpenAI Service</a>
+                    </div>
+                    <div class="rai-image">
+                        <img src="/images/limitedaccess.jpg" alt="Azure AI Limited Access Use Case Feedback Form showing application requirements" />
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="site-title">
+                    <a href="index.html">Rithika's website</a>
+                    <span class="separator">|</span>
+                    <span class="current-page">portfolio project</span>
+                </div>
+                
+                <button class="menu-trigger">
+                    <span>menu</span>
+                </button>
+            </div>
+        
+            <div class="menu-popup hidden">
+                <a href="about.html">about</a>
+                <a href="likes.html">likes</a>
+                <a href="portfolio.html">portfolio</a>
+                <a href="contact.html">connect</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Load your main.js last -->
+    <script type="module" src="/main.js"></script>
+</body>
+</html>

@@ -5,7 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Connect - Rithika's Website</title>
     <link rel="stylesheet" href="/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Load EmailJS SDK as a regular script, not a module -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Initialize EmailJS directly in the head -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize EmailJS
+            emailjs.init("IQQqJBlmNLVOkWWax");
+            console.log("EmailJS initialized in HTML");
+        });
+    </script>
 </head>
 <body>
     <div class="main-container">
@@ -19,11 +28,11 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label">Name<span class="required">*</span></label>
-                            <input type="text" id="name" class="form-input" required placeholder="">
+                            <input type="text" id="name" name="from_name" class="form-input" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Email<span class="required">*</span></label>
-                            <input type="email" id="email" class="form-input" required placeholder="">
+                            <input type="email" id="email" name="from_email" class="form-input" required>
                         </div>
                     </div>
                 
@@ -55,7 +64,7 @@
                                 </label>
                                 <label class="checkbox-label">
                                     <input type="checkbox" name="reason" value="incident">
-                                    <span>You know what happened at the Home Depot parking lot...</span>
+                                    <span>You know about the incident at the Home Depot parking lot...</span>
                                 </label>
                                 <label class="checkbox-label">
                                     <input type="checkbox" name="reason" value="other">
@@ -67,32 +76,30 @@
                 
                     <div class="form-group">
                         <label class="form-label">Message<span class="required">*</span></label>
-                        <textarea id="message" class="form-textarea" required placeholder=""></textarea>
+                        <textarea id="message" name="message" class="form-textarea" required></textarea>
                     </div>
                 
-
-                    <!-- Replace your current footer section with this -->
-<div class="form-actions">
-    <div class="social-links">
-        <a href="https://x.com/rithika24k" class="social-icon" target="_blank" rel="noopener noreferrer">
-            <img src="/x.jpg" alt="X">
-        </a>
-        <a href="https://www.linkedin.com/in/rithikakorrapolu/" class="social-icon" target="_blank" rel="noopener noreferrer">
-            <img src="/linkedin.jpg" alt="LinkedIn">
-        </a>
-        <a href="https://rithikakorrapolu.substack.com/?utm_source=substack&utm_medium=web&utm_campaign=substack_profile" class="social-icon" target="_blank" rel="noopener noreferrer">
-            <img src="/substack.jpg" alt="Substack">
-        </a>
-        <a href="https://www.youtube.com/@TheBigSuitShow" class="social-icon" target="_blank" rel="noopener noreferrer">
-            <img src="/youtube.jpg" alt="YouTube">
-        </a>
-    </div>
-    <div class="form-footer">
-        <p class="tagline">We are the future. Believe.</p>
-        <button type="submit" class="send-button">Send</button>
-    </div>
-</div>
-<input type="hidden" id="selected-reasons">
+                    <div class="form-actions">
+                        <div class="social-links">
+                            <a href="https://x.com/rithika24k" class="social-icon" target="_blank" rel="noopener noreferrer">
+                                <img src="/x.jpg" alt="X">
+                            </a>
+                            <a href="https://www.linkedin.com/in/rithikakorrapolu/" class="social-icon" target="_blank" rel="noopener noreferrer">
+                                <img src="/linkedin.jpg" alt="LinkedIn">
+                            </a>
+                            <a href="https://rithikakorrapolu.substack.com/?utm_source=substack&utm_medium=web&utm_campaign=substack_profile" class="social-icon" target="_blank" rel="noopener noreferrer">
+                                <img src="/substack.jpg" alt="Substack">
+                            </a>
+                            <a href="https://www.youtube.com/@TheBigSuitShow" class="social-icon" target="_blank" rel="noopener noreferrer">
+                                <img src="/youtube.jpg" alt="YouTube">
+                            </a>
+                        </div>
+                        <div class="form-footer">
+                            <p class="tagline">We are the future. Believe.</p>
+                            <button type="submit" class="send-button">Send</button>
+                        </div>
+                    </div>
+                    <input type="hidden" id="selected-reasons" name="reasons">
                 </form>
             </div>
         </div>
@@ -118,16 +125,164 @@
             </div>
         </nav>
     </div>
-    <!-- <script>
-        (function() {
-            // TODO: Replace with your actual EmailJS public key
-            emailjs.init("IQQqJBlmNLVOkWWax");
-        })();
-    </script> -->
-    <script type="module" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script type="module">
-    emailjs.init("IQQqJBlmNLVOkWWax");
-</script>
-<script type="module" src="/main.js"></script>
+
+    <!-- Add direct form handling script that doesn't rely on main.js -->
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize form components
+            initializeContactForm();
+        });
+
+        function initializeContactForm() {
+            console.log('Directly initializing contact form in HTML');
+            
+            // Initialize dropdown
+            const dropdownTrigger = document.querySelector('.dropdown-trigger');
+            const dropdownContent = document.querySelector('.dropdown-content');
+            
+            if (dropdownTrigger && dropdownContent) {
+                // Initialize dropdown state
+                dropdownTrigger.setAttribute('aria-expanded', 'false');
+                
+                // Add click handler to dropdown trigger
+                dropdownTrigger.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const trigger = event.currentTarget;
+                    const content = trigger.nextElementSibling;
+                    const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+                    
+                    trigger.setAttribute('aria-expanded', !isExpanded);
+                    content.classList.toggle('hidden');
+                    
+                    if (!isExpanded) {
+                        const closeDropdown = function(e) {
+                            if (!trigger.contains(e.target) && !content.contains(e.target)) {
+                                trigger.setAttribute('aria-expanded', 'false');
+                                content.classList.add('hidden');
+                                document.removeEventListener('click', closeDropdown);
+                            }
+                        };
+                        document.addEventListener('click', closeDropdown);
+                    }
+                });
+                
+                // Add checkbox listeners
+                const checkboxes = document.querySelectorAll('.checkbox-label input[type="checkbox"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', updateSelectionCount);
+                });
+            }
+
+            function updateSelectionCount() {
+                const checkboxes = document.querySelectorAll('.checkbox-label input[type="checkbox"]:checked');
+                const dropdownText = document.querySelector('.dropdown-text');
+                const selectedReasonsInput = document.getElementById('selected-reasons');
+                
+                if (checkboxes.length === 0) {
+                    dropdownText.textContent = '';
+                    selectedReasonsInput.value = '';
+                } else {
+                    dropdownText.textContent = `${checkboxes.length} selected`;
+                    selectedReasonsInput.value = Array.from(checkboxes)
+                        .map(cb => cb.nextElementSibling.textContent.trim())
+                        .join(', ');
+                }
+            }
+
+            // Initialize form submission
+            const form = document.getElementById('contact-form');
+            if (form) {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    console.log('Form submitted directly from HTML handler');
+                    
+                    // Get form data
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+                    const reasons = document.getElementById('selected-reasons').value;
+
+                    // Show loading state
+                    const sendButton = form.querySelector('.send-button');
+                    const originalButtonText = sendButton.textContent;
+                    sendButton.textContent = 'Sending...';
+                    sendButton.disabled = true;
+                    
+                    console.log('Preparing to send email with data:', { name, email, message, reasons });
+
+                    // Create the template parameters
+                    const templateParams = {
+                        from_name: name,
+                        from_email: email,
+                        message: message,
+                        reasons: reasons || 'None specified'
+                    };
+                    
+                    // Send the email
+                    emailjs.send('service_b566mfj', 'template_ea9zmeh', templateParams)
+                        .then(function(response) {
+                            console.log('SUCCESS!', response.status, response.text);
+                            handleSuccess();
+                        }, function(error) {
+                            console.log('FAILED...', error);
+                            handleError(error);
+                        });
+
+                    function handleSuccess() {
+                        console.log('Email sent successfully');
+                        // Success animation
+                        sendButton.textContent = 'Sent!';
+                        sendButton.classList.add('success');
+                        
+                        // Create fireworks
+                        for (let i = 0; i < 5; i++) {
+                            setTimeout(() => {
+                                const firework = document.createElement('div');
+                                firework.className = 'firework';
+                                
+                                // Random position around the button
+                                const buttonRect = sendButton.getBoundingClientRect();
+                                const randomX = buttonRect.x + Math.random() * buttonRect.width;
+                                const randomY = buttonRect.y + Math.random() * buttonRect.height;
+                                
+                                firework.style.left = randomX + 'px';
+                                firework.style.top = randomY + 'px';
+                                
+                                document.body.appendChild(firework);
+                                
+                                // Remove firework element after animation
+                                setTimeout(() => {
+                                    firework.remove();
+                                }, 1000);
+                            }, i * 100);
+                        }
+                        
+                        // Reset form and button after delay
+                        setTimeout(() => {
+                            form.reset();
+                            updateSelectionCount();
+                            sendButton.textContent = originalButtonText;
+                            sendButton.classList.remove('success');
+                            sendButton.disabled = false;
+                        }, 2000);
+                    }
+
+                    function handleError(error) {
+                        console.error('Failed to send message:', error);
+                        alert('Failed to send message. Details: ' + (error.text || error.message || 'Unknown error'));
+                        
+                        // Reset button
+                        sendButton.textContent = originalButtonText;
+                        sendButton.disabled = false;
+                    }
+                });
+            } else {
+                console.error('Contact form not found');
+            }
+        }
+    </script>
+
+    <!-- Load your main.js last -->
+    <script type="module" src="/main.js"></script>
 </body>
 </html>

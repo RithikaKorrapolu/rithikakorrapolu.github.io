@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Red Mailbox Project - Rithika's Website</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        /* Keep the existing container structure but allow content to be wider */
+        .contact-container {
+            width: 100%;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        
+        .rai-section {
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+        
+        .rai-text {
+            width: 100%;
+        }
+        
+        .rai-link {
+            color: #4169E1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .rai-link:hover {
+            text-decoration: underline;
+        }
+        
+        .rai-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .rai-text h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .project-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .project-images img {
+            max-width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: cover;
+        }
+        
+        .project-images {
+            max-width: 600px;
+        }
+        
+        .image-caption {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        
+        .get-involved {
+            margin-top: 3rem;
+        }
+        
+        .get-involved h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .appendix {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .inspiration-links {
+            margin-top: 1rem;
+        }
+        
+        .inspiration-links a {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #4169E1;
+            text-decoration: none;
+        }
+        
+        .inspiration-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="content-container">
+            <div class="contact-container">
+                <h1 class="contact-title">Red Mailbox Project</h1>
+                
+                <div class="rai-section">
+                    <div class="rai-text">
+                        <h2>About</h2>
+                        <p>My friends and I set up red mailboxes around the city for strangers to write letters to each other. Just for kicks. We put them up in public parks, community spaces and even partner with small businesses and local venues. Every time we find a new letter, it feels like discovering treasure. We hope you like and feel the same.</p>
+                        
+                        <div class="project-images">
+                            <img src="/images/red-mailbox.jpg" alt="Red Mailbox with 'You've got mail' written on it">
+                        </div>
+                        
+                        <div class="project-images">
+                            <div>
+                                <img src="/images/jordidil.jpg" alt="People holding letters from the mailbox">
+                            </div>
+                        </div>
+                        <div class="project-images">
+                            <div>
+                                <img src="/images/realmail.jpg" alt="People holding letters from the mailbox">
+                            </div>
+                        </div>
+                        
+
+                        
+                        <div class="appendix">
+                            <h2>Appendix</h2>
+                            <p>Very much inspired by:</p>
+                            <div class="inspiration-links">
+                                <a href="https://littlefreelibrary.org/in-new-york-city-little-free-libraries-share-diverse-books-through-read-in-color-initiative/" class="rai-link">Little Free Library</a>
+                                <a href="https://strangersproject.com/" class="rai-link">Strangers Project</a>
+                                <a href="https://www.humansofnewyork.com/" class="rai-link">Humans of NY</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="site-title">
+                    <a href="index.html">Rithika's website</a>
+                    <span class="separator">|</span>
+                    <span class="current-page">portfolio project</span>
+                </div>
+                
+                <button class="menu-trigger">
+                    <span>menu</span>
+                </button>
+            </div>
+        
+            <div class="menu-popup hidden">
+                <a href="about.html">about</a>
+                <a href="likes.html">likes</a>
+                <a href="portfolio.html">portfolio</a>
+                <a href="contact.html">connect</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Load your main.js last -->
+    <script type="module" src="/main.js"></script>
+</body>
+</html>
