@@ -31,13 +31,54 @@ export function initializeHomePage() {
     const infoTrigger = document.querySelector('.info-trigger');
     const infoPopup = document.querySelector('.info-popup');
     const closeButton = document.querySelector('.close-button');
+    const nameElement = document.querySelector('.name');
 
     if (welcomeVideo) {
+        // Array of available videos
+        const videos = [
+            {
+                mp4: '/thattaya.mp4',
+                webm: '/thattaya.webm',
+                name: 'Dr. Sambasiva Korrapolu'
+            },
+            {
+                mp4: '/taruna.mp4',
+                webm: '/taruna.webm', // If you have a WebM version available
+                name: 'Taruna Emani'
+            },
+            {
+                mp4: '/glory.mp4',
+                webm: '/glory.webm', // If you have a WebM version available
+                name: 'Glory Kanes'
+            }
+            // Add more videos as needed
+        ];
+
+        // Randomly select a video
+        const randomIndex = Math.floor(Math.random() * videos.length);
+        const selectedVideo = videos[randomIndex];
+        
+        // Update source URLs
+        const sourceElements = welcomeVideo.getElementsByTagName('source');
+        sourceElements[0].src = selectedVideo.mp4;
+        if (sourceElements.length > 1 && selectedVideo.webm) {
+            sourceElements[1].src = selectedVideo.webm;
+        }
+        
+        // Update name in the overlay
+        if (nameElement && selectedVideo.name) {
+            nameElement.textContent = selectedVideo.name;
+        }
+        
         // Video setup
         welcomeVideo.muted = true;
         if (muteLine) muteLine.classList.remove('hidden');
         welcomeVideo.autoplay = true;
         welcomeVideo.loop = true;
+        
+        // Load the new video sources before trying to play
+        welcomeVideo.load();
+        
         welcomeVideo.play().catch(function(error) {
             console.log("Video autoplay failed:", error);
             welcomeVideo.muted = true;
