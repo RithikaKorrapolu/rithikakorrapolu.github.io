@@ -233,7 +233,7 @@ export function initializeAboutPage() {
                         <div class="slide-column-right">
                                 <p><em>"I'm so embarrassed. I'm not a real person yet" - Frances Ha</em></p>
                                 <br>
-                            <p>I'm allergic to tree nuts. I don't fully understand how the stock market works. I generally cry when I get really frustrated. Sometimes, I pretend like I understand what someone is saying even though I don't because I don't want them to think I'm dumb. It mostly happens with new people. I also need to get better at handling feedback more objectively. I can be overly sensitive. I'll strive to be stronger in these areas.</p>
+                            <p>I'm allergic to tree nuts. I don't fully understand how the stock market works. Sometimes, I start randomly crying when I get really frustrated. I need to learn how to communicate better when that happens. I also need to get better at handling feedback more objectively. I can be overly sensitive. I'll strive to be stronger in these areas.</p>
                         </div>
                     </div>
                 </div>
@@ -291,7 +291,7 @@ export function initializeAboutPage() {
                             <img src="hobbies.jpg" alt="Photo with hat" class="slide-image">
                         </div>
                         <div class="slide-column-right">
-                            <p>I like doing bad improv. I really like getting my friends to do bad improv. I work part-time at bars and restaurants. I host dinners and workout and practice different dance moves in front of my mirror. I collect gadgets. I love pranks. More stuff I like <a href="likes.html" class="link" target="_blank" rel="noopener noreferrer">here</a>.</p>
+                            <p>I like doing bad improv. I really like getting my friends to do bad improv. I work part-time at bars and restaurants. I host dinners and workout and practice different dance moves in front of my mirror. They're pretty heinous. I collect gadgets. I love pranks. More stuff I like <a href="likes.html" class="link" target="_blank" rel="noopener noreferrer">here</a>.</p>
                         </div>
                     </div>
                 </div>
@@ -309,8 +309,7 @@ export function initializeAboutPage() {
                         <h2>The End</h2>
                                  <p><em>"You don't meet the people you love. You recognize them." - Anna Gavalda</em></p>
                                 <br>
-                            <p>In general, I hope this presentation inspired you to fly free and reach for the stars and say "I love you" more.</p>
-                            <p>And if you want to talk, come <a href="contact.html" class="link" target="_blank" rel="noopener noreferrer">here</a></p>
+                            <p>If you want to chat, come <a href="contact.html" class="link" target="_blank" rel="noopener noreferrer">here</a></p>
                         </div>
                         <div class="slide-column-right">
                         </div>
