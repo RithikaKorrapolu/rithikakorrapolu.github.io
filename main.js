@@ -50,6 +50,16 @@ export function initializeHomePage() {
                 mp4: '/glory.mp4',
                 webm: '/glory.webm', // If you have a WebM version available
                 name: 'Glory Kanes'
+            },
+            {
+                mp4: '/mich.mp4',
+                webm: '/mich.webm', // If you have a WebM version available
+                name: 'Michelle Christian'
+            },
+            {
+                mp4: '/jordan.mp4',
+                webm: '/jordan.webm', // If you have a WebM version available
+                name: 'Jordan Mitchell'
             }
             // Add more videos as needed
         ];
