@@ -60,6 +60,11 @@ export function initializeHomePage() {
                 mp4: '/jordan.mp4',
                 webm: '/jordan.webm', // If you have a WebM version available
                 name: 'Jordan Mitchell'
+            },
+            {
+                mp4: '/kasra.mp4',
+                webm: '/kasra.webm', // If you have a WebM version available
+                name: 'Kasra Koushan',
             }
             // Add more videos as needed
         ];
