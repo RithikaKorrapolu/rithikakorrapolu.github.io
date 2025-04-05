@@ -65,6 +65,11 @@ export function initializeHomePage() {
                 mp4: '/kasra.mp4',
                 webm: '/kasra.webm', // If you have a WebM version available
                 name: 'Kasra Koushan',
+            },
+            {
+                mp4: '/anant.mp4',
+                webm: '/anant.webm', // If you have a WebM version available
+                name: 'Anant Vasudevan',
             }
             // Add more videos as needed
         ];
@@ -248,7 +253,7 @@ export function initializeAboutPage() {
                         <div class="slide-column-right">
                                 <p><em>"I'm so embarrassed. I'm not a real person yet" - Frances Ha</em></p>
                                 <br>
-                            <p>I'm allergic to tree nuts. I don't fully understand how the stock market works. Sometimes, I start randomly crying when I get really frustrated. I need to learn how to communicate better when that happens. I also need to get better at handling feedback more objectively. I can be overly sensitive. I'll strive to be stronger in these areas.</p>
+                            <p>I'm allergic to tree nuts. I don't fully understand how the stock market works. When I get really frustrated, I'll just start crying. I need to learn how to communicate better when that happens. I also need to get better at handling feedback more objectively. I can be overly sensitive. I'll strive to be stronger in these areas.</p>
                         </div>
                     </div>
                 </div>

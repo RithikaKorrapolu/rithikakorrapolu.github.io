@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Things I Like - Rithika's Website</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* Specific styles for the likes page */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 80px); /* Adjust for navbar height */
+}
+
+header, .header-section {
+  padding: 20px 20px 10px;
+  text-align: left;
+}
+
+.header-section h1, h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  text-align: left;
+}
+.header-section .quote, .quote {
+  font-style: italic;
+  opacity: 0.7;
+  margin-bottom: 1.5rem;
+  width: auto;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.8);
+  display: block; /* Ensure it takes the full width */
+  white-space: normal; /* Allow wrapping when needed */
+  line-height: 1.4; /* Slightly increased line height for readability */
+  padding-right: 20px; /* Give some space on the right */
+}
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.scroll-container {
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  padding-bottom: 20px;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+.likes-list {
+  width: 40%;
+  padding: 0 40px;
+}
+
+.likes-list ul {
+  list-style: none;
+  padding-bottom: 100vh; /* Extra space at the bottom for continuous scrolling effect */
+  padding-top: 100vh; /* Extra space at the top for continuous scrolling effect */
+}
+
+.likes-list li {
+  padding: 12px 0;
+  cursor: pointer;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  color: rgba(255, 255, 255, 0.4);
+  opacity: 0.5;
+}
+
+.likes-list li:hover {
+  color: rgba(255, 255, 255, 0.9);
+  opacity: 0.9;
+}
+
+.likes-list li.active {
+  color: #ffffff;
+  opacity: 1;
+  font-weight: 500;
+}
+
+.content-display {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.content-display .content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.content-display img {
+  max-width: 70%;
+  max-height: 60%;
+  object-fit: contain;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.content-display img.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.image-caption {
+  color: #ffffff;
+  margin-top: 15px;
+  text-align: center;
+  font-size: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  max-width: 70%;
+}
+
+.image-caption.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.likes-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  margin-top: 0; /* Ensure no top margin */
+}
+
+@media (min-width: 1024px) {
+  .header-section .quote, .quote {
+    display: inline-block; /* Helps keep it on one line when possible */
+  }
+}
+
+@media (max-width: 768px) {
+  .likes-list {
+    width: 100%;
+    padding: 0 20px;
+  }
+  
+  .content-display {
+    width: 100%;
+    top: auto;
+    bottom: 80px;
+    height: 40%;
+    transform: none;
+  }
+  
+  .content-display img {
+    max-width: 80%;
+    max-height: 80%;
+  }
+  
+  .image-caption {
+    max-width: 80%;
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="content-container">
+      <div class="container">
+        <div class="header-section" style="padding-top: 5px; padding-bottom: 5px;">
+            <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem; font-weight: bold;">Things I Like</h1>
+            <div class="quote" style="font-style: italic; color: rgba(255, 255, 255, 0.8); margin-bottom: 0.75rem; max-width: 600px;">
+              "It should be enough. To make something beautiful should be enough. It isn't. It should be."
+              <br>-Richard Silken
+            </div>
+          </div>
+        
+        <div class="content-wrapper">
+          <div class="scroll-container">
+            <div class="likes-list">
+              <ul id="likesList">
+                <li data-embed="spotify">When people say "Bada bing bada boom"</li>
+                <li data-img="handwriting.jpg">Seeing a friend's handwriting for the first time, especially if it's bad</li>
+                <li data-img="umbrella.jpg">Sharing an umbrella</li>
+                <li data-img="grocery.jpg">Going on dates at the grocery store</li>
+                <li data-img="niche.jpg">Niche references to books, movies, shows</li>
+                <li data-img="early.jpg">Going to the movie theater early to watch all the trailers</li>
+                <li data-img="passwords.jpg">When people use the name/birthday of someone they love in their passwords</li>
+                <li data-img="jersey.jpg">The concept of "retiring a jersey/number" to honor a player</li>
+                <li data-img="chairs.jpg">Rocking chairs and cushy recliners</li>
+                <li data-img="notes.jpg">Finding random notes or receipts in used books</li>
+                <li data-img="tutelage.jpg">The word "tutelage". Also "hijinx"</li>
+                <li data-img="pencil.jpg">Old school pencil sharpeners</li>
+                <li data-img="lyrics.jpg">When my friends sing the wrong lyrics to a song</li>
+                <li data-img="benches.jpg">Personal dedications on public benches</li>
+                <li data-img="tucking.jpg">Tucking friends and family into bed</li>
+                <li data-img="honking.jpg">Bus drivers honking when they recognize each other</li>
+                <li data-img="socks.jpg">Wearing mismatched socks</li>
+                <li data-img="lyrics2.jpg">Really poetic and deep lyrics hidden in party/dance songs</li>
+                <li data-img="tattoos.jpg">Learning the meaning behind tattoos</li>
+                <li data-img="dedications.jpg">Unique dedications and epigraphs in books</li>
+                <li data-img="talent.jpg">Watching kid's school talent shows/performances</li>
+                <li data-img="samples.jpg">When songs sample real life recordings</li>
+                <li data-img="bill.jpg">When people argue over who gets to pay the bill</li>
+                <li data-img="serve.jpg">When people serve their companion food before themselves in a restaurant</li>
+                <li data-img="letters.jpg">Surprise emails and letters to your friends who you text regularly</li>
+                <li data-img="dancing.jpg">Goofy dancing</li>
+                <li data-img="animals.jpg">When animals from different species become friends</li>
+                <li data-img="orange.jpg">Drinking orange juice out of mugs</li>
+                <li data-img="bloopers.jpg">Bloopers - the word and the concept</li>
+                <li data-img="sign.jpg">Passionate sign language experts</li>
+                <li data-img="shoulders.jpg">Seeing kids on their parent's shoulders</li>
+                <li data-img="tanlines.jpg">Having strong tan lines (especially sock tan lines)</li>
+                <li data-img="scooters.jpg">Adults in fancy clothes riding scooters</li>
+                <li data-img="mannerisms.jpg">Recognizing when I've adopted certain terminology or mannerisms from someone else in my life</li>
+                <li data-img="petnames.jpg">When pets are named after different animals or random objects</li>
+                <li data-img="indianclothes.jpg">Wearing Indian clothes</li>
+                <li data-img="seeingindian.jpg">Seeing people in Indian clothes</li>
+                <li data-img="pranks.jpg">Widespread pranks</li>
+                <li data-img="walkie.jpg">Using walkie-talkies</li>
+                <li data-img="employee.jpg">Seeing the employee of the month</li>
+                <li data-img="runsync.jpg">When people run in sync next to each other</li>
+                <li data-img="airport.jpg">Watching people embrace at the airport</li>
+                <li data-img="bells.jpg">When doors have bells above them so you can tell when someone enters</li>
+                <li data-img="animalsinvade.jpg">When animals infiltrate buildings</li>
+                <li data-img="phrases.jpg">The phrases "sweet on you" "I'm charmed"</li>
+                <li data-img="whistle.jpg">When people loudly whistle "whoo whoo" for applause</li>
+                <li data-img="shoulders2.jpg">Moving shoulders up and down and nodding and going "huh" "huh"</li>
+                <li data-img="namesongs.jpg">When songs have specific people's names in them</li>
+                <li data-img="earrings.jpg">Dangly earrings</li>
+                <li data-img="pens.jpg">Pens that are attached to desks (like at banks) so you can't accidentally steal them</li>
+                <li data-img="hoodies.jpg">Wearing big hoodies and storing things in the hood</li>
+                <li data-img="segways.jpg">Segways</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="content-display">
+            <div class="content-wrapper">
+              <img id="displayedImage" src="" alt="Displayed Content">
+              <p id="imageCaption" class="image-caption"></p>
+            </div>
+            <iframe 
+              id="spotifyEmbed" 
+              style="display: none;" 
+              width="300" 
+              height="380" 
+              frameborder="0" 
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+      <div class="nav-content">
+        <div class="site-title">
+          <a href="index.html">Rithika's website ⌂</a>
+          <span class="separator">|</span>
+          <span class="current-page">likes</span>
+        </div>
+        
+        <button class="menu-trigger">
+          <span>menu</span>
+        </button>
+      </div>
+    
+      <div class="menu-popup hidden">
+        <a href="about.html">about</a>
+        <a href="likes.html">likes</a>
+        <a href="portfolio.html">portfolio</a>
+        <a href="contact.html">connect</a>
+      </div>
+    </nav>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Get DOM elements
+      const scrollContainer = document.querySelector('.scroll-container');
+      const likesList = document.getElementById('likesList');
+      const originalItems = Array.from(likesList.querySelectorAll('li'));
+      const contentImg = document.querySelector('.content-display img');
+      const imageCaption = document.getElementById('imageCaption');
+      let likeItems;
+      let currentIndex = 0;
+      let totalOriginalItems = originalItems.length;
+      
+      // Set up infinite scrolling
+      function setupInfiniteScroll() {
+        // Clone the list items multiple times
+        for (let i = 0; i < 3; i++) {
+          // Clone for bottom (after original list)
+          originalItems.forEach(item => {
+            const clone = item.cloneNode(true);
+            clone.setAttribute('data-clone', 'bottom');
+            likesList.appendChild(clone);
+          });
+          
+          // Clone for top (before original list)
+          originalItems.slice().reverse().forEach(item => {
+            const clone = item.cloneNode(true);
+            clone.setAttribute('data-clone', 'top');
+            likesList.insertBefore(clone, likesList.firstChild);
+          });
+        }
+        
+        // Get all items including clones
+        likeItems = likesList.querySelectorAll('li');
+        
+        // Set initial scroll position to the EXACT middle of original items
+        setTimeout(() => {
+          // Find the first original item (not a clone)
+          const firstOriginal = Array.from(likeItems).find(item => !item.hasAttribute('data-clone'));
+          if (firstOriginal) {
+            const originalItemsHeight = originalItems.length * firstOriginal.offsetHeight;
+            const cloneItemsBeforeHeight = 3 * originalItems.length * firstOriginal.offsetHeight;
+            
+            // Position to show the middle of the original items
+            const middlePosition = cloneItemsBeforeHeight + (originalItemsHeight / 2) - (scrollContainer.clientHeight / 2);
+            scrollContainer.scrollTop = middlePosition;
+          } else {
+            // Fallback to approximate middle
+            const middlePosition = likesList.offsetHeight / 2 - scrollContainer.clientHeight / 2;
+            scrollContainer.scrollTop = middlePosition;
+          }
+        }, 100);
+      }
+      
+      // Highlight the active item
+      function highlightItem(index) {
+        // Get the item data to match
+        const targetItem = originalItems[index];
+        const imgSrc = targetItem.getAttribute('data-img');
+        const embedType = targetItem.getAttribute('data-embed');
+        const itemText = targetItem.textContent.trim();
+        
+        // Remove active class from all items and apply base styling
+        likeItems.forEach(item => {
+          item.classList.remove('active');
+          item.style.color = 'rgba(255, 255, 255, 0.4)';
+          item.style.opacity = '0.5';
+          item.style.fontWeight = 'normal';
+        });
+        
+        // Find and highlight all matching items (original and clones)
+        const matchingItems = Array.from(likeItems).filter(item => {
+          if (embedType) {
+            return item.getAttribute('data-embed') === embedType && 
+                  item.textContent.trim() === itemText;
+          } else {
+            return item.getAttribute('data-img') === imgSrc && 
+                  item.textContent.trim() === itemText;
+          }
+        });
+        
+        matchingItems.forEach(item => {
+          item.classList.add('active');
+          item.style.color = '#ffffff';
+          item.style.opacity = '1';
+          item.style.fontWeight = '500';
+        });
+        
+        if (embedType === "spotify") {
+          // Handle Spotify embed
+          contentImg.style.display = "none";
+          imageCaption.style.display = "none";
+          document.getElementById('spotifyEmbed').style.display = "block";
+          document.getElementById('spotifyEmbed').src = "https://open.spotify.com/embed/track/4OgcGtcurJBgS7H1iW7peT";
+        } else {
+          // Handle image and caption
+          document.getElementById('spotifyEmbed').style.display = "none";
+          contentImg.style.display = "block";
+          imageCaption.style.display = "block";
+          
+          contentImg.classList.remove('visible');
+          imageCaption.classList.remove('visible');
+          
+          setTimeout(() => {
+            contentImg.src = imgSrc;
+            contentImg.alt = itemText;
+            contentImg.classList.add('visible');
+            
+            // Set caption text and make it visible
+            imageCaption.textContent = itemText;
+            imageCaption.classList.add('visible');
+          }, 300);
+        }
+        
+        // Update current index
+        currentIndex = index;
+      }
+      
+      // Handle click on items
+      function setupClickHandlers() {
+        likesList.addEventListener('click', (event) => {
+          // Check if a list item was clicked
+          if (event.target.tagName === 'LI') {
+            const item = event.target;
+            
+            // Find matching original item
+            const imgSrc = item.getAttribute('data-img');
+            const embedType = item.getAttribute('data-embed');
+            const itemText = item.textContent.trim();
+            
+            let index = -1;
+            if (embedType) {
+              index = originalItems.findIndex(original => 
+                original.getAttribute('data-embed') === embedType && 
+                original.textContent.trim() === itemText
+              );
+            } else {
+              index = originalItems.findIndex(original => 
+                original.getAttribute('data-img') === imgSrc && 
+                original.textContent.trim() === itemText
+              );
+            }
+            
+            if (index !== -1) {
+              // Highlight this item
+              highlightItem(index);
+              
+              // Scroll to this item
+              const containerRect = scrollContainer.getBoundingClientRect();
+              scrollContainer.scrollTo({
+                top: item.offsetTop - (containerRect.height / 2) + (item.offsetHeight / 2),
+                behavior: 'smooth'
+              });
+            }
+          }
+        });
+      }
+      
+      // Handle scroll events
+      function setupScrollHandler() {
+        let isScrolling = false;
+        let scrollTimeout;
+        let lastResetTime = 0;
+        const resetCooldown = 1000; // Don't reset scroll more than once per second
+        
+        scrollContainer.addEventListener('scroll', () => {
+          clearTimeout(scrollTimeout);
+          
+          if (!isScrolling) {
+            isScrolling = true;
+            
+            requestAnimationFrame(() => {
+              // Find the item closest to center of viewport
+              const containerRect = scrollContainer.getBoundingClientRect();
+              const containerMiddle = containerRect.height / 2;
+              
+              // Get visible items
+              const visibleItems = Array.from(likeItems).filter(item => {
+                const rect = item.getBoundingClientRect();
+                return rect.top <= containerRect.bottom && rect.bottom >= containerRect.top;
+              });
+              
+              // Find closest
+              let closestItem = null;
+              let closestDistance = Infinity;
+              
+              visibleItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                const distance = Math.abs((rect.top + rect.height / 2) - (containerRect.top + containerMiddle));
+                
+                if (distance < closestDistance) {
+                  closestDistance = distance;
+                  closestItem = item;
+                }
+              });
+              
+              if (closestItem) {
+                // Find matching original item
+                const imgSrc = closestItem.getAttribute('data-img');
+                const embedType = closestItem.getAttribute('data-embed');
+                const itemText = closestItem.textContent.trim();
+                
+                let index = -1;
+                if (embedType) {
+                  index = originalItems.findIndex(original => 
+                    original.getAttribute('data-embed') === embedType && 
+                    original.textContent.trim() === itemText
+                  );
+                } else {
+                  index = originalItems.findIndex(original => 
+                    original.getAttribute('data-img') === imgSrc && 
+                    original.textContent.trim() === itemText
+                  );
+                }
+                
+                if (index !== -1 && index !== currentIndex) {
+                  highlightItem(index);
+                }
+              }
+              
+              // Handle infinite scroll reset
+              const now = Date.now();
+              const scrollTop = scrollContainer.scrollTop;
+              const scrollHeight = scrollContainer.scrollHeight;
+              const clientHeight = scrollContainer.clientHeight;
+              
+              // Use more extreme limits to prevent accidental resets during fast scrolling
+              const upperLimit = scrollHeight / 4;  // Only reset when in top 25%
+              const lowerLimit = scrollHeight * 3 / 4; // Only reset when in bottom 25%
+              
+              // Calculate where the middle of the original items is
+              const middlePosition = scrollHeight / 2 - clientHeight / 2;
+              
+              // Only reset if we haven't reset recently and we're in an extreme position
+              if ((scrollTop < upperLimit || scrollTop > lowerLimit) && 
+                  (now - lastResetTime > resetCooldown)) {
+                
+                lastResetTime = now;
+                
+                scrollTimeout = setTimeout(() => {
+                  // Save the current position relative to the nearest item
+                  let targetItem = null;
+                  
+                  // Find the item that should be centered after reset
+                  visibleItems.forEach(item => {
+                    const rect = item.getBoundingClientRect();
+                    const distance = Math.abs((rect.top + rect.height / 2) - (containerRect.top + containerMiddle));
+                    
+                    if (distance < closestDistance) {
+                      closestDistance = distance;
+                      targetItem = item;
+                    }
+                  });
+                  
+                  // Disable smooth scrolling for the reset
+                  scrollContainer.style.scrollBehavior = 'auto';
+                  
+                  // Jump to middle
+                  scrollContainer.scrollTop = middlePosition;
+                  
+                  // If we have a target item, adjust to keep it in view
+                  if (targetItem) {
+                    // Find the matching item in the middle section
+                    const imgSrc = targetItem.getAttribute('data-img');
+                    const embedType = targetItem.getAttribute('data-embed');
+                    const itemText = targetItem.textContent.trim();
+                    
+                    // Find the middle instance of this item
+                    let middleItems = [];
+                    if (embedType) {
+                      middleItems = Array.from(likeItems).filter(item => 
+                        !item.hasAttribute('data-clone') && 
+                        item.getAttribute('data-embed') === embedType && 
+                        item.textContent.trim() === itemText
+                      );
+                    } else {
+                      middleItems = Array.from(likeItems).filter(item => 
+                        !item.hasAttribute('data-clone') && 
+                        item.getAttribute('data-img') === imgSrc && 
+                        item.textContent.trim() === itemText
+                      );
+                    }
+                    
+                    if (middleItems.length > 0) {
+                      const middleItem = middleItems[0];
+                      scrollContainer.scrollTop = middleItem.offsetTop - (containerRect.height / 2) + (middleItem.offsetHeight / 2);
+                    }
+                  }
+                  
+                  // Re-enable smooth scrolling
+                  setTimeout(() => {
+                    scrollContainer.style.scrollBehavior = 'smooth';
+                  }, 50);
+                }, 100);
+              }
+              
+              isScrolling = false;
+            });
+          }
+        });
+      }
+      
+      // Menu functionality
+      function setupMenu() {
+        const menuTrigger = document.querySelector('.menu-trigger');
+        const menuPopup = document.querySelector('.menu-popup');
+        
+        if (menuTrigger && menuPopup) {
+          menuTrigger.addEventListener('click', () => {
+            menuPopup.classList.toggle('hidden');
+            menuTrigger.setAttribute('aria-expanded', menuPopup.classList.contains('hidden') ? 'false' : 'true');
+            menuTrigger.classList.toggle('active');
+          });
+          
+          // Close when clicking outside
+          document.addEventListener('click', event => {
+            if (!menuTrigger.contains(event.target) && !menuPopup.contains(event.target)) {
+              menuPopup.classList.add('hidden');
+              menuTrigger.setAttribute('aria-expanded', 'false');
+              menuTrigger.classList.remove('active');
+            }
+          });
+        }
+      }
+      
+      // Initialize everything
+      setupInfiniteScroll();
+      setupClickHandlers();
+      setupScrollHandler();
+      setupMenu();
+      highlightItem(0);
+    });
+  </script>
+</body>
+</html>
