@@ -70,6 +70,11 @@ export function initializeHomePage() {
                 mp4: '/anant.mp4',
                 webm: '/anant.webm', // If you have a WebM version available
                 name: 'Anant Vasudevan',
+            },
+            {
+                mp4: '/mahi.mp4',
+                webm: '/mahi.webm', // If you have a WebM version available
+                name: 'Mahi Patel',
             }
             // Add more videos as needed
         ];
