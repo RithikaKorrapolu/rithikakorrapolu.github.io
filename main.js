@@ -38,22 +38,18 @@ export function initializeHomePage() {
         const videos = [
             {
                 mp4: '/thattaya.mp4',
-                webm: '/thattaya.webm',
                 name: 'Dr. Sambasiva Korrapolu'
             },
             {
                 mp4: '/taruna.mp4',
-                webm: '/taruna.webm', // If you have a WebM version available
                 name: 'Taruna Emani'
             },
             {
                 mp4: '/glory.mp4',
-                webm: '/glory.webm', // If you have a WebM version available
                 name: 'Glory Kanes'
             },
             {
                 mp4: '/mich.mp4',
-                webm: '/mich.webm', // If you have a WebM version available
                 name: 'Michelle Christian'
             },
             {
@@ -63,17 +59,14 @@ export function initializeHomePage() {
             },
             {
                 mp4: '/kasra.mp4',
-                webm: '/kasra.webm', // If you have a WebM version available
                 name: 'Kasra Koushan',
             },
             {
                 mp4: '/anant.mp4',
-                webm: '/anant.webm', // If you have a WebM version available
                 name: 'Anant Vasudevan',
             },
             {
                 mp4: '/mahi.mp4',
-                webm: '/mahi.webm', // If you have a WebM version available
                 name: 'Mahi Patel',
             }
             // Add more videos as needed
