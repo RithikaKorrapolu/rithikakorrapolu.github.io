@@ -26,6 +26,7 @@ export function initializeMenu() {
 // Export home page functionality
 // Export home page functionality with Instagram browser compatibility
 // Export home page functionality with sequential non-repeating video playback
+// Export home page functionality with Instagram compatibility
 export function initializeHomePage() {
     const welcomeVideo = document.getElementById('welcomeVideo');
     const muteLine = document.querySelector('.mute-line');
@@ -36,12 +37,54 @@ export function initializeHomePage() {
     const nameElement = document.querySelector('.name');
 
     if (welcomeVideo) {
-        // Detect Instagram browser
+        // Detect Instagram browser (very reliable detection)
         const isInstagramBrowser = 
             navigator.userAgent.includes('Instagram') || 
-            window.location.href.includes('instagram');
+            window.location.href.includes('instagram') ||
+            document.referrer.includes('instagram');
         
         console.log('Instagram browser detected:', isInstagramBrowser);
+        
+        // Show Instagram fallback immediately if in Instagram browser
+        if (isInstagramBrowser) {
+            // Create Instagram fallback element with a small delay to ensure DOM is ready
+            setTimeout(() => {
+                createInstagramFallback();
+            }, 200);
+        }
+        
+        // Function to create Instagram fallback
+        function createInstagramFallback() {
+            // Only create if it doesn't already exist
+            if (document.querySelector('.instagram-fallback')) return;
+            
+            const videoContainer = welcomeVideo.parentElement;
+            const fallbackElement = document.createElement('div');
+            fallbackElement.className = 'instagram-fallback';
+            
+            // Get the clean URL (without query parameters)
+            const cleanUrl = window.location.origin + window.location.pathname;
+            
+            fallbackElement.innerHTML = `
+                <p>Videos don't play in Instagram's browser</p>
+                <p>Please open in your regular browser:</p>
+                <a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" 
+                   onclick="window.location.href='${cleanUrl}'; return false;">
+                   Open in Browser
+                </a>
+            `;
+            
+            videoContainer.appendChild(fallbackElement);
+            
+            // Add click event to the entire fallback div to force external browser
+            fallbackElement.addEventListener('click', (e) => {
+                window.location.href = cleanUrl;
+                if (typeof window.open === 'function') {
+                    window.open(cleanUrl, '_system');
+                }
+                e.preventDefault();
+            });
+        }
         
         // Array of available videos
         const videos = [
@@ -87,8 +130,7 @@ export function initializeHomePage() {
         function resetPlaylist() {
             // Create a fresh shuffled copy of all videos
             remainingVideos = [...videos].sort(() => Math.random() - 0.5);
-            console.log('Playlist reset with new random order. Videos to play:', 
-                remainingVideos.map(v => v.name).join(', '));
+            console.log('Playlist reset with new random order.');
         }
         
         // Initialize the playlist
@@ -104,8 +146,7 @@ export function initializeHomePage() {
             // Take the first video from the remaining ones
             const selectedVideo = remainingVideos.shift();
             
-            console.log(`Playing video ${videos.length - remainingVideos.length}/${videos.length}: ${selectedVideo.name}`);
-            console.log(`Remaining videos in this cycle: ${remainingVideos.length}`);
+            console.log(`Playing video: ${selectedVideo.name}`);
             
             // Update source URLs
             const sourceElements = welcomeVideo.getElementsByTagName('source');
@@ -122,33 +163,10 @@ export function initializeHomePage() {
             // Load the new video sources
             welcomeVideo.load();
             
-            // Play attempt tracking for this video
-            let playAttempts = 0;
-            const maxPlayAttempts = 3;
-            
-            // Try to play the video
-            function tryPlayVideo() {
-                if (playAttempts >= maxPlayAttempts) {
-                    console.log('Max play attempts reached, moving to next video');
-                    // Move to next video if this one fails
-                    loadNextVideo();
-                    return;
-                }
-                
-                playAttempts++;
-                welcomeVideo.play().catch(error => {
-                    console.log(`Play attempt ${playAttempts} failed:`, error);
-                    setTimeout(tryPlayVideo, 300);
-                });
-            }
-            
-            // Different handling based on browser type
-            if (isInstagramBrowser) {
-                console.log('Using Instagram optimized video loading');
-                setTimeout(tryPlayVideo, 500);
-            } else {
+            // Only try to play if not in Instagram (since we're showing fallback there)
+            if (!isInstagramBrowser) {
                 welcomeVideo.play().catch(function(error) {
-                    console.log("Video autoplay failed in standard browser:", error);
+                    console.log("Video play failed:", error);
                     welcomeVideo.muted = true;
                     welcomeVideo.play();
                 });
@@ -157,14 +175,13 @@ export function initializeHomePage() {
         
         // Event listener for when the current video ends
         welcomeVideo.addEventListener('ended', function() {
-            console.log('Video ended, loading next non-duplicate video');
+            console.log('Video ended, loading next video');
             loadNextVideo();
         });
         
-        // Fix for Instagram: also check periodically if video has ended
-        // This helps when 'ended' event might not fire reliably
+        // Check periodically if video has ended (backup for when 'ended' event doesn't fire)
         setInterval(function() {
-            if (welcomeVideo.currentTime > 0 && 
+            if (!isInstagramBrowser && welcomeVideo.currentTime > 0 && 
                 welcomeVideo.currentTime >= welcomeVideo.duration - 0.5) {
                 console.log('Video detected as ended via time check');
                 welcomeVideo.currentTime = 0;
@@ -184,8 +201,10 @@ export function initializeHomePage() {
         
         if (muteLine) muteLine.classList.remove('hidden');
 
-        // Start with the first video
-        loadNextVideo();
+        // Start with the first video (only if not in Instagram)
+        if (!isInstagramBrowser) {
+            loadNextVideo();
+        }
 
         // Name overlay / mute toggle
         if (nameOverlay) {
@@ -210,7 +229,6 @@ export function initializeHomePage() {
                 
                 // Only continue if video metadata is loaded
                 if (!welcomeVideo.videoWidth || !welcomeVideo.videoHeight) {
-                    console.log('Video dimensions not available yet');
                     return;
                 }
                 
@@ -237,9 +255,6 @@ export function initializeHomePage() {
         
         // Also update on window resize
         window.addEventListener('resize', updateVideoSize);
-        
-        // Force an update after a short delay to handle late loading
-        setTimeout(updateVideoSize, 1000);
     }
 
     // Info popup functionality
