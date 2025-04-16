@@ -23,9 +23,6 @@ export function initializeMenu() {
     }
 }
 
-// Export home page functionality
-// Export home page functionality with Instagram browser compatibility
-// Export home page functionality with sequential non-repeating video playback
 // Export home page functionality with Instagram compatibility
 export function initializeHomePage() {
     const welcomeVideo = document.getElementById('welcomeVideo');
@@ -68,10 +65,6 @@ export function initializeHomePage() {
             fallbackElement.innerHTML = `
                 <p>Videos don't play in Instagram's browser</p>
                 <p>Please open in your regular browser:</p>
-                <a href="${cleanUrl}" target="_blank" rel="noopener noreferrer" 
-                   onclick="window.location.href='${cleanUrl}'; return false;">
-                   Open in Browser
-                </a>
             `;
             
             videoContainer.appendChild(fallbackElement);
