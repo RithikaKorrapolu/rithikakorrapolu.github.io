@@ -24,6 +24,7 @@ export function initializeMenu() {
 }
 
 // Export home page functionality
+// Export home page functionality with Instagram browser compatibility
 export function initializeHomePage() {
     const welcomeVideo = document.getElementById('welcomeVideo');
     const muteLine = document.querySelector('.mute-line');
@@ -34,6 +35,13 @@ export function initializeHomePage() {
     const nameElement = document.querySelector('.name');
 
     if (welcomeVideo) {
+        // Detect Instagram browser
+        const isInstagramBrowser = 
+            navigator.userAgent.includes('Instagram') || 
+            window.location.href.includes('instagram');
+        
+        console.log('Instagram browser detected:', isInstagramBrowser);
+        
         // Array of available videos
         const videos = [
             {
@@ -88,20 +96,100 @@ export function initializeHomePage() {
             nameElement.textContent = selectedVideo.name;
         }
         
-        // Video setup
+        // Ensure necessary attributes for best cross-browser compatibility
         welcomeVideo.muted = true;
-        if (muteLine) muteLine.classList.remove('hidden');
+        welcomeVideo.setAttribute('playsinline', '');
+        welcomeVideo.setAttribute('webkit-playsinline', '');
+        welcomeVideo.preload = 'auto';
         welcomeVideo.autoplay = true;
         welcomeVideo.loop = true;
         
-        // Load the new video sources before trying to play
+        if (muteLine) muteLine.classList.remove('hidden');
+        
+        // Load the new video sources
         welcomeVideo.load();
         
-        welcomeVideo.play().catch(function(error) {
-            console.log("Video autoplay failed:", error);
-            welcomeVideo.muted = true;
-            welcomeVideo.play();
-        });
+        // Play attempt tracking
+        let playAttempts = 0;
+        const maxPlayAttempts = 3;
+        
+        // Function to try playing video with fallback
+        function tryPlayVideo() {
+            if (playAttempts >= maxPlayAttempts) {
+                console.log('Max play attempts reached, showing fallback');
+                // Show fallback for Instagram
+                if (isInstagramBrowser) {
+                    const videoContainer = welcomeVideo.parentElement;
+                    
+                    // Only add fallback if it doesn't exist already
+                    if (!document.querySelector('.video-fallback')) {
+                        const fallbackElement = document.createElement('div');
+                        fallbackElement.className = 'video-fallback';
+                        fallbackElement.style.position = 'absolute';
+                        fallbackElement.style.top = '0';
+                        fallbackElement.style.left = '0';
+                        fallbackElement.style.width = '100%';
+                        fallbackElement.style.height = '100%';
+                        fallbackElement.style.display = 'flex';
+                        fallbackElement.style.flexDirection = 'column';
+                        fallbackElement.style.justifyContent = 'center';
+                        fallbackElement.style.alignItems = 'center';
+                        fallbackElement.style.backgroundColor = 'rgba(0,0,0,0.7)';
+                        fallbackElement.style.color = 'white';
+                        fallbackElement.style.zIndex = '5';
+                        
+                        // Get the base URL without Instagram parameters
+                        const baseUrl = window.location.href.split('?')[0];
+                        
+                        fallbackElement.innerHTML = `
+                            <p style="margin-bottom: 15px; font-size: 16px;">
+                                Video not loading in Instagram browser
+                            </p>
+                            <a href="${baseUrl}" target="_blank" style="
+                                display: inline-block;
+                                padding: 8px 15px;
+                                background-color: white;
+                                color: black;
+                                text-decoration: none;
+                                border-radius: 4px;
+                                font-weight: bold;
+                            ">Open in Browser</a>
+                        `;
+                        videoContainer.appendChild(fallbackElement);
+                    }
+                }
+                return;
+            }
+            
+            playAttempts++;
+            welcomeVideo.play().catch(error => {
+                console.log(`Play attempt ${playAttempts} failed:`, error);
+                setTimeout(tryPlayVideo, 300);
+            });
+        }
+        
+        // Different handling based on browser type
+        if (isInstagramBrowser) {
+            console.log('Using Instagram optimized video loading');
+            
+            // Add dedicated error handler for Instagram
+            welcomeVideo.addEventListener('error', (e) => {
+                console.error('Video error in Instagram browser:', e);
+                tryPlayVideo();
+            });
+            
+            // Use a timeout to ensure Instagram has fully loaded the page
+            setTimeout(() => {
+                tryPlayVideo();
+            }, 500);
+        } else {
+            // Normal browser handling
+            welcomeVideo.play().catch(function(error) {
+                console.log("Video autoplay failed in standard browser:", error);
+                welcomeVideo.muted = true;
+                welcomeVideo.play();
+            });
+        }
 
         // Name overlay / mute toggle
         if (nameOverlay) {
@@ -111,27 +199,51 @@ export function initializeHomePage() {
             });
         }
 
-        // Video size handling
+        // Video size handling with better error prevention
         function updateVideoSize() {
-            const container = welcomeVideo.parentElement;
-            const containerWidth = container.offsetWidth;
-            const containerHeight = container.offsetHeight;
-            const containerAspect = containerWidth / containerHeight;
-            const videoAspect = welcomeVideo.videoWidth / welcomeVideo.videoHeight;
+            try {
+                const container = welcomeVideo.parentElement;
+                if (!container) return;
+                
+                const containerWidth = container.offsetWidth;
+                const containerHeight = container.offsetHeight;
+                
+                if (!containerWidth || !containerHeight) return;
+                
+                const containerAspect = containerWidth / containerHeight;
+                
+                // Only continue if video metadata is loaded
+                if (!welcomeVideo.videoWidth || !welcomeVideo.videoHeight) {
+                    console.log('Video dimensions not available yet');
+                    return;
+                }
+                
+                const videoAspect = welcomeVideo.videoWidth / welcomeVideo.videoHeight;
 
-            if (containerAspect > videoAspect) {
-                const scale = containerWidth / welcomeVideo.videoWidth;
-                welcomeVideo.style.width = containerWidth + 'px';
-                welcomeVideo.style.height = (welcomeVideo.videoHeight * scale) + 'px';
-            } else {
-                const scale = containerHeight / welcomeVideo.videoHeight;
-                welcomeVideo.style.height = containerHeight + 'px';
-                welcomeVideo.style.width = (welcomeVideo.videoWidth * scale) + 'px';
+                if (containerAspect > videoAspect) {
+                    const scale = containerWidth / welcomeVideo.videoWidth;
+                    welcomeVideo.style.width = containerWidth + 'px';
+                    welcomeVideo.style.height = (welcomeVideo.videoHeight * scale) + 'px';
+                } else {
+                    const scale = containerHeight / welcomeVideo.videoHeight;
+                    welcomeVideo.style.height = containerHeight + 'px';
+                    welcomeVideo.style.width = (welcomeVideo.videoWidth * scale) + 'px';
+                }
+            } catch (err) {
+                console.error('Error updating video size:', err);
             }
         }
 
+        // Multiple event listeners for more reliable size calculation
         welcomeVideo.addEventListener('loadedmetadata', updateVideoSize);
+        welcomeVideo.addEventListener('loadeddata', updateVideoSize);
+        welcomeVideo.addEventListener('playing', updateVideoSize);
+        
+        // Also update on window resize
         window.addEventListener('resize', updateVideoSize);
+        
+        // Force an update after a short delay to handle late loading
+        setTimeout(updateVideoSize, 1000);
     }
 
     // Info popup functionality
