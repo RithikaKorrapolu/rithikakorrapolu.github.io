@@ -63,8 +63,8 @@ export function initializeHomePage() {
             const cleanUrl = window.location.origin + window.location.pathname;
             
             fallbackElement.innerHTML = `
-                <p>Videos don't play in Instagram's browser</p>
-                <p>Please open in your regular browser:</p>
+                <p>Argh, the videos don't play in Instagram's app browser for some reason</p>
+                <p>But if you open it outside of insta, it works and I think its worth it so check it!</p>
             `;
             
             videoContainer.appendChild(fallbackElement);
