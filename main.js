@@ -25,6 +25,7 @@ export function initializeMenu() {
 
 // Export home page functionality
 // Export home page functionality with Instagram browser compatibility
+// Export home page functionality with sequential non-repeating video playback
 export function initializeHomePage() {
     const welcomeVideo = document.getElementById('welcomeVideo');
     const muteLine = document.querySelector('.mute-line');
@@ -62,7 +63,7 @@ export function initializeHomePage() {
             },
             {
                 mp4: '/jordan.mp4',
-                webm: '/jordan.webm', // If you have a WebM version available
+                webm: '/jordan.webm',
                 name: 'Jordan Mitchell'
             },
             {
@@ -77,24 +78,99 @@ export function initializeHomePage() {
                 mp4: '/mahi.mp4',
                 name: 'Mahi Patel',
             }
-            // Add more videos as needed
         ];
 
-        // Randomly select a video
-        const randomIndex = Math.floor(Math.random() * videos.length);
-        const selectedVideo = videos[randomIndex];
+        // Track which videos have been played in this cycle
+        let remainingVideos = [];
         
-        // Update source URLs
-        const sourceElements = welcomeVideo.getElementsByTagName('source');
-        sourceElements[0].src = selectedVideo.mp4;
-        if (sourceElements.length > 1 && selectedVideo.webm) {
-            sourceElements[1].src = selectedVideo.webm;
+        // Function to reset the playlist when all videos have been played
+        function resetPlaylist() {
+            // Create a fresh shuffled copy of all videos
+            remainingVideos = [...videos].sort(() => Math.random() - 0.5);
+            console.log('Playlist reset with new random order. Videos to play:', 
+                remainingVideos.map(v => v.name).join(', '));
         }
         
-        // Update name in the overlay
-        if (nameElement && selectedVideo.name) {
-            nameElement.textContent = selectedVideo.name;
+        // Initialize the playlist
+        resetPlaylist();
+        
+        // Function to load and play the next video
+        function loadNextVideo() {
+            // If we've played all videos, reset the playlist
+            if (remainingVideos.length === 0) {
+                resetPlaylist();
+            }
+            
+            // Take the first video from the remaining ones
+            const selectedVideo = remainingVideos.shift();
+            
+            console.log(`Playing video ${videos.length - remainingVideos.length}/${videos.length}: ${selectedVideo.name}`);
+            console.log(`Remaining videos in this cycle: ${remainingVideos.length}`);
+            
+            // Update source URLs
+            const sourceElements = welcomeVideo.getElementsByTagName('source');
+            sourceElements[0].src = selectedVideo.mp4;
+            if (sourceElements.length > 1 && selectedVideo.webm) {
+                sourceElements[1].src = selectedVideo.webm;
+            }
+            
+            // Update name in the overlay
+            if (nameElement && selectedVideo.name) {
+                nameElement.textContent = selectedVideo.name;
+            }
+            
+            // Load the new video sources
+            welcomeVideo.load();
+            
+            // Play attempt tracking for this video
+            let playAttempts = 0;
+            const maxPlayAttempts = 3;
+            
+            // Try to play the video
+            function tryPlayVideo() {
+                if (playAttempts >= maxPlayAttempts) {
+                    console.log('Max play attempts reached, moving to next video');
+                    // Move to next video if this one fails
+                    loadNextVideo();
+                    return;
+                }
+                
+                playAttempts++;
+                welcomeVideo.play().catch(error => {
+                    console.log(`Play attempt ${playAttempts} failed:`, error);
+                    setTimeout(tryPlayVideo, 300);
+                });
+            }
+            
+            // Different handling based on browser type
+            if (isInstagramBrowser) {
+                console.log('Using Instagram optimized video loading');
+                setTimeout(tryPlayVideo, 500);
+            } else {
+                welcomeVideo.play().catch(function(error) {
+                    console.log("Video autoplay failed in standard browser:", error);
+                    welcomeVideo.muted = true;
+                    welcomeVideo.play();
+                });
+            }
         }
+        
+        // Event listener for when the current video ends
+        welcomeVideo.addEventListener('ended', function() {
+            console.log('Video ended, loading next non-duplicate video');
+            loadNextVideo();
+        });
+        
+        // Fix for Instagram: also check periodically if video has ended
+        // This helps when 'ended' event might not fire reliably
+        setInterval(function() {
+            if (welcomeVideo.currentTime > 0 && 
+                welcomeVideo.currentTime >= welcomeVideo.duration - 0.5) {
+                console.log('Video detected as ended via time check');
+                welcomeVideo.currentTime = 0;
+                loadNextVideo();
+            }
+        }, 1000);
         
         // Ensure necessary attributes for best cross-browser compatibility
         welcomeVideo.muted = true;
@@ -102,94 +178,14 @@ export function initializeHomePage() {
         welcomeVideo.setAttribute('webkit-playsinline', '');
         welcomeVideo.preload = 'auto';
         welcomeVideo.autoplay = true;
-        welcomeVideo.loop = true;
+        
+        // Important: Turn OFF loop since we want to handle ending ourselves
+        welcomeVideo.loop = false;
         
         if (muteLine) muteLine.classList.remove('hidden');
-        
-        // Load the new video sources
-        welcomeVideo.load();
-        
-        // Play attempt tracking
-        let playAttempts = 0;
-        const maxPlayAttempts = 3;
-        
-        // Function to try playing video with fallback
-        function tryPlayVideo() {
-            if (playAttempts >= maxPlayAttempts) {
-                console.log('Max play attempts reached, showing fallback');
-                // Show fallback for Instagram
-                if (isInstagramBrowser) {
-                    const videoContainer = welcomeVideo.parentElement;
-                    
-                    // Only add fallback if it doesn't exist already
-                    if (!document.querySelector('.video-fallback')) {
-                        const fallbackElement = document.createElement('div');
-                        fallbackElement.className = 'video-fallback';
-                        fallbackElement.style.position = 'absolute';
-                        fallbackElement.style.top = '0';
-                        fallbackElement.style.left = '0';
-                        fallbackElement.style.width = '100%';
-                        fallbackElement.style.height = '100%';
-                        fallbackElement.style.display = 'flex';
-                        fallbackElement.style.flexDirection = 'column';
-                        fallbackElement.style.justifyContent = 'center';
-                        fallbackElement.style.alignItems = 'center';
-                        fallbackElement.style.backgroundColor = 'rgba(0,0,0,0.7)';
-                        fallbackElement.style.color = 'white';
-                        fallbackElement.style.zIndex = '5';
-                        
-                        // Get the base URL without Instagram parameters
-                        const baseUrl = window.location.href.split('?')[0];
-                        
-                        fallbackElement.innerHTML = `
-                            <p style="margin-bottom: 15px; font-size: 16px;">
-                                Video not loading in Instagram browser
-                            </p>
-                            <a href="${baseUrl}" target="_blank" style="
-                                display: inline-block;
-                                padding: 8px 15px;
-                                background-color: white;
-                                color: black;
-                                text-decoration: none;
-                                border-radius: 4px;
-                                font-weight: bold;
-                            ">Open in Browser</a>
-                        `;
-                        videoContainer.appendChild(fallbackElement);
-                    }
-                }
-                return;
-            }
-            
-            playAttempts++;
-            welcomeVideo.play().catch(error => {
-                console.log(`Play attempt ${playAttempts} failed:`, error);
-                setTimeout(tryPlayVideo, 300);
-            });
-        }
-        
-        // Different handling based on browser type
-        if (isInstagramBrowser) {
-            console.log('Using Instagram optimized video loading');
-            
-            // Add dedicated error handler for Instagram
-            welcomeVideo.addEventListener('error', (e) => {
-                console.error('Video error in Instagram browser:', e);
-                tryPlayVideo();
-            });
-            
-            // Use a timeout to ensure Instagram has fully loaded the page
-            setTimeout(() => {
-                tryPlayVideo();
-            }, 500);
-        } else {
-            // Normal browser handling
-            welcomeVideo.play().catch(function(error) {
-                console.log("Video autoplay failed in standard browser:", error);
-                welcomeVideo.muted = true;
-                welcomeVideo.play();
-            });
-        }
+
+        // Start with the first video
+        loadNextVideo();
 
         // Name overlay / mute toggle
         if (nameOverlay) {
