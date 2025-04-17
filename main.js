@@ -23,7 +23,7 @@ export function initializeMenu() {
     }
 }
 
-// Export home page functionality with Instagram compatibility
+// Export home page functionality without Instagram compatibility
 export function initializeHomePage() {
     const welcomeVideo = document.getElementById('welcomeVideo');
     const muteLine = document.querySelector('.mute-line');
@@ -34,51 +34,6 @@ export function initializeHomePage() {
     const nameElement = document.querySelector('.name');
 
     if (welcomeVideo) {
-        // Detect Instagram browser (very reliable detection)
-        const isInstagramBrowser = 
-            navigator.userAgent.includes('Instagram') || 
-            window.location.href.includes('instagram') ||
-            document.referrer.includes('instagram');
-        
-        console.log('Instagram browser detected:', isInstagramBrowser);
-        
-        // Show Instagram fallback immediately if in Instagram browser
-        if (isInstagramBrowser) {
-            // Create Instagram fallback element with a small delay to ensure DOM is ready
-            setTimeout(() => {
-                createInstagramFallback();
-            }, 200);
-        }
-        
-        // Function to create Instagram fallback
-        function createInstagramFallback() {
-            // Only create if it doesn't already exist
-            if (document.querySelector('.instagram-fallback')) return;
-            
-            const videoContainer = welcomeVideo.parentElement;
-            const fallbackElement = document.createElement('div');
-            fallbackElement.className = 'instagram-fallback';
-            
-            // Get the clean URL (without query parameters)
-            const cleanUrl = window.location.origin + window.location.pathname;
-            
-            fallbackElement.innerHTML = `
-                <p>Argh, my home page doest't work on Instagram's app browser for some reason</p>
-                <p>But if you open it outside of the app, it works and I think its worth it so check it!</p>
-            `;
-            
-            videoContainer.appendChild(fallbackElement);
-            
-            // Add click event to the entire fallback div to force external browser
-            fallbackElement.addEventListener('click', (e) => {
-                window.location.href = cleanUrl;
-                if (typeof window.open === 'function') {
-                    window.open(cleanUrl, '_system');
-                }
-                e.preventDefault();
-            });
-        }
-        
         // Array of available videos
         const videos = [
             {
@@ -156,14 +111,12 @@ export function initializeHomePage() {
             // Load the new video sources
             welcomeVideo.load();
             
-            // Only try to play if not in Instagram (since we're showing fallback there)
-            if (!isInstagramBrowser) {
-                welcomeVideo.play().catch(function(error) {
-                    console.log("Video play failed:", error);
-                    welcomeVideo.muted = true;
-                    welcomeVideo.play();
-                });
-            }
+            // Play the video
+            welcomeVideo.play().catch(function(error) {
+                console.log("Video play failed:", error);
+                welcomeVideo.muted = true;
+                welcomeVideo.play();
+            });
         }
         
         // Event listener for when the current video ends
@@ -174,7 +127,7 @@ export function initializeHomePage() {
         
         // Check periodically if video has ended (backup for when 'ended' event doesn't fire)
         setInterval(function() {
-            if (!isInstagramBrowser && welcomeVideo.currentTime > 0 && 
+            if (welcomeVideo.currentTime > 0 && 
                 welcomeVideo.currentTime >= welcomeVideo.duration - 0.5) {
                 console.log('Video detected as ended via time check');
                 welcomeVideo.currentTime = 0;
@@ -194,10 +147,8 @@ export function initializeHomePage() {
         
         if (muteLine) muteLine.classList.remove('hidden');
 
-        // Start with the first video (only if not in Instagram)
-        if (!isInstagramBrowser) {
-            loadNextVideo();
-        }
+        // Start with the first video
+        loadNextVideo();
 
         // Name overlay / mute toggle
         if (nameOverlay) {
