@@ -1219,6 +1219,56 @@ video {
     margin-top: 10px;
 }
 
+.museum-header {
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+  
+  .museum-header h1 {
+    font-size: 2.5rem;
+    font-family: Georgia, serif;
+    margin-bottom: 0.5rem;
+  }
+  
+  .museum-header .subtext {
+    font-size: 1rem;
+    color: #777;
+  }
+  
+  .museum-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .museum-item {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+  }
+  
+  .museum-item:hover {
+    transform: translateY(-4px);
+  }
+  
+  .museum-item img,
+  .museum-item video {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+  }
+  
+  .caption {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #444;
+    font-style: italic;
+  }
+  
+
 /* Responsive adjustments */
 @media (max-width: 1200px) {
     .slide-content {

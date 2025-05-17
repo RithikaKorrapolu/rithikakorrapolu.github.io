@@ -509,7 +509,14 @@ export function initializePortfolioPage() {
     }
 }
 
+export function initializeMuseumPage() {
+    console.log('Museum page loaded');
+    // The museum functionality is handled by museum.js
+    // No additional initialization needed here
+}
+
 // Initialize everything when DOM is loaded
+// Update your DOMContentLoaded handler in main.js
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM loaded');
     initializeMenu();
@@ -524,5 +531,7 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeAboutPage();
     } else if (currentPage === 'portfolio') {
         initializePortfolioPage();
+    } else if (currentPage === 'museum') {
+        initializeMuseumPage();
     }
 });

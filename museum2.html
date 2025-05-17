@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>The Rithika Museum - Rithika's Website</title>
+    <link rel="stylesheet" href="/style.css">
+    <!-- Add Supabase  -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <style>
+        /* Keep your existing styles */
+        .contact-container {
+            width: 100%;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        
+        .rai-section {
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+        
+        .rai-text {
+            width: 100%;
+        }
+        
+        .rai-link {
+            color: #4169E1;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .rai-link:hover {
+            text-decoration: underline;
+        }
+        
+        .rai-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .rai-text h2 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .project-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .project-images img {
+            max-width: 100%;
+            height: auto;
+            max-height: 300px;
+            object-fit: cover;
+        }
+        
+        .concept-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .project-section {
+            margin-top: 3rem;
+            padding-top: 1rem;
+        }
+        
+        /* New museum-specific styles */
+        .museum-tabs {
+            display: flex;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom: 2px solid #4169E1;
+            font-weight: 500;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .art-form {
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        button {
+            background-color: #4169E1;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        button:hover {
+            background-color: #3151b1;
+        }
+        
+        button:disabled {
+            background-color: #b3c3f3;
+            cursor: not-allowed;
+        }
+        
+        .message {
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+        
+        .message.success {
+            background-color: #e6f7e6;
+            border: 1px solid #c3e6c3;
+        }
+        
+        .message.error {
+            background-color: #f7e6e6;
+            border: 1px solid #e6c3c3;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .art-item {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1.5rem;
+            background-color: #fff;
+        }
+        
+        .art-preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        
+        .art-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .tag {
+            background-color: #f0f0f0;
+            padding: 0.25rem 0.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        /* Add to your existing CSS */
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.spotify-container {
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.art-type-quote blockquote {
+    font-style: italic;
+    border-left: 3px solid #ddd;
+    padding-left: 1rem;
+    margin: 1rem 0;
+}
+
+.art-type-book .book-info {
+    background-color: #f8f8f8;
+    padding: 1rem;
+    border-radius: 4px;
+    margin: 1rem 0;
+}
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="content-container">
+            <div class="contact-container">
+                <h1 class="contact-title">The Rithika Museum</h1>
+                <p class="concept-subtitle">A tool to save and organize digital art based on how you're feeling</p>
+                
+                <div id="message-container"></div>
+                
+                <div class="museum-tabs">
+                    <div class="tab active" data-tab="add">Add to Museum</div>
+                    <div class="tab" data-tab="find">Find by Mood</div>
+                    <div class="tab" data-tab="gallery">Gallery</div>
+                </div>
+                
+                <div class="rai-section">
+                    <div class="tab-content active" id="add-tab">
+                        <h2>Save Something to Your Museum</h2>
+                        <form id="art-upload-form" class="art-form">
+                            <div class="form-group">
+                                <label for="art-title">Title</label>
+                                <input type="text" id="art-title" placeholder="Give your art a name (optional)">
+                            </div>
+                            
+<!-- Find this in your museum2.html file -->
+<div class="form-group">
+    <label for="art-type">Type</label>
+    <select id="art-type" required>
+        <option value="music">Music</option>
+        <option value="quote">Quotes / Poems</option>
+        <option value="film">Film / TV</option>
+        <option value="book">Books</option>
+        <option value="video">Videos</option>
+        <option value="art">Fine Art</option>
+        <option value="other">Other</option>
+    </select>
+</div>
+                            
+                            <div class="form-group">
+                                <label for="art-content">Content</label>
+                                <textarea id="art-content" rows="4" placeholder="Paste text, quote, or description here"></textarea>
+                            </div>
+                            <!-- Add this to your form in the "Add to Museum" tab -->
+<div class="form-group">
+    <label for="art-url">URL (for YouTube, Spotify, etc.)</label>
+    <input type="url" id="art-url" placeholder="Paste a link to content (optional)">
+</div>
+                            <div class="form-group">
+                                <label for="art-file">File Upload (optional)</label>
+                                <input type="file" id="art-file">
+                            </div>
+                            
+                            <button type="submit">Save to Museum</button>
+                        </form>
+                    </div>
+                    
+                    <div class="tab-content" id="find-tab">
+                        <h2>Find Art Based on Your Mood</h2>
+                        <form id="mood-search-form" class="art-form">
+                            <div class="form-group">
+                                <label for="mood-input">How are you feeling?</label>
+                                <textarea id="mood-input" rows="4" required placeholder="Describe your current mood or what kind of inspiration you're looking for..."></textarea>
+                            </div>
+                            
+                            <button type="submit">Find Art</button>
+                        </form>
+                        
+                        <div id="mood-results"></div>
+                    </div>
+                    
+                    <div class="tab-content" id="gallery-tab">
+                        <h2>Your Collection</h2>
+                        <div id="art-gallery"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="site-title">
+                    <a href="index.html">Rithika's website ⌂</a>
+                </div>
+                
+                <button class="menu-trigger">
+                    <span>menu</span>
+                </button>
+            </div>
+        
+            <div class="menu-popup hidden">
+                <a href="about.html">about</a>
+                <a href="likes.html">likes</a>
+                <a href="portfolio.html">portfolio</a>
+                <a href="museum2.html">museum</a>
+                <a href="contact.html">connect</a>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Add tab switching logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+                    
+                    // Hide all tab content
+                    const tabContents = document.querySelectorAll('.tab-content');
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Show selected tab content
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+        });
+    </script>
+    
+    <!-- Load museum.js before main.js -->
+    <script src="/museum.js"></script>
+    
+    <!-- Load your main.js last -->
+    <script type="module" src="/main.js"></script>
+</body>
+</html>
