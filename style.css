@@ -402,11 +402,6 @@ video {
     object-fit: cover;
 }
 
-.quote {
-    font-style: italic;
-    color: #888;
-    margin-bottom: 0.25rem;
-}
 
 .quote-author {
     color: #888;
@@ -655,13 +650,6 @@ video {
     transition: background-color 0.3s ease;
 }
 
-.tagline {
-    text-align: center;
-    color: #9ca3af;
-    font-style: italic;
-    font-size: 1rem;
-    margin: 0;  /* Remove any existing margins */
-}
 
 .checkbox-group {
     background-color: #171717;
@@ -728,12 +716,6 @@ video {
     margin-top: 2rem;
 }
 
-.tagline {
-    /* Remove text-align: center; */
-    color: #9ca3af;
-    font-style: italic;
-    font-size: 0.875rem;
-}
 .dropdown-container {
     position: relative;
 }
@@ -805,213 +787,15 @@ video {
     margin-left: 0.25rem;
 }
 
-.likes-container {
-    min-height: 100vh;
-    background-color: #000;
-    color: white;
-    padding: 2rem;
-}
 
-.likes-content {
-    max-width: 64rem;
-    margin: 0 auto;
-}
 
-.likes-header {
-    margin-bottom: 2rem;
-}
 
-.likes-header h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-
-.likes-quote {
-    color: #9ca3af;
-    font-style: italic;
-    margin-bottom: 2rem;
-}
-
-.likes-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-}
-
-.shuffle-button, .filter-button {
-    background: none;
-    border: none;
-    color: #9ca3af;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem;
-}
-
-.shuffle-button:hover, .filter-button:hover {
-    color: white;
-}
-
-.likes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    justify-content: center;
-    padding: 20px;
-  }
-
-.likes-card {
-    width: 300px; /* Adjust as needed */
-    height: 350px; /* Adjust as needed */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-radius: 12px;
-    background-color: #000000; /* Ensure contrast */
-  }
-
-  .likes-image {
-    width: 100%;  /* Make image fill card */
-    height: 200px; /* Consistent height */
-    object-fit: cover; /* Prevent stretching */
-    border-radius: 8px;
-  }
-
-  /* Additional Likes Page Styles */
-.likes-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-  }
   
-  .likes-header {
-    margin-bottom: 3rem;
-  }
   
-  .likes-header h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
   
-  .likes-quote {
-    font-style: italic;
-    color: #9ca3af;
-    margin-bottom: 2rem;
-  }
   
-  .likes-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
   
-  .shuffle-button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #9ca3af;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
   
-  .categories {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .category-button {
-    background: none;
-    border: none;
-    color: #9ca3af;
-    cursor: pointer;
-    transition: opacity 0.2s;
-  }
-  
-  .category-button:hover,
-  .category-button.active {
-    opacity: 1;
-  }
-  
-  .likes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-  }
-  
-  .likes-card {
-    background: #111;
-    border-radius: 1rem;
-    overflow: hidden;
-    position: relative;
-  }
-  
-  .category-label {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    font-size: 0.875rem;
-    color: #9ca3af;
-  }
-  
-  .card-content {
-    padding: 1rem;
-  }
-  
-  .likes-image {
-    width: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    border-radius: 0.5rem;
-  }
-  
-  .card-info {
-    margin-top: 1rem;
-  }
-  
-  .card-info h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .music-controls {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.5rem;
-    border-radius: 9999px;
-  }
-  
-  .music-controls button {
-    background: none;
-    border: none;
-    padding: 0.5rem;
-    cursor: pointer;
-  }
-  
-  .music-controls img {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-  
-  .quote {
-    font-size: 1.5rem;
-    padding: 2rem;
-  }
-  
-  .quote .author {
-    font-size: 1rem;
-    color: #9ca3af;
-    margin-top: 1rem;
-  }
   .likes-container {
     max-width: 800px;
     margin: 2rem auto;
@@ -1030,31 +814,6 @@ video {
     text-align: center;
 }
 
-.likes-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.quote {
-    font-style: italic;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 1.2rem;
-    position: relative;
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.quote cite {
-    display: block;
-    font-size: 0.9rem;
-    text-align: right;
-    margin-top: 0.5rem;
-}
 /* Simple Likes Page Styling */
 .simple-likes-container {
     padding: 2rem;
@@ -1188,35 +947,6 @@ video {
     margin: 0;
     font-size: 1.1rem;
     font-weight: 500;
-}
-.instagram-fallback {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0,0,0,0.7);
-    color: white;
-    z-index: 10;
-    text-align: center;
-}
-.instagram-fallback p {
-    margin-bottom: 15px;
-    font-size: 16px;
-}
-.instagram-fallback a {
-    display: inline-block;
-    padding: 12px 20px;
-    background-color: white;
-    color: black;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: bold;
-    margin-top: 10px;
 }
 
 .museum-header {
