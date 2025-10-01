@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Art Admin | Rithika's Website</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="content-container">
+            <div class="simple-likes-container">
+                <h1>Art Collection Admin</h1>
+                
+                <div class="simple-quote">
+                    <p>Add new pieces to your art collection</p>
+                </div>
+                
+                <div class="gallery-content">
+                    <!-- Upload Form -->
+                    <div class="art-upload-container">
+                        <form id="art-upload-form" class="upload-form">
+                            <div class="form-group">
+                                <label class="form-label">Title</label>
+                                <input type="text" id="art-title" class="form-input" placeholder="Name of the piece">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Description</label>
+                                <textarea id="art-description" class="form-textarea" placeholder="Describe this piece..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Content Type *</label>
+                                <select id="content-type" class="form-select" required>
+                                    <option value="">Select type...</option>
+                                    <option value="image">Image</option>
+                                    <option value="video">Video</option>
+                                    <option value="quote">Quote</option>
+                                    <option value="spotify">Spotify Song</option>
+                                    <option value="youtube">YouTube Video</option>
+                                    <option value="website">Website Link</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group" id="url-group">
+                                <label class="form-label">URL</label>
+                                <input type="url" id="content-url" class="form-input" placeholder="https://...">
+                            </div>
+                            
+                            <div class="form-group hidden" id="text-group">
+                                <label class="form-label">Quote Text</label>
+                                <textarea id="content-text" class="form-textarea" placeholder="Enter the quote text..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Mood Tags</label>
+                                <input type="text" id="mood-tags" class="form-input" placeholder="happy, energetic, peaceful, sad (comma separated)">
+                                <small style="color: #888; font-size: 0.9rem;">Enter emotions and feelings this art evokes</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Style Tags</label>
+                                <input type="text" id="style-tags" class="form-input" placeholder="abstract, landscape, pop, electronic (comma separated)">
+                                <small style="color: #888; font-size: 0.9rem;">Enter artistic styles and genres</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Color Palette (optional)</label>
+                                <input type="text" id="color-palette" class="form-input" placeholder="warm, cool, monochrome, vibrant">
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="send-button">Add to Collection</button>
+                            </div>
+                        </form>
+                        
+                        <div id="upload-status" class="search-status hidden"></div>
+                    </div>
+                    
+                    <!-- Current Collection -->
+                    <div class="collection-preview">
+                        <h2>Current Collection</h2>
+                        <div id="current-collection" class="gallery-grid">
+                            <!-- Collection items will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="site-title">
+                    <a href="index.html">Rithika's website ⌂</a>
+                    <span class="separator">|</span>
+                    <span class="current-page">art admin</span>
+                </div>
+                
+                <button class="menu-trigger">
+                    <span>menu</span>
+                </button>
+            </div>
+        
+            <div class="menu-popup hidden">
+                <a href="about.html">about</a>
+                <a href="likes.html">likes</a>
+                <a href="portfolio.html">portfolio</a>
+                <a href="artgallery.html">art gallery</a>
+                <a href="contact.html">connect</a>
+            </div>
+        </nav>
+    </div>
+    
+    <script>
+        // Initialize Supabase client
+        const SUPABASE_URL = 'https://elnpavvstpmqkszpiuuy.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVsbnBhdnZzdHBtcWtzenBpdXV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc1MTI5MzEsImV4cCI6MjA2MzA4ODkzMX0.KqS7YpUTJFlgIUZ5XELGCMAnEkowbRlgE6VZaq6AVtI';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        // Handle content type changes
+        document.getElementById('content-type').addEventListener('change', function() {
+            const contentType = this.value;
+            const urlGroup = document.getElementById('url-group');
+            const textGroup = document.getElementById('text-group');
+            const urlInput = document.getElementById('content-url');
+            const textInput = document.getElementById('content-text');
+            
+            if (contentType === 'quote') {
+                urlGroup.classList.add('hidden');
+                textGroup.classList.remove('hidden');
+                urlInput.required = false;
+                textInput.required = true;
+            } else if (contentType) {
+                urlGroup.classList.remove('hidden');
+                textGroup.classList.add('hidden');
+                urlInput.required = true;
+                textInput.required = false;
+            } else {
+                urlGroup.classList.remove('hidden');
+                textGroup.classList.add('hidden');
+                urlInput.required = false;
+                textInput.required = false;
+            }
+        });
+        
+        // Handle form submission
+        document.getElementById('art-upload-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.querySelector('.send-button');
+            const statusDiv = document.getElementById('upload-status');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Adding...';
+            statusDiv.className = 'search-status';
+            statusDiv.textContent = 'Adding art to your collection...';
+            
+            try {
+                // Collect form data
+                const formData = {
+                    title: document.getElementById('art-title').value.trim(),
+                    description: document.getElementById('art-description').value.trim(),
+                    content_type: document.getElementById('content-type').value,
+                    content_url: document.getElementById('content-url').value.trim() || null,
+                    content_text: document.getElementById('content-text').value.trim() || null,
+                    mood_tags: document.getElementById('mood-tags').value.split(',').map(tag => tag.trim().toLowerCase()).filter(tag => tag),
+                    style_tags: document.getElementById('style-tags').value.split(',').map(tag => tag.trim().toLowerCase()).filter(tag => tag),
+                    color_palette: document.getElementById('color-palette').value.trim() || null
+                };
+                
+                // Validate required fields
+                if (!formData.content_type) {
+                    throw new Error('Content type is required');
+                }
+                
+                if (formData.content_type === 'quote' && !formData.content_text) {
+                    throw new Error('Quote text is required for quote type');
+                }
+                
+                if (formData.content_type !== 'quote' && !formData.content_url) {
+                    throw new Error('URL is required for this content type');
+                }
+                
+                // Insert into database
+                const { data, error } = await supabase
+                    .from('art_collection')
+                    .insert([formData])
+                    .select();
+                
+                if (error) {
+                    throw error;
+                }
+                
+                statusDiv.textContent = 'Art piece added successfully!';
+                statusDiv.style.color = '#4CAF50';
+                
+                // Reset form
+                document.getElementById('art-upload-form').reset();
+                document.getElementById('url-group').classList.remove('hidden');
+                document.getElementById('text-group').classList.add('hidden');
+                
+                // Reload collection
+                loadCurrentCollection();
+                
+            } catch (error) {
+                console.error('Upload error:', error);
+                statusDiv.textContent = `Error: ${error.message}`;
+                statusDiv.style.color = '#ff6b6b';
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Add to Collection';
+            }
+        });
+        
+        // Load current collection
+        async function loadCurrentCollection() {
+            try {
+                const { data: artCollection, error } = await supabase
+                    .from('art_collection')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+                
+                if (error) {
+                    throw error;
+                }
+                
+                const collectionContainer = document.getElementById('current-collection');
+                collectionContainer.innerHTML = '';
+                
+                if (artCollection && artCollection.length > 0) {
+                    artCollection.forEach(piece => {
+                        const itemElement = createCollectionItem(piece);
+                        collectionContainer.appendChild(itemElement);
+                    });
+                } else {
+                    collectionContainer.innerHTML = `
+                        <div class="gallery-item">
+                            <div class="gallery-placeholder">
+                                <p>📁</p>
+                                <span>No art pieces yet. Add some above!</span>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+            } catch (error) {
+                console.error('Error loading collection:', error);
+            }
+        }
+        
+        // Create collection item element
+        function createCollectionItem(piece) {
+            const itemElement = document.createElement('div');
+            itemElement.className = 'gallery-item collection-item';
+            
+            let contentPreview = '';
+            switch (piece.content_type) {
+                case 'image':
+                    contentPreview = `<img src="${piece.content_url}" alt="${piece.title}" style="width: 100%; height: 150px; object-fit: cover;">`;
+                    break;
+                case 'quote':
+                    contentPreview = `<div class="quote-preview">"${piece.content_text.substring(0, 80)}${piece.content_text.length > 80 ? '...' : ''}"</div>`;
+                    break;
+                case 'spotify':
+                    contentPreview = `<div class="content-preview">🎵 Spotify Track</div>`;
+                    break;
+                case 'youtube':
+                    contentPreview = `<div class="content-preview">🎥 YouTube Video</div>`;
+                    break;
+                case 'website':
+                    contentPreview = `<div class="content-preview">🔗 Website Link</div>`;
+                    break;
+                default:
+                    contentPreview = `<div class="content-preview">${piece.content_type}</div>`;
+            }
+            
+            itemElement.innerHTML = `
+                ${contentPreview}
+                <div class="art-info">
+                    <h3>${piece.title || 'Untitled'}</h3>
+                    <p>${piece.description || ''}</p>
+                    <div class="tags-preview">
+                        <small>Mood: ${piece.mood_tags?.join(', ') || 'none'}</small><br>
+                        <small>Style: ${piece.style_tags?.join(', ') || 'none'}</small>
+                    </div>
+                    <button onclick="deleteArtPiece(${piece.id})" class="delete-btn">Delete</button>
+                </div>
+            `;
+            
+            return itemElement;
+        }
+        
+        // Delete art piece
+        async function deleteArtPiece(id) {
+            if (!confirm('Are you sure you want to delete this art piece?')) {
+                return;
+            }
+            
+            try {
+                const { error } = await supabase
+                    .from('art_collection')
+                    .delete()
+                    .eq('id', id);
+                
+                if (error) {
+                    throw error;
+                }
+                
+                loadCurrentCollection();
+                
+            } catch (error) {
+                console.error('Delete error:', error);
+                alert('Error deleting art piece: ' + error.message);
+            }
+        }
+        
+        // Load collection on page load
+        loadCurrentCollection();
+    </script>
+    <script type="module" src="/main.js"></script>
+</body>
+</html>

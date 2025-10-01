@@ -317,3 +317,9 @@ entrypoint = "./functions/search-by-mood/index.ts"
 # Specifies static files to be bundled with the function. Supports glob patterns.
 # For example, if you want to serve static HTML pages in your function:
 # static_files = [ "./functions/search-by-mood/*.html" ]
+
+[functions.search-art-by-mood]
+enabled = true
+verify_jwt = false
+import_map = "./functions/search-art-by-mood/deno.json"
+entrypoint = "./functions/search-art-by-mood/index.ts"

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Art Gallery | Rithika's Website</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="content-container">
+            <div class="simple-likes-container">
+                <h1>Art Gallery</h1>
+                
+                <div class="simple-quote">
+                    <p>"It should be enough to make beautiful things." <cite>-Richard Silken</cite></p>
+                </div>
+                
+                <div class="gallery-content">
+                    <p>Tell me how you feel and I'll show you some of my favorite art that matches your mood.</p>
+                    
+                    <!-- Search Interface -->
+                    <div class="art-search-container">
+                        <div class="search-form">
+                            <textarea 
+                                id="mood-input" 
+                                placeholder="How are you feeling? What kind of art speaks to you right now?"
+                                rows="3"
+                            ></textarea>
+                            <button id="search-btn" onclick="searchArt()">Find Art</button>
+                        </div>
+                        
+                        <div id="search-status" class="search-status hidden"></div>
+                    </div>
+                    
+                    <!-- Results Area -->
+                    <div id="art-results" class="gallery-grid">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="site-title">
+                    <a href="index.html">Rithika's website ⌂</a>
+                    <span class="separator">|</span>
+                    <span class="current-page">art gallery</span>
+                </div>
+                
+                <button class="menu-trigger">
+                    <span>menu</span>
+                </button>
+            </div>
+        
+            <div class="menu-popup hidden">
+                <a href="about.html">about</a>
+                <a href="likes.html">likes</a>
+                <a href="portfolio.html">portfolio</a>
+                <a href="artgallery.html">art gallery</a>
+                <a href="contact.html">connect</a>
+            </div>
+        </nav>
+    </div>
+    
+    <script>
+        // Initialize Supabase client (you'll need to add your actual keys)
+        const SUPABASE_URL = 'https://elnpavvstpmqkszpiuuy.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVsbnBhdnZzdHBtcWtzenBpdXV5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc1MTI5MzEsImV4cCI6MjA2MzA4ODkzMX0.KqS7YpUTJFlgIUZ5XELGCMAnEkowbRlgE6VZaq6AVtI';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        
+        async function searchArt() {
+            const moodInput = document.getElementById('mood-input');
+            const searchBtn = document.getElementById('search-btn');
+            const searchStatus = document.getElementById('search-status');
+            const resultsContainer = document.getElementById('art-results');
+            
+            const mood = moodInput.value.trim();
+            if (!mood) {
+                alert('Please describe how you\'re feeling or what kind of art you\'re looking for.');
+                return;
+            }
+            
+            // Show loading state
+            searchBtn.disabled = true;
+            searchBtn.textContent = 'Searching...';
+            searchStatus.className = 'search-status';
+            searchStatus.textContent = 'Analyzing your mood and finding matching art...';
+            
+            try {
+                // Call the Supabase function
+                const { data, error } = await supabase.functions.invoke('search-art-by-mood', {
+                    body: { mood: mood }
+                });
+                
+                if (error) {
+                    throw error;
+                }
+                
+                // Clear previous results
+                resultsContainer.innerHTML = '';
+                
+                if (data.art && data.art.length > 0) {
+                    // Display the found art pieces
+                    data.art.forEach(artPiece => {
+                        const artElement = createArtElement(artPiece);
+                        resultsContainer.appendChild(artElement);
+                    });
+                    
+                    searchStatus.textContent = data.message || `Found ${data.art.length} piece(s) that match your mood`;
+                } else {
+                    // No results found
+                    resultsContainer.innerHTML = `
+                        <div class="gallery-item">
+                            <div class="gallery-placeholder">
+                                <p>🔍</p>
+                                <span>No art found for this mood yet. Try a different description!</span>
+                            </div>
+                        </div>
+                    `;
+                    searchStatus.textContent = 'No matching art found. Try describing your mood differently.';
+                }
+                
+            } catch (error) {
+                console.error('Search error:', error);
+                searchStatus.textContent = 'Sorry, there was an error searching for art. Please try again.';
+                searchStatus.style.color = '#ff6b6b';
+            } finally {
+                // Reset button state
+                searchBtn.disabled = false;
+                searchBtn.textContent = 'Find Art';
+            }
+        }
+        
+        function createArtElement(artPiece) {
+            const artElement = document.createElement('div');
+            artElement.className = 'gallery-item art-result';
+            
+            let contentHtml = '';
+            
+            switch (artPiece.content_type) {
+                case 'image':
+                    contentHtml = `
+                        <img src="${artPiece.content_url}" alt="${artPiece.title || 'Art piece'}" class="art-image">
+                        <div class="art-info">
+                            <h3>${artPiece.title || 'Untitled'}</h3>
+                            ${artPiece.description ? `<p>${artPiece.description}</p>` : ''}
+                        </div>
+                    `;
+                    break;
+                    
+                case 'quote':
+                    contentHtml = `
+                        <div class="art-quote">
+                            <blockquote>"${artPiece.content_text}"</blockquote>
+                            <div class="art-info">
+                                <h3>${artPiece.title || 'Quote'}</h3>
+                                ${artPiece.description ? `<p>${artPiece.description}</p>` : ''}
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'spotify':
+                    const spotifyId = extractSpotifyId(artPiece.content_url);
+                    contentHtml = `
+                        <iframe src="https://open.spotify.com/embed/track/${spotifyId}" 
+                                width="100%" height="200" frameborder="0" allowtransparency="true" 
+                                allow="encrypted-media"></iframe>
+                        <div class="art-info">
+                            <h3>${artPiece.title || 'Music'}</h3>
+                            ${artPiece.description ? `<p>${artPiece.description}</p>` : ''}
+                        </div>
+                    `;
+                    break;
+                    
+                case 'youtube':
+                    const youtubeId = extractYouTubeId(artPiece.content_url);
+                    contentHtml = `
+                        <iframe src="https://www.youtube.com/embed/${youtubeId}" 
+                                width="100%" height="200" frameborder="0" allowfullscreen></iframe>
+                        <div class="art-info">
+                            <h3>${artPiece.title || 'Video'}</h3>
+                            ${artPiece.description ? `<p>${artPiece.description}</p>` : ''}
+                        </div>
+                    `;
+                    break;
+                    
+                case 'website':
+                    contentHtml = `
+                        <div class="art-link">
+                            <a href="${artPiece.content_url}" target="_blank">🔗 Visit Link</a>
+                            <div class="art-info">
+                                <h3>${artPiece.title || 'Website'}</h3>
+                                ${artPiece.description ? `<p>${artPiece.description}</p>` : ''}
+                            </div>
+                        </div>
+                    `;
+                    break;
+                    
+                default:
+                    contentHtml = `
+                        <div class="gallery-placeholder">
+                            <p>${artPiece.title || 'Art Piece'}</p>
+                            <span>${artPiece.description || ''}</span>
+                        </div>
+                    `;
+            }
+            
+            artElement.innerHTML = contentHtml;
+            return artElement;
+        }
+        
+        function extractSpotifyId(url) {
+            const match = url.match(/track\/([a-zA-Z0-9]+)/);
+            return match ? match[1] : '';
+        }
+        
+        function extractYouTubeId(url) {
+            const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+            return match ? match[1] : '';
+        }
+        
+        // Allow Enter key to trigger search
+        document.getElementById('mood-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                searchArt();
+            }
+        });
+    </script>
+    <script type="module" src="/main.js"></script>
+</body>
+</html>
