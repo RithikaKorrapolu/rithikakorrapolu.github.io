@@ -32,6 +32,7 @@ export function initializeHomePage() {
     const infoPopup = document.querySelector('.info-popup');
     const closeButton = document.querySelector('.close-button');
     const nameElement = document.querySelector('.name');
+    const videoContainer = document.querySelector('.video-container');
 
     if (welcomeVideo) {
         // Array of available videos
@@ -73,79 +74,128 @@ export function initializeHomePage() {
 
         // Track which videos have been played in this cycle
         let remainingVideos = [];
-        
+        let preloadedVideo = null;
+        let isVideoEnding = false;
+
         // Function to reset the playlist when all videos have been played
         function resetPlaylist() {
             // Create a fresh shuffled copy of all videos
             remainingVideos = [...videos].sort(() => Math.random() - 0.5);
             console.log('Playlist reset with new random order.');
         }
-        
+
         // Initialize the playlist
         resetPlaylist();
-        
+
+        // Function to preload next video
+        function preloadNextVideo() {
+            if (remainingVideos.length === 0) {
+                resetPlaylist();
+            }
+
+            const nextVideo = remainingVideos[0];
+            if (!nextVideo) return;
+
+            // Create invisible video element for preloading
+            preloadedVideo = document.createElement('video');
+            preloadedVideo.preload = 'auto';
+            preloadedVideo.muted = true;
+
+            const source = document.createElement('source');
+            source.src = nextVideo.mp4;
+            source.type = 'video/mp4';
+            preloadedVideo.appendChild(source);
+
+            if (nextVideo.webm) {
+                const webmSource = document.createElement('source');
+                webmSource.src = nextVideo.webm;
+                webmSource.type = 'video/webm';
+                preloadedVideo.appendChild(webmSource);
+            }
+
+            preloadedVideo.load();
+            console.log(`Preloading next video: ${nextVideo.name}`);
+        }
+
         // Function to load and play the next video
         function loadNextVideo() {
+            if (isVideoEnding) return;
+            isVideoEnding = true;
+
+            // Show loading indicator
+            if (videoContainer) {
+                videoContainer.classList.add('loading');
+            }
+
             // If we've played all videos, reset the playlist
             if (remainingVideos.length === 0) {
                 resetPlaylist();
             }
-            
+
             // Take the first video from the remaining ones
             const selectedVideo = remainingVideos.shift();
-            
+
             console.log(`Playing video: ${selectedVideo.name}`);
-            
+
             // Update source URLs
             const sourceElements = welcomeVideo.getElementsByTagName('source');
             sourceElements[0].src = selectedVideo.mp4;
             if (sourceElements.length > 1 && selectedVideo.webm) {
                 sourceElements[1].src = selectedVideo.webm;
             }
-            
+
             // Update name in the overlay
             if (nameElement && selectedVideo.name) {
                 nameElement.textContent = selectedVideo.name;
             }
-            
+
             // Load the new video sources
             welcomeVideo.load();
-            
+
             // Play the video
             welcomeVideo.play().catch(function(error) {
                 console.log("Video play failed:", error);
                 welcomeVideo.muted = true;
                 welcomeVideo.play();
+            }).finally(() => {
+                isVideoEnding = false;
             });
+
+            // Preload the next video in background
+            preloadNextVideo();
         }
-        
+
         // Event listener for when the current video ends
         welcomeVideo.addEventListener('ended', function() {
             console.log('Video ended, loading next video');
             loadNextVideo();
         });
         
-        // Check periodically if video has ended (backup for when 'ended' event doesn't fire)
-        setInterval(function() {
-            if (welcomeVideo.currentTime > 0 && 
-                welcomeVideo.currentTime >= welcomeVideo.duration - 0.5) {
-                console.log('Video detected as ended via time check');
-                welcomeVideo.currentTime = 0;
-                loadNextVideo();
-            }
-        }, 1000);
-        
         // Ensure necessary attributes for best cross-browser compatibility
         welcomeVideo.muted = true;
         welcomeVideo.setAttribute('playsinline', '');
         welcomeVideo.setAttribute('webkit-playsinline', '');
-        welcomeVideo.preload = 'auto';
+        welcomeVideo.preload = 'metadata'; // Changed from 'auto' to 'metadata' for faster initial load
         welcomeVideo.autoplay = true;
-        
+
         // Important: Turn OFF loop since we want to handle ending ourselves
         welcomeVideo.loop = false;
-        
+
         if (muteLine) muteLine.classList.remove('hidden');
+
+        // Remove loading indicator when video is ready to play
+        welcomeVideo.addEventListener('canplay', function() {
+            if (videoContainer) {
+                videoContainer.classList.remove('loading');
+            }
+        });
+
+        // Also remove loading when video starts playing
+        welcomeVideo.addEventListener('playing', function() {
+            if (videoContainer) {
+                videoContainer.classList.remove('loading');
+            }
+        });
 
         // Start with the first video
         loadNextVideo();
