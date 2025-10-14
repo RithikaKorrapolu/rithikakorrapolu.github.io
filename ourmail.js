@@ -915,8 +915,10 @@ function formatDate(date) {
 
 // Utility: Truncate text
 function truncate(text, maxLength) {
-    if (text.length <= maxLength) return text;
-    return text.substring(0, maxLength) + '...';
+    // Strip HTML tags and replace line breaks with spaces
+    const stripped = text.replace(/<[^>]*>/g, '').replace(/\n/g, ' ').replace(/\s+/g, ' ').trim();
+    if (stripped.length <= maxLength) return stripped;
+    return stripped.substring(0, maxLength) + '...';
 }
 
 // Update heart display

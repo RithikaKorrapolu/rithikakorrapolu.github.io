@@ -315,22 +315,22 @@ body {
 
 .email-content {
     flex: 1;
-    display: flex;
-    gap: 0.5rem;
     font-size: 0.9rem;
     color: #5f6368;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    min-width: 0;
 }
 
 .email-subject {
     color: #202124;
-    font-weight: inherit;
+    font-weight: 500;
 }
 
 .email-preview {
     color: #5f6368;
+    font-weight: 400;
 }
 
 .email-time {
