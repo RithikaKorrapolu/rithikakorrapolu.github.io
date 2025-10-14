@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Mail - Shared Inbox</title>
+    <link rel="stylesheet" href="/ourmail.css">
+</head>
+<body>
+    <div class="mail-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo" id="logoBtn">
+                <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+                    <!-- Mailbox post -->
+                    <rect x="20" y="28" width="8" height="14" fill="#E8D4A0"/>
+                    <!-- Mailbox body base -->
+                    <rect x="8" y="16" width="32" height="14" rx="3" fill="#5B9FD8"/>
+                    <!-- Mailbox door -->
+                    <path d="M 14 16 Q 14 26 14 30 L 20 30 Q 20 20 20 16 Z" fill="#2C4F8C"/>
+                    <!-- Mailbox flag pole -->
+                    <rect x="28" y="10" width="2" height="8" fill="#E74C3C"/>
+                    <!-- Mailbox flag -->
+                    <rect x="30" y="10" width="6" height="4" fill="#E74C3C"/>
+                    <!-- Flag circle -->
+                    <circle cx="29" cy="16" r="2" fill="#C0392B"/>
+                </svg>
+                <span class="logo-text">Our Mail</span>
+            </div>
+
+            <button class="compose-btn" id="composeBtn">
+                Compose
+            </button>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" id="inboxTab">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    Inbox
+                    <span class="count" id="emailCount">2</span>
+                </a>
+                <a href="#" class="nav-item" id="pinnedTab">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                    Pinned
+                </a>
+                <a href="#" class="nav-item" id="feedbackTab">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+                    </svg>
+                    Feedback
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="search-bar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    <input type="text" placeholder="Search mail" id="searchInput">
+                </div>
+                <button class="icon-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="1"/>
+                        <circle cx="19" cy="12" r="1"/>
+                        <circle cx="5" cy="12" r="1"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Selection toolbar (hidden by default) -->
+            <div class="selection-toolbar hidden" id="selectionToolbar">
+                <div class="toolbar-left">
+                    <span class="selection-count" id="selectionCount">0 selected</span>
+                </div>
+                <div class="toolbar-actions">
+                    <button class="icon-btn" id="downloadBtn" title="Download selected emails">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="7 10 12 15 17 10"/>
+                            <line x1="12" y1="15" x2="12" y2="3"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Email list -->
+            <div class="email-list" id="emailList">
+                <!-- Emails will be populated here -->
+            </div>
+
+            <!-- Email detail view (hidden by default) -->
+            <div class="email-detail hidden" id="emailDetail">
+                <div class="detail-header">
+                    <button class="icon-btn" id="backBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <h2 class="detail-subject"></h2>
+                </div>
+                <div class="detail-content">
+                    <div class="detail-meta">
+                        <div class="sender-info">
+                            <strong class="detail-sender"></strong>
+                            <span class="detail-timestamp"></span>
+                        </div>
+                        <div class="detail-actions-right">
+                            <button class="heart-btn" id="heartBtn" title="Heart this email">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                                <span class="heart-count" id="heartCount">0</span>
+                            </button>
+                            <button class="icon-btn" id="replyToggleBtn" title="Reply">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 14L4 9l5-5"/>
+                                    <path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5v0a5.5 5.5 0 0 1-5.5 5.5H11"/>
+                                </svg>
+                            </button>
+                            <button class="icon-btn" id="downloadDetailBtn" title="Download this email">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="detail-body"></div>
+
+                    <!-- Replies section -->
+                    <div class="replies-section" id="repliesSection">
+                        <!-- Replies will be populated here -->
+                    </div>
+
+                    <!-- Reply form -->
+                    <div class="reply-form-container">
+                        <form id="replyForm" class="reply-form">
+                            <div class="reply-compose-box">
+                                <div id="replyMessage" class="reply-editor" contenteditable="true" data-placeholder="Reply..."></div>
+                                <div class="reply-toolbar">
+                                    <button type="submit" class="send-btn-reply" id="replyBtn">Send</button>
+                                    <div class="formatting-toolbar formatting-toolbar-inline">
+                                        <button type="button" class="format-btn" id="boldBtnReply" title="Bold">
+                                            <strong>B</strong>
+                                        </button>
+                                        <button type="button" class="format-btn" id="italicBtnReply" title="Italic">
+                                            <em>I</em>
+                                        </button>
+                                        <button type="button" class="format-btn" id="linkBtnReply" title="Insert link">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <input type="text" id="replyFromName" placeholder="Name (optional)" maxlength="50" class="reply-name-inline">
+                                    <div class="send-status hidden" id="replyStatus"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Compose modal -->
+    <div class="compose-modal hidden" id="composeModal">
+        <div class="compose-window">
+            <div class="compose-header">
+                <span>New Message</span>
+                <button class="icon-btn" id="closeComposeBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="composeForm">
+                <div class="compose-field">
+                    <input type="text" id="fromName" placeholder="Name" maxlength="50">
+                </div>
+                <div class="compose-field">
+                    <input type="text" id="subject" placeholder="Subject" required maxlength="100">
+                </div>
+                <div class="compose-field">
+                    <div id="message" class="compose-editor" contenteditable="true" data-placeholder="Write your message to share with the world..."></div>
+                </div>
+                <div class="compose-footer">
+                    <button type="submit" class="send-btn" id="sendBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        </svg>
+                        Send
+                    </button>
+                    <div class="formatting-toolbar formatting-toolbar-inline">
+                        <button type="button" class="format-btn" id="boldBtn" title="Bold">
+                            <strong>B</strong>
+                        </button>
+                        <button type="button" class="format-btn" id="italicBtn" title="Italic">
+                            <em>I</em>
+                        </button>
+                        <button type="button" class="format-btn" id="linkBtn" title="Insert link">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="send-status hidden" id="sendStatus"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Link modal -->
+    <div class="link-modal hidden" id="linkModal">
+        <div class="link-modal-content">
+            <div class="link-modal-input-container">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+                <input type="text" id="linkUrlInput" placeholder="Type or paste a link" class="link-input">
+            </div>
+            <button type="button" class="link-apply-btn" id="linkApplyBtn">Apply</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="/ourmail.js"></script>
+</body>
+</html>
