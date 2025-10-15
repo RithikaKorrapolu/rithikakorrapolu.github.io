@@ -44,12 +44,12 @@ const pinnedEmailsData = [
         time: '10/14',
         fullMessage: `Dear Stranger,
 
-You made it! It's cool you're here. My name is Rithika and I love writing and receiving hand written letters. A good one feels like opening treasure. It made me think that there should be a place online where people can do something similar and get that feeling. But then I realized it exists already - its freaking EMAIL lol. I don't know about you but email to me feels joyless. Checking my inbox doesn't feel like discovering treasure - it feels tedious and sterile and cold. I think it's because
+You made it! It's cool you're here. My name is Rithika and I love writing and receiving hand written letters. A good one feels like <strong>opening treasure</strong>. It made me think that there should be a place online where people can do something similar and get that feeling. But then I realized it exists already - its fcking EMAIL lol. I don't know about you but email to me feels joyless. Checking my inbox doesn't feel like discovering treasure - it feels tedious and sterile and cold. I think it's because
 
 1.  Most people (including me) only really use email for networking and more transactional stuff, and two,
-2. Most people's email writing (including mine) is pretty lazy - it's all the same corporate, sanitized language - "Great to e-meet you"  "Hope you're doing well" "Sounds good." "Looking forward to it".  Freaking Bleh!!!!
+2. Most people's email writing (including mine) is pretty lazy - it's all the same corporate, sanitized language - <em>"Great to e-meet you"</em>  <em>"Hope you're doing well"</em> <em>"Sounds good." "Looking forward to it"</em>….
 
-So then I had the idea for this project. This website acts as basically a shared inbox where strangers can write and read emails from each other. It has a similar design to standard email services but I've tried to add small elements to encourage people to put in more effort and creativity and heart into any email they send here. More similar to how you'd write a thoughtful letter. Basically, the question with all this is - <strong>can we make opening an email feel like discovering treasure? Can we make emails beautiful? lol</strong>
+So then I had the idea for this project. This website acts as basically a shared inbox where strangers can write and read emails from each other. It has a similar design to standard email services but I've tried to add small elements to encourage people to put in more effort and creativity and heart into any email they send here. More similar to how you'd write a thoughtful letter. Basically, the question with this is - <strong>can we make opening an email feel like discovering treasure? Can we make emails beautiful? lol</strong>
 
 <em>"The world is full of paper.
 Write to me."
@@ -61,14 +61,14 @@ Rithika`
     {
         id: 'pinned-1',
         sender: 'Rithika',
-        subject: 'Would you wanna try?',
+        subject: 'might be worth it',
         preview: 'Dear Stranger, There are many, many cool and important and wild things you could be spending your time on so it\'s pretty cool you\'re here. The goal of this website is to get strangers to write beautiful emails...',
         time: '10/12',
         fullMessage: `Dear Stranger,
 
-There are many, many cool and important and wild things you could be spending your time on so it's pretty cool you're here. The goal of this website is to get strangers to write beautiful emails to each other. I'm asking you to spend your time and creative energy contributing to this thing that ultimately, very few people will prob end up seeing. But I think it's still worth it. I hope you do too!
+There are many, many cool and important and wild things you could be spending your time on so it's pretty cool you're here. The goal of this website is to get strangers to write beautiful emails to each other. That takes time and creative energy. If you write one, you might end up contributing to this thing that ultimately, very few people will prob end up seeing. But one person could see it and feel like they discovered treasure.  might be worth it.
 
-Peace and Love,
+Sincerely,
 
 Rithika`
     }
@@ -80,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     setupFormattingButtons();
     setupLinkModal();
+    setupDropdownMenu();
+    setupFeedbackModal();
 });
 
 // Setup event listeners
@@ -161,6 +163,21 @@ function setupEventListeners() {
         clearSelections();
         renderEmailList(allEmails, '');
     });
+
+    // Header logo click - same as sidebar logo
+    const headerLogoBtn = document.getElementById('headerLogoBtn');
+    if (headerLogoBtn) {
+        headerLogoBtn.addEventListener('click', () => {
+            currentView = 'inbox';
+            inboxTab.classList.add('active');
+            pinnedTab.classList.remove('active');
+            feedbackTab.classList.remove('active');
+            emailDetail.classList.add('hidden');
+            emailList.classList.remove('hidden');
+            clearSelections();
+            renderEmailList(allEmails, '');
+        });
+    }
 
     // Tab switching
     inboxTab.addEventListener('click', (e) => {
@@ -1510,4 +1527,139 @@ function sanitizeHTML(html) {
 
     // Preserve line breaks
     return cleaned.replace(/\n/g, '<br>');
+}
+
+// Setup dropdown menu
+function setupDropdownMenu() {
+    const menuBtn = document.getElementById('menuBtn');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const contactUsBtn = document.getElementById('contactUsBtn');
+
+    if (menuBtn && dropdownMenu) {
+        menuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            dropdownMenu.classList.add('hidden');
+        });
+
+        // Prevent dropdown from closing when clicking inside
+        dropdownMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+
+    if (contactUsBtn) {
+        contactUsBtn.addEventListener('click', () => {
+            dropdownMenu.classList.add('hidden');
+            document.getElementById('feedbackModal').classList.remove('hidden');
+        });
+    }
+}
+
+// Setup feedback modal
+function setupFeedbackModal() {
+    const feedbackModal = document.getElementById('feedbackModal');
+    const closeFeedbackBtn = document.getElementById('closeFeedbackBtn');
+    const feedbackModalForm = document.getElementById('feedbackModalForm');
+
+    if (closeFeedbackBtn) {
+        closeFeedbackBtn.addEventListener('click', () => {
+            feedbackModal.classList.add('hidden');
+            feedbackModalForm.reset();
+            document.getElementById('feedbackModalMessage').innerHTML = '';
+        });
+    }
+
+    if (feedbackModalForm) {
+        feedbackModalForm.addEventListener('submit', handleFeedbackModalSubmit);
+    }
+}
+
+// Handle feedback modal submit
+async function handleFeedbackModalSubmit(e) {
+    e.preventDefault();
+
+    const messageEditor = document.getElementById('feedbackModalMessage');
+    const message = messageEditor.innerHTML.trim();
+    const userName = document.getElementById('feedbackModalUserName').value.trim();
+    const userEmail = document.getElementById('feedbackModalUserEmail').value.trim();
+    const sendBtn = document.getElementById('feedbackModalSendBtn');
+    const sendStatus = document.getElementById('feedbackModalStatus');
+
+    if (!message || message === '<br>' || message === '') {
+        sendStatus.textContent = 'Please write your feedback message.';
+        sendStatus.className = 'send-status error';
+        sendStatus.classList.remove('hidden');
+        setTimeout(() => sendStatus.classList.add('hidden'), 3000);
+        return;
+    }
+
+    // Disable button and show sending status
+    sendBtn.disabled = true;
+    sendBtn.textContent = 'Sending...';
+
+    try {
+        // Strip HTML tags for email sending
+        const strippedMessage = message.replace(/<[^>]*>/g, '').replace(/<br>/g, '\n');
+        
+        // Build the message with contact info if provided
+        let fullMessage = strippedMessage;
+        if (userName || userEmail) {
+            fullMessage += '\n\n---\nContact Info:\n';
+            if (userName) fullMessage += `Name: ${userName}\n`;
+            if (userEmail) fullMessage += `Email: ${userEmail}`;
+        }
+
+        // Send email via EmailJS
+        const templateParams = {
+            from_name: userName || 'Anonymous Visitor',
+            reasons: 'Feedback for Our Mail',
+            message: fullMessage,
+            from_email: userEmail || 'Not provided'
+        };
+
+        await emailjs.send('service_b566mfj', 'template_ea9zmeh', templateParams);
+
+        // Show success message
+        sendStatus.textContent = 'Feedback sent successfully! Thank you!';
+        sendStatus.className = 'send-status success';
+        sendStatus.classList.remove('hidden');
+
+        // Clear the form after a moment
+        setTimeout(() => {
+            document.getElementById('feedbackModal').classList.add('hidden');
+            document.getElementById('feedbackModalForm').reset();
+            messageEditor.innerHTML = '';
+            document.getElementById('feedbackModalUserName').value = '';
+            document.getElementById('feedbackModalUserEmail').value = '';
+            sendStatus.classList.add('hidden');
+        }, 2000);
+
+        // Reset button
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+            Send
+        `;
+    } catch (error) {
+        console.error('Error sending feedback:', error);
+        sendStatus.textContent = 'Failed to send feedback. Please try again.';
+        sendStatus.className = 'send-status error';
+        sendStatus.classList.remove('hidden');
+
+        // Reset button
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+            Send
+        `;
+    }
 }
