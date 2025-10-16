@@ -61,16 +61,10 @@ Rithika`
     {
         id: 'pinned-1',
         sender: 'Rithika',
-        subject: 'might be worth it',
-        preview: 'Dear Stranger, There are many, many cool and important and wild things you could be spending your time on so it\'s pretty cool you\'re here. The goal of this website is to get strangers to write beautiful emails...',
+        subject: 'Picture of Me looking Dope as Hell',
+        preview: 'A picture of me looking dope as hell',
         time: '10/12',
-        fullMessage: `Dear Stranger,
-
-There are many, many cool and important and wild things you could be spending your time on so it's pretty cool you're here. The goal of this website is to get strangers to write beautiful emails to each other. That takes time and creative energy. If you write one, you might end up contributing to this thing that ultimately, very few people will prob end up seeing. But one person could see it and feel like they discovered treasure.  might be worth it.
-
-Sincerely,
-
-Rithika`
+        fullMessage: `<img src="/images/suitme.jpg" alt="Picture of me looking dope as hell" style="max-width: 100%; height: auto; border-radius: 8px;">`
     }
 ];
 
