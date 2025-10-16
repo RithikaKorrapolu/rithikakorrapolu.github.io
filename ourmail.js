@@ -710,13 +710,13 @@ async function handleSendEmail(e) {
     if (!subject || !message || message === '<br>' || message === '') {
         sendStatus.textContent = 'Please fill in both subject and message.';
         sendStatus.className = 'send-status error';
+        sendStatus.classList.remove('hidden');
         setTimeout(() => sendStatus.classList.add('hidden'), 3000);
         return;
     }
 
     // Disable button and show sending status
     sendBtn.disabled = true;
-    sendBtn.textContent = 'Sending...';
 
     try {
         const { data, error } = await supabaseClient
@@ -753,23 +753,22 @@ async function handleSendEmail(e) {
         // Reset button
         sendBtn.disabled = false;
         sendBtn.innerHTML = `
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
             </svg>
-            Send
         `;
     } catch (error) {
         console.error('Error sending email:', error);
         sendStatus.textContent = 'Failed to send message. Please try again.';
         sendStatus.className = 'send-status error';
+        sendStatus.classList.remove('hidden');
 
         // Reset button
         sendBtn.disabled = false;
         sendBtn.innerHTML = `
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
             </svg>
-            Send
         `;
     }
 }
@@ -1603,7 +1602,6 @@ async function handleFeedbackModalSubmit(e) {
 
     // Disable button and show sending status
     sendBtn.disabled = true;
-    sendBtn.textContent = 'Sending...';
 
     try {
         // Strip HTML tags for email sending
@@ -1646,10 +1644,9 @@ async function handleFeedbackModalSubmit(e) {
         // Reset button
         sendBtn.disabled = false;
         sendBtn.innerHTML = `
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
             </svg>
-            Send
         `;
     } catch (error) {
         console.error('Error sending feedback:', error);
@@ -1660,10 +1657,9 @@ async function handleFeedbackModalSubmit(e) {
         // Reset button
         sendBtn.disabled = false;
         sendBtn.innerHTML = `
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
             </svg>
-            Send
         `;
     }
 }
@@ -1708,7 +1704,6 @@ async function handlePenPalSubmit(e) {
 
     // Disable button and show sending status
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Signing up...';
 
     try {
         const { data, error } = await supabaseClient
@@ -1744,10 +1739,9 @@ async function handlePenPalSubmit(e) {
         // Reset button
         submitBtn.disabled = false;
         submitBtn.innerHTML = `
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
             </svg>
-            Sign Up
         `;
     } catch (error) {
         console.error('Error signing up for pen pal:', error);
@@ -1758,10 +1752,9 @@ async function handlePenPalSubmit(e) {
         // Reset button
         submitBtn.disabled = false;
         submitBtn.innerHTML = `
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
             </svg>
-            Sign Up
         `;
     }
 }

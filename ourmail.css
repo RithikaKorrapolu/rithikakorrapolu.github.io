@@ -727,6 +727,49 @@ body {
     font-size: 0.95rem;
 }
 
+.compose-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.compose-header-actions .format-btn {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.compose-header-actions .format-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.compose-header-actions .format-btn strong,
+.compose-header-actions .format-btn em {
+    color: white;
+}
+
+.send-btn-header {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.send-btn-header:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.send-btn-header svg {
+    width: 20px;
+    height: 20px;
+}
+
 .compose-field {
     display: flex;
     flex-direction: column;
@@ -860,10 +903,12 @@ body {
 }
 
 .send-status {
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1rem;
     border-radius: 4px;
     font-size: 0.9rem;
     font-weight: 500;
+    margin: 0 1rem 1rem 1rem;
+    text-align: center;
 }
 
 .send-status.success {
@@ -1336,6 +1381,74 @@ body {
     .feedback-textarea {
         min-height: 300px;
     }
+
+    /* E-Pen Pals mobile */
+    .pen-pals-view {
+        padding: 1rem;
+    }
+
+    .pen-pals-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .pen-pals-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .pen-pals-subtitle {
+        font-size: 0.85rem;
+        max-width: 100%;
+    }
+
+    .pen-pals-signup-btn {
+        width: 100%;
+    }
+
+    .pen-pals-table {
+        font-size: 0.8rem;
+    }
+
+    .pen-pals-table th,
+    .pen-pals-table td {
+        padding: 0.5rem;
+    }
+
+    .pen-pals-table th:nth-child(1) {
+        width: 18%;
+    }
+
+    .pen-pals-table th:nth-child(2) {
+        width: 0;
+        display: none;
+    }
+
+    .pen-pals-table td:nth-child(2) {
+        display: none;
+    }
+
+    .pen-pals-table th:nth-child(3) {
+        width: 62%;
+    }
+
+    .pen-pals-table th:nth-child(4) {
+        width: 20%;
+    }
+
+    .pen-pal-name {
+        font-size: 0.8rem;
+    }
+
+    .pen-pal-bio {
+        font-size: 0.75rem;
+        line-height: 1.4;
+    }
+
+    .pen-pal-date {
+        font-size: 0.7rem;
+    }
 }
 
 /* Extra small screens */
@@ -1427,6 +1540,7 @@ body {
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    table-layout: fixed;
 }
 
 .pen-pals-table thead {
@@ -1442,11 +1556,29 @@ body {
     border-bottom: 1px solid #e0e0e0;
 }
 
+.pen-pals-table th:nth-child(1) {
+    width: 20%;
+}
+
+.pen-pals-table th:nth-child(2) {
+    width: 25%;
+}
+
+.pen-pals-table th:nth-child(3) {
+    width: 40%;
+}
+
+.pen-pals-table th:nth-child(4) {
+    width: 15%;
+}
+
 .pen-pals-table td {
     padding: 1rem;
     border-bottom: 1px solid #f0f0f0;
     color: #202124;
     font-size: 0.9rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .pen-pals-table tr:last-child td {

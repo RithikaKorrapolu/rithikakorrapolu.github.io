@@ -201,32 +201,15 @@
     <!-- Compose modal -->
     <div class="compose-modal hidden" id="composeModal">
         <div class="compose-window">
-            <div class="compose-header">
-                <span>New Message</span>
-                <button class="icon-btn" id="closeComposeBtn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 6L6 18M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
             <form id="composeForm">
-                <div class="compose-field">
-                    <input type="text" id="fromName" placeholder="Name" maxlength="50">
-                </div>
-                <div class="compose-field">
-                    <input type="text" id="subject" placeholder="Subject" required maxlength="100">
-                </div>
-                <div class="compose-field">
-                    <div id="message" class="compose-editor" contenteditable="true" data-placeholder="Write your message to share with the world..."></div>
-                </div>
-                <div class="compose-footer">
-                    <button type="submit" class="send-btn" id="sendBtn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                <div class="compose-header">
+                    <button class="icon-btn" type="button" id="closeComposeBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 6L6 18M6 6l12 12"/>
                         </svg>
-                        Send
                     </button>
-                    <div class="formatting-toolbar formatting-toolbar-inline">
+                    <span>New Message</span>
+                    <div class="compose-header-actions">
                         <button type="button" class="format-btn" id="boldBtn" title="Bold">
                             <strong>B</strong>
                         </button>
@@ -239,9 +222,23 @@
                                 <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
                             </svg>
                         </button>
+                        <button type="submit" class="icon-btn send-btn-header" id="sendBtn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                            </svg>
+                        </button>
                     </div>
-                    <div class="send-status hidden" id="sendStatus"></div>
                 </div>
+                <div class="compose-field">
+                    <input type="text" id="fromName" placeholder="Name" maxlength="50">
+                </div>
+                <div class="compose-field">
+                    <input type="text" id="subject" placeholder="Subject" required maxlength="100">
+                </div>
+                <div class="compose-field">
+                    <div id="message" class="compose-editor" contenteditable="true" data-placeholder="Write your message to share with the world..."></div>
+                </div>
+                <div class="send-status hidden" id="sendStatus"></div>
             </form>
         </div>
     </div>
@@ -263,15 +260,20 @@
     <!-- E-Pen Pals Sign Up modal -->
     <div class="compose-modal hidden" id="penPalModal">
         <div class="compose-window">
-            <div class="compose-header">
-                <span>Sign up for an e-Pen Pal</span>
-                <button class="icon-btn" id="closePenPalBtn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 6L6 18M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
             <form id="penPalForm">
+                <div class="compose-header">
+                    <button class="icon-btn" type="button" id="closePenPalBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 6L6 18M6 6l12 12"/>
+                        </svg>
+                    </button>
+                    <span>Sign up for an e-Pen Pal</span>
+                    <button type="submit" class="icon-btn send-btn-header" id="penPalSubmitBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        </svg>
+                    </button>
+                </div>
                 <div class="compose-field">
                     <input type="text" id="penPalName" placeholder="What's your name?" required maxlength="100">
                 </div>
@@ -281,15 +283,7 @@
                 <div class="compose-field">
                     <div id="penPalBio" class="compose-editor" contenteditable="true" data-placeholder="Give us a quick bio about yourself! What are you into? What makes you laugh? What do you want to talk about? What would you want someone to email you about that would get you excited?" style="min-height: 150px;"></div>
                 </div>
-                <div class="compose-footer">
-                    <button type="submit" class="send-btn" id="penPalSubmitBtn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                        </svg>
-                        Sign Up
-                    </button>
-                    <div class="send-status hidden" id="penPalStatus"></div>
-                </div>
+                <div class="send-status hidden" id="penPalStatus"></div>
             </form>
         </div>
     </div>
@@ -297,15 +291,20 @@
     <!-- Feedback modal -->
     <div class="compose-modal hidden" id="feedbackModal">
         <div class="compose-window">
-            <div class="compose-header">
-                <span>Contact Us</span>
-                <button class="icon-btn" id="closeFeedbackBtn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 6L6 18M6 6l12 12"/>
-                    </svg>
-                </button>
-            </div>
             <form id="feedbackModalForm">
+                <div class="compose-header">
+                    <button class="icon-btn" type="button" id="closeFeedbackBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 6L6 18M6 6l12 12"/>
+                        </svg>
+                    </button>
+                    <span>Contact Us</span>
+                    <button type="submit" class="icon-btn send-btn-header" id="feedbackModalSendBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        </svg>
+                    </button>
+                </div>
                 <div class="compose-field">
                     <input type="text" id="feedbackModalFromName" value="Rithika (rkrox24@gmail.com)" readonly>
                 </div>
@@ -317,17 +316,13 @@
 
 Leave your name and email if you'd like me to respond, thank you!"></div>
                 </div>
-                <div class="compose-footer">
-                    <button type="submit" class="send-btn" id="feedbackModalSendBtn">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                        </svg>
-                        Send
-                    </button>
-                    <input type="text" id="feedbackModalUserName" placeholder="Your name (optional)" maxlength="50" class="reply-name-inline">
-                    <input type="email" id="feedbackModalUserEmail" placeholder="Your email (optional)" maxlength="100" class="reply-name-inline">
-                    <div class="send-status hidden" id="feedbackModalStatus"></div>
+                <div class="compose-field">
+                    <input type="text" id="feedbackModalUserName" placeholder="Your name (optional)" maxlength="50">
                 </div>
+                <div class="compose-field">
+                    <input type="email" id="feedbackModalUserEmail" placeholder="Your email (optional)" maxlength="100">
+                </div>
+                <div class="send-status hidden" id="feedbackModalStatus"></div>
             </form>
         </div>
     </div>
