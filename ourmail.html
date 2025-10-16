@@ -260,6 +260,40 @@
         </div>
     </div>
 
+    <!-- E-Pen Pals Sign Up modal -->
+    <div class="compose-modal hidden" id="penPalModal">
+        <div class="compose-window">
+            <div class="compose-header">
+                <span>Sign up for an e-Pen Pal</span>
+                <button class="icon-btn" id="closePenPalBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            <form id="penPalForm">
+                <div class="compose-field">
+                    <input type="text" id="penPalName" placeholder="What's your name?" required maxlength="100">
+                </div>
+                <div class="compose-field">
+                    <input type="email" id="penPalEmail" placeholder="What's your email?" required maxlength="100">
+                </div>
+                <div class="compose-field">
+                    <div id="penPalBio" class="compose-editor" contenteditable="true" data-placeholder="Give us a quick bio about yourself! What are you into? What makes you laugh? What do you want to talk about? What would you want someone to email you about that would get you excited?" style="min-height: 150px;"></div>
+                </div>
+                <div class="compose-footer">
+                    <button type="submit" class="send-btn" id="penPalSubmitBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        </svg>
+                        Sign Up
+                    </button>
+                    <div class="send-status hidden" id="penPalStatus"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Feedback modal -->
     <div class="compose-modal hidden" id="feedbackModal">
         <div class="compose-window">
@@ -276,15 +310,10 @@
                     <input type="text" id="feedbackModalFromName" value="Rithika (rkrox24@gmail.com)" readonly>
                 </div>
                 <div class="compose-field">
-                    <input type="text" id="feedbackModalSubject" value="Feedback for Our Mail" readonly>
+                    <input type="text" id="feedbackModalSubject" placeholder="Contacting you from OurMail">
                 </div>
                 <div class="compose-field">
-                    <div id="feedbackModalMessage" class="compose-editor" contenteditable="true" data-placeholder="What up Visitor,
-
-Have you noticed any bugs or have feature requests? Let me know and I'll try to work on them! Thanks for being here in general!
-
-Cordially,
-Rithika
+                    <div id="feedbackModalMessage" class="compose-editor" contenteditable="true" data-placeholder="Have you noticed any bugs or have feature requests? Let me know and I'll try to work on them! Thanks for being here in general!
 
 Leave your name and email if you'd like me to respond, thank you!"></div>
                 </div>

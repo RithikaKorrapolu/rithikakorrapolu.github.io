@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupLinkModal();
     setupDropdownMenu();
     setupFeedbackModal();
+    setupPenPalModal();
 });
 
 // Setup event listeners
@@ -206,14 +207,14 @@ function setupEventListeners() {
 
     feedbackTab.addEventListener('click', (e) => {
         e.preventDefault();
-        currentView = 'feedback';
+        currentView = 'penpals';
         feedbackTab.classList.add('active');
         inboxTab.classList.remove('active');
         pinnedTab.classList.remove('active');
         emailDetail.classList.add('hidden');
         emailList.classList.remove('hidden');
         clearSelections();
-        renderFeedbackView();
+        renderEPenPalsView();
     });
 }
 
@@ -820,8 +821,8 @@ async function toggleStar(emailId) {
 function handleSearch(e) {
     const query = e.target.value.toLowerCase().trim();
 
-    // If on feedback view, disable search
-    if (currentView === 'feedback') {
+    // If on pen pals view, disable search
+    if (currentView === 'penpals') {
         return;
     }
 
@@ -1571,6 +1572,7 @@ function setupFeedbackModal() {
             feedbackModal.classList.add('hidden');
             feedbackModalForm.reset();
             document.getElementById('feedbackModalMessage').innerHTML = '';
+            document.getElementById('feedbackModalSubject').value = '';
         });
     }
 
@@ -1585,6 +1587,7 @@ async function handleFeedbackModalSubmit(e) {
 
     const messageEditor = document.getElementById('feedbackModalMessage');
     const message = messageEditor.innerHTML.trim();
+    const subject = document.getElementById('feedbackModalSubject').value.trim();
     const userName = document.getElementById('feedbackModalUserName').value.trim();
     const userEmail = document.getElementById('feedbackModalUserEmail').value.trim();
     const sendBtn = document.getElementById('feedbackModalSendBtn');
@@ -1605,7 +1608,7 @@ async function handleFeedbackModalSubmit(e) {
     try {
         // Strip HTML tags for email sending
         const strippedMessage = message.replace(/<[^>]*>/g, '').replace(/<br>/g, '\n');
-        
+
         // Build the message with contact info if provided
         let fullMessage = strippedMessage;
         if (userName || userEmail) {
@@ -1617,7 +1620,7 @@ async function handleFeedbackModalSubmit(e) {
         // Send email via EmailJS
         const templateParams = {
             from_name: userName || 'Anonymous Visitor',
-            reasons: 'Feedback for Our Mail',
+            reasons: subject || 'Contacting you from OurMail',
             message: fullMessage,
             from_email: userEmail || 'Not provided'
         };
@@ -1634,6 +1637,7 @@ async function handleFeedbackModalSubmit(e) {
             document.getElementById('feedbackModal').classList.add('hidden');
             document.getElementById('feedbackModalForm').reset();
             messageEditor.innerHTML = '';
+            document.getElementById('feedbackModalSubject').value = '';
             document.getElementById('feedbackModalUserName').value = '';
             document.getElementById('feedbackModalUserEmail').value = '';
             sendStatus.classList.add('hidden');
@@ -1661,5 +1665,195 @@ async function handleFeedbackModalSubmit(e) {
             </svg>
             Send
         `;
+    }
+}
+
+// Setup pen pal modal
+function setupPenPalModal() {
+    const penPalModal = document.getElementById('penPalModal');
+    const closePenPalBtn = document.getElementById('closePenPalBtn');
+    const penPalForm = document.getElementById('penPalForm');
+
+    if (closePenPalBtn) {
+        closePenPalBtn.addEventListener('click', () => {
+            penPalModal.classList.add('hidden');
+            penPalForm.reset();
+            document.getElementById('penPalBio').innerHTML = '';
+        });
+    }
+
+    if (penPalForm) {
+        penPalForm.addEventListener('submit', handlePenPalSubmit);
+    }
+}
+
+// Handle pen pal form submission
+async function handlePenPalSubmit(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('penPalName').value.trim();
+    const email = document.getElementById('penPalEmail').value.trim();
+    const bioEditor = document.getElementById('penPalBio');
+    const bio = bioEditor.innerHTML.trim();
+    const submitBtn = document.getElementById('penPalSubmitBtn');
+    const status = document.getElementById('penPalStatus');
+
+    if (!name || !email || !bio || bio === '<br>' || bio === '') {
+        status.textContent = 'Please fill in all fields.';
+        status.className = 'send-status error';
+        status.classList.remove('hidden');
+        setTimeout(() => status.classList.add('hidden'), 3000);
+        return;
+    }
+
+    // Disable button and show sending status
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Signing up...';
+
+    try {
+        const { data, error } = await supabaseClient
+            .from('pen_pals')
+            .insert([
+                {
+                    name: name,
+                    email: email,
+                    bio: bio
+                }
+            ])
+            .select();
+
+        if (error) throw error;
+
+        // Show success message
+        status.textContent = 'Successfully signed up!';
+        status.className = 'send-status success';
+        status.classList.remove('hidden');
+
+        // Wait a moment to show success message
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        // Close modal and reset form
+        document.getElementById('penPalModal').classList.add('hidden');
+        document.getElementById('penPalForm').reset();
+        bioEditor.innerHTML = '';
+        status.classList.add('hidden');
+
+        // Reload pen pals view
+        renderEPenPalsView();
+
+        // Reset button
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+            Sign Up
+        `;
+    } catch (error) {
+        console.error('Error signing up for pen pal:', error);
+        status.textContent = 'Failed to sign up. Please try again.';
+        status.className = 'send-status error';
+        status.classList.remove('hidden');
+
+        // Reset button
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+            </svg>
+            Sign Up
+        `;
+    }
+}
+
+// Load pen pals from database
+async function loadPenPals() {
+    try {
+        const { data, error } = await supabaseClient
+            .from('pen_pals')
+            .select('*')
+            .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        return data || [];
+    } catch (error) {
+        console.error('Error loading pen pals:', error);
+        return [];
+    }
+}
+
+// Render E-Pen Pals view
+async function renderEPenPalsView() {
+    const penPals = await loadPenPals();
+
+    let html = `
+        <div class="pen-pals-view">
+            <div class="pen-pals-header">
+                <div class="pen-pals-header-text">
+                    <h2>E-Pen Pals</h2>
+                    <p class="pen-pals-subtitle">Sign up if you are open to being sent an email from a stranger. Or if anyone on this list intrigues, feel free to shoot them an email!</p>
+                </div>
+                <button class="compose-btn pen-pals-signup-btn" id="openPenPalModalBtn">
+                    Sign Up
+                </button>
+            </div>
+    `;
+
+    if (penPals.length === 0) {
+        html += `
+            <div class="pen-pals-empty">
+                <p>No pen pals yet. Be the first to sign up!</p>
+            </div>
+        `;
+    } else {
+        html += `
+            <table class="pen-pals-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Bio</th>
+                        <th>Joined</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        penPals.forEach(penPal => {
+            const date = new Date(penPal.created_at);
+            const dateString = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+            // Strip HTML from bio for table display
+            const bioText = penPal.bio.replace(/<[^>]*>/g, '').replace(/\n/g, ' ');
+
+            html += `
+                <tr>
+                    <td class="pen-pal-name">${penPal.name}</td>
+                    <td class="pen-pal-email">${penPal.email}</td>
+                    <td class="pen-pal-bio">${bioText}</td>
+                    <td class="pen-pal-date">${dateString}</td>
+                </tr>
+            `;
+        });
+
+        html += `
+                </tbody>
+            </table>
+        `;
+    }
+
+    html += `
+        </div>
+    `;
+
+    emailList.innerHTML = html;
+
+    // Add event listener to open modal button
+    const openPenPalModalBtn = document.getElementById('openPenPalModalBtn');
+    if (openPenPalModalBtn) {
+        openPenPalModalBtn.addEventListener('click', () => {
+            document.getElementById('penPalModal').classList.remove('hidden');
+        });
     }
 }

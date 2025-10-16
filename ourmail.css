@@ -734,6 +734,13 @@ body {
     border-bottom: 1px solid #e0e0e0;
 }
 
+.compose-field label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #5f6368;
+    margin-bottom: 0.5rem;
+}
+
 .formatting-toolbar {
     display: flex;
     gap: 0.25rem;
@@ -1272,9 +1279,11 @@ body {
         border-radius: 16px 16px 0 0;
         animation: slideUpMobile 0.3s ease-out;
         position: fixed;
+        top: 0;
         bottom: 0;
         left: 0;
         right: 0;
+        overflow-y: auto;
     }
 
     @keyframes slideUpMobile {
@@ -1352,4 +1361,123 @@ body {
         font-size: 0.7rem;
         min-width: 50px;
     }
+}
+
+/* E-Pen Pals page */
+.pen-pals-view {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pen-pals-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.pen-pals-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.pen-pals-header-text {
+    flex: 1;
+}
+
+.pen-pals-header h1,
+.pen-pals-header h2 {
+    font-size: 1.8rem;
+    color: #202124;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.pen-pals-subtitle {
+    font-size: 0.95rem;
+    color: #5f6368;
+    line-height: 1.5;
+    max-width: 600px;
+}
+
+.pen-pals-signup-btn {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.pen-pals-signup-btn:hover {
+    background-color: #1557b0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.pen-pals-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.pen-pals-table thead {
+    background-color: #f5f5f5;
+}
+
+.pen-pals-table th {
+    text-align: left;
+    padding: 1rem;
+    font-weight: 500;
+    color: #5f6368;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.pen-pals-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    color: #202124;
+    font-size: 0.9rem;
+}
+
+.pen-pals-table tr:last-child td {
+    border-bottom: none;
+}
+
+.pen-pals-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.pen-pal-name {
+    font-weight: 500;
+    color: #1a73e8;
+}
+
+.pen-pal-email {
+    color: #5f6368;
+}
+
+.pen-pal-bio {
+    line-height: 1.5;
+    max-width: 500px;
+}
+
+.pen-pals-empty {
+    text-align: center;
+    padding: 3rem;
+    color: #5f6368;
+}
+
+.pen-pals-empty p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
 }
