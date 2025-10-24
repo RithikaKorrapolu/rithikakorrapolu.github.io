@@ -21,8 +21,8 @@
             </div>
 
             <div class="sidebar-section">
-                <div class="section-header">Today</div>
-                <div class="note-item active">
+                <div class="section-header">Things I Like</div>
+                <div class="note-item active" id="specificThingsTab">
                     <div class="note-title">Specific Things I Like</div>
                     <div class="note-preview">"Instructions for living...</div>
                 </div>
@@ -225,6 +225,15 @@
         mobileBackBtn?.addEventListener('click', () => {
             sidebar.classList.toggle('mobile-show');
             content.classList.toggle('mobile-hide');
+        });
+
+        // When clicking "Specific Things I Like" on mobile, go back to detail view
+        const specificThingsTab = document.getElementById('specificThingsTab');
+        specificThingsTab?.addEventListener('click', () => {
+            if (window.innerWidth <= 480) {
+                sidebar.classList.remove('mobile-show');
+                content.classList.remove('mobile-hide');
+            }
         });
 
         // When clicking a note item on mobile, hide sidebar and show content
