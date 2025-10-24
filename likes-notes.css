@@ -544,10 +544,25 @@ body {
         background-color: transparent;
         margin: 0;
         border-left: none;
-        border-bottom: 1px solid #222;
+        border-bottom: none;
         padding: 1rem 1.5rem;
         display: block;
         width: 100%;
+        position: relative;
+    }
+
+    .note-item::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background-color: #222;
+    }
+
+    .note-item:last-child::after {
+        display: none;
     }
 
     .note-item.active {
@@ -557,10 +572,6 @@ body {
 
     .note-item:hover {
         background-color: #1a1a1a;
-    }
-
-    .note-item:last-child {
-        border-bottom: none;
     }
 
     .note-link {
