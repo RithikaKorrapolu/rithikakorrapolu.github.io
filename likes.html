@@ -48,12 +48,12 @@
         <!-- Main Content -->
         <div class="notes-content">
             <div class="mobile-back-button">
-                <a href="notes://" class="back-link">
+                <button class="back-link" id="mobileBackBtn">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <polyline points="15 18 9 12 15 6"></polyline>
                     </svg>
-                    <span>Notes</span>
-                </a>
+                    <span>More Likes</span>
+                </button>
             </div>
             <div class="note-header">
                 <div class="note-timestamp">Last Updated: October 23, 2025 at 2:04 PM</div>
@@ -215,6 +215,29 @@
             if (e.target === notesPopup) {
                 notesPopup.classList.add('hidden');
             }
+        });
+
+        // Mobile sidebar toggle
+        const mobileBackBtn = document.getElementById('mobileBackBtn');
+        const sidebar = document.querySelector('.notes-sidebar');
+        const content = document.querySelector('.notes-content');
+
+        mobileBackBtn?.addEventListener('click', () => {
+            sidebar.classList.toggle('mobile-show');
+            content.classList.toggle('mobile-hide');
+        });
+
+        // When clicking a note item on mobile, hide sidebar and show content
+        const noteLinks = document.querySelectorAll('.note-item.note-link:not(#notesAppTrigger)');
+        noteLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth <= 480) {
+                    // Let external links work normally
+                    if (!link.hasAttribute('href') || link.getAttribute('href').startsWith('http')) {
+                        return;
+                    }
+                }
+            });
         });
     </script>
 </body>

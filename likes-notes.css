@@ -119,6 +119,10 @@ body {
     text-decoration: none;
     font-size: 1.1rem;
     font-weight: 400;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 }
 
 .back-link svg {
@@ -454,11 +458,28 @@ body {
 @media (max-width: 480px) {
     .notes-sidebar {
         display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1000;
+        background-color: #000;
+        border-radius: 0;
+        border-right: none;
+    }
+
+    .notes-sidebar.mobile-show {
+        display: block;
     }
 
     .notes-content {
         width: 100%;
         border-radius: 1rem;
+    }
+
+    .notes-content.mobile-hide {
+        display: none;
     }
 
     .mobile-back-button {
