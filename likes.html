@@ -13,6 +13,15 @@
         <div class="notes-wrapper">
             <!-- Sidebar -->
             <div class="notes-sidebar">
+            <div class="sidebar-header">
+                <button class="sidebar-back-btn" id="sidebarBackBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    <span>Likes</span>
+                </button>
+            </div>
+
             <div class="sidebar-section">
                 <div class="section-header">
                     <span class="pin-icon">📌</span>
@@ -23,7 +32,10 @@
             <div class="sidebar-section">
                 <div class="section-header">Things I Like</div>
                 <div class="note-item active" id="specificThingsTab">
-                    <div class="note-title">Specific Things I Like</div>
+                    <div class="note-title">
+                        Specific Things I Like
+                        <span class="favorite-star">⭐</span>
+                    </div>
                     <div class="note-preview">"Instructions for living...</div>
                 </div>
                 <a href="https://open.spotify.com/user/1264073976/playlists" target="_blank" class="note-item note-link">
@@ -234,6 +246,13 @@
                 sidebar.classList.remove('mobile-show');
                 content.classList.remove('mobile-hide');
             }
+        });
+
+        // Sidebar back button
+        const sidebarBackBtn = document.getElementById('sidebarBackBtn');
+        sidebarBackBtn?.addEventListener('click', () => {
+            sidebar.classList.remove('mobile-show');
+            content.classList.remove('mobile-hide');
         });
 
         // When clicking a note item on mobile, hide sidebar and show content
