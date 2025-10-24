@@ -6,19 +6,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Likes | Rithika's Website</title>
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/likes-notes.css">
 </head>
 <body>
-    <div class="main-container">
-        <div class="content-container">
-            <div class="simple-likes-container">
-                <h1>Things I Like</h1>
-                
-                <div class="simple-quote">
-                    <p>"Instructions for living a life: Pay attention. Be astonished. Tell about it." <cite>-Mary Oliver</cite></p>
+    <div class="notes-app">
+        <div class="notes-wrapper">
+            <!-- Sidebar -->
+            <div class="notes-sidebar">
+            <div class="sidebar-section">
+                <div class="section-header">
+                    <span class="pin-icon">📌</span>
+                    <span>NOTES</span>
                 </div>
-                
-                <ol class="simple-likes-list">
-                    <li>When people say "Bada bing bada boom"</li>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="section-header">Today</div>
+                <div class="note-item active">
+                    <div class="note-title">Specific Things I Like</div>
+                    <div class="note-preview">"Instructions for living...</div>
+                </div>
+                <a href="https://open.spotify.com/user/1264073976/playlists" target="_blank" class="note-item note-link">
+                    <div class="note-title">Music</div>
+                    <div class="note-preview">playlist for every month..</div>
+                </a>
+                <a href="https://letterboxd.com/rithika24/reviews/" target="_blank" class="note-item note-link">
+                    <div class="note-title">Movies</div>
+                    <div class="note-preview">freaking love the cinema</div>
+                </a>
+                <a href="https://www.goodreads.com/review/list/140259558-rithika-korrapolu?shelf=read" target="_blank" class="note-item note-link">
+                    <div class="note-title">Books</div>
+                    <div class="note-preview">yeah, I read or whatever</div>
+                </a>
+                <div class="note-item note-link" id="notesAppTrigger">
+                    <div class="note-title">Things You Like</div>
+                    <div class="note-preview">make things holy</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="notes-content">
+            <div class="mobile-back-button">
+                <a href="notes://" class="back-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                    <span>Notes</span>
+                </a>
+            </div>
+            <div class="note-header">
+                <div class="note-timestamp">Last Updated: October 23, 2025 at 2:04 PM</div>
+            </div>
+
+            <div class="note-body">
+                <h1 class="note-main-title">Specific Things I Like</h1>
+
+                <div class="mary-oliver-quote">
+                    <p class="quote-title">"Instructions for living a life:</p>
+                    <div class="quote-item">
+                        <span class="quote-text">Pay attention.</span>
+                    </div>
+                    <div class="quote-item">
+                        <span class="quote-text">Be astonished.</span>
+                    </div>
+                    <div class="quote-item">
+                        <span class="quote-text">Tell about it."</span>
+                    </div>
+                    <p class="quote-author">– Mary Oliver</p>
+                </div>
+
+                <div class="personal-note">
+                    <p>I keep a list of random things I like on my Notes app. Pretty much looks like this. It's kind of all over the place but when I'm feeling uninspired or sad or cynical, I look at it. And then I usually feel a little bit better. It makes me feel hopeful.</p>
+                </div>
+
+                <div class="additional-quote">
+                    <p>"You make things holy by the kind of attention you give them."</p>
+                </div>
+
+                <ul class="likes-list">
+                    <li>When people say "bada bing bada boom"</li>
                     <li>Seeing a friend's handwriting for the first time, especially if it's bad</li>
                     <li>Sharing an umbrella</li>
                     <li>When people chant SPEECH SPEECH SPEECH and then someone actually gives a speech</li>
@@ -30,7 +97,7 @@
                     <li>Niche references to books, movies, shows</li>
                     <li>Going to the movie theater early to watch all the trailers</li>
                     <li>When people use the name / birthday of someone they love in their passwords</li>
-                    <li>The concept of "retiring a jersey/number"' to honor a player</li>
+                    <li>The concept of "retiring a jersey/number" to honor a player</li>
                     <li>Rocking chairs and cushy recliners</li>
                     <li>Finding random notes or receipts in used books</li>
                     <li>The word "tutelage". Also "hijinx"</li>
@@ -40,7 +107,7 @@
                     <li>Tucking friends and family into bed</li>
                     <li>Bus drivers honking when they recognize each other</li>
                     <li>Wearing mismatched socks</li>
-                    <li>Really poetic and deep lyrics hidden in party / dance songs (Like many of Fred Again's songs or AP Dhillon's songs)</li>
+                    <li>Really poetic and deep lyrics hidden in party / dance songs</li>
                     <li>Learning the meaning behind tattoos</li>
                     <li>Unique dedications and epigraphs in books</li>
                     <li>Watching kid's school talent shows / performances</li>
@@ -76,7 +143,7 @@
                     <li>Segways</li>
                     <li>Calling my friends dummy affectionately</li>
                     <li>When people say "Shabaash"</li>
-                    <li>Purposely misquoteing famous lines to get people's reactions</li>
+                    <li>Purposely misquoting famous lines to get people's reactions</li>
                     <li>When people store pencil/pen on their ears or in their hair</li>
                     <li>When people run with their backpacks - looks goofy but cute</li>
                     <li>Random thunderstorms or rain in the summer</li>
@@ -86,73 +153,25 @@
                     <li>When dogs are carried in bags and just their head sticks out</li>
                     <li>Dates at furniture stores</li>
                     <li>Adult field trips</li>
-                </ol>
-                <div class="simple-quote">
-                    <p>"It should be enough to make beautiful things. It isn't. It should be." <cite>-Richard Silken</cite></p>
-                </div>
-                    <p>Movies<cite></cite></p>
-                <ol class="simple-likes-list">
-                    <li>Amélie</li>
-                    <li>When Harry Met Sally</li>
-                    <li>3 Idiots</li>
-                    <li>Life Itself</li>
-                    <li>Good Will Hunting</li>
-                    <li>Everything Everywhere All At Once</li>
-                    <li>Jojo Rabbit</li>
-                    <li>La La Land</li>
-                    <li>Kabhi Khushi Kabhie Gham</li>
-                </ol>
-                    <p>TV Shows<cite></cite></p>
-                <ol class="simple-likes-list">
-                    <li>The Office</li>
-                    <li>After Life</li>
-                    <li>Parks and Recreation</li>
-                    <li>Community</li>
-                    <li>Arrested Development</li>
-                    <li>Veep</li>
-                </ol>
-                    <p>Music<cite></cite></p>
-                <ol class="simple-likes-list">
-                    <li>Frank Ocean</li>
-                    <li>Nusrat Fateh Ali Khan</li>
-                    <li>Bon Iver</li>
-                    <li>Alabama Shakes</li>
-                    <li>A.R Rahman</li>
-                    <li>Note: Any kind of soft, devotional, or folksy indian music is uniquely precious to me </li>
-                </ol>
-                    <p>Writing<cite></cite></p>
-                <ol class="simple-likes-list">
-                    <li>The Kite Runner</li>
-                    <li>Tomorrow, and Tomorrow, and Tomorrow</li>
-                    <li>The Book Thief</li>
-                    <li>Bone</li>
-                    <li>Mary Oliver</li>
-                    <li>Frank O'Hara</li>
-                    <li>Virginia Woolf</li>
-                    <li>Rainer Maria Rilke</li>
-                    <li>Richard Silken</li>
-                    <li>Ocean Vuong</li>
-                    <li>Mary Ruefle</li>
-                    <li>Mahmoud Darwish</li>
-                    <li>Pablo Neruda</li>
-                </ol>
+                </ul>
             </div>
-            
-            
+        </div>
         </div>
 
-        <!-- Navigation Bar -->
-        <nav class="navbar">
+        <!-- Bottom Navigation -->
+        <nav class="notes-navbar">
             <div class="nav-content">
                 <div class="site-title">
-                    <a href="index.html">Rithika's website ⌂</a>
+                    <a href="index.html">
+                        <img src="/images/logo.jpg" alt="Rithika's website" class="site-logo">
+                    </a>
                 </div>
-                
+
                 <button class="menu-trigger">
                     <span>menu</span>
                 </button>
             </div>
-        
+
             <div class="menu-popup hidden">
                 <a href="about.html">about</a>
                 <a href="likes.html">likes</a>
@@ -160,7 +179,47 @@
                 <a href="contact.html">connect</a>
             </div>
         </nav>
+
+        <!-- Custom Notes App Popup -->
+        <div class="notes-popup-overlay hidden" id="notesPopup">
+            <div class="notes-popup-content">
+                <h2>Open Notes?</h2>
+                <p>What specific things do you like?</p>
+                <div class="notes-popup-buttons">
+                    <button class="notes-btn notes-btn-cancel" id="cancelNotesBtn">Cancel</button>
+                    <button class="notes-btn notes-btn-open" id="openNotesBtn">Open Notes</button>
+                </div>
+            </div>
+        </div>
     </div>
+
     <script type="module" src="/main.js"></script>
+    <script>
+        // Notes app popup functionality
+        const notesPopup = document.getElementById('notesPopup');
+        const notesAppTrigger = document.getElementById('notesAppTrigger');
+        const cancelNotesBtn = document.getElementById('cancelNotesBtn');
+        const openNotesBtn = document.getElementById('openNotesBtn');
+
+        notesAppTrigger?.addEventListener('click', () => {
+            notesPopup.classList.remove('hidden');
+        });
+
+        cancelNotesBtn?.addEventListener('click', () => {
+            notesPopup.classList.add('hidden');
+        });
+
+        openNotesBtn?.addEventListener('click', () => {
+            window.location.href = 'notes://';
+            notesPopup.classList.add('hidden');
+        });
+
+        // Close popup when clicking outside
+        notesPopup?.addEventListener('click', (e) => {
+            if (e.target === notesPopup) {
+                notesPopup.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
