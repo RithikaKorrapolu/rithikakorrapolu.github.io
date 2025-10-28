@@ -249,6 +249,7 @@
         .form-group:not(.form-row):has(select#laughALot) .form-label,
         .form-group:not(.form-row):has(select#everGetScared) .form-label,
         .form-group:not(.form-row):has(select#forgivingPerson) .form-label,
+        .form-group:not(.form-row):has(select#isGodReal) .form-label,
         .form-group:not(.form-row):has(select#dreamSize) .form-label {
             position: static;
             display: block;
@@ -280,6 +281,7 @@
         select#laughALot.form-input,
         select#everGetScared.form-input,
         select#forgivingPerson.form-input,
+        select#isGodReal.form-input,
         select#dreamSize.form-input {
             padding: 10px 14px;
         }
@@ -586,7 +588,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="howKnowLove">How do you know if someone loves you?<span class="required">*</span></label>
+                    <label class="form-label" for="howKnowLove">How do you know if someone loves you? Like for real.<span class="required">*</span></label>
                     <textarea id="howKnowLove" name="howKnowLove" class="form-input" rows="4" required></textarea>
                 </div>
 
@@ -608,7 +610,17 @@
 
                 <div class="form-group">
                     <label class="form-label" for="isGodReal">Is God real, you think?<span class="required">*</span></label>
-                    <textarea id="isGodReal" name="isGodReal" class="form-input" rows="4" required></textarea>
+                    <select id="isGodReal" name="isGodReal" class="form-input" required>
+                        <option value="">Select...</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                        <option value="Maybe">Maybe</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="howDoYouKnowGroup" style="display: none;">
+                    <label class="form-label" for="howDoYouKnow">How do you know?<span class="required">*</span></label>
+                    <textarea id="howDoYouKnow" name="howDoYouKnow" class="form-input" rows="4"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -649,6 +661,11 @@
                 <div class="form-group">
                     <label class="form-label" for="dontUnderstand">What's something you still don't understand?<span class="required">*</span></label>
                     <textarea id="dontUnderstand" name="dontUnderstand" class="form-input" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="doUnderstand">What's something you do understand?<span class="required">*</span></label>
+                    <textarea id="doUnderstand" name="doUnderstand" class="form-input" rows="4" required></textarea>
                 </div>
 
                 <div class="form-group">
@@ -698,6 +715,21 @@
                 whatScaresYouGroup.style.display = 'none';
                 whatScaresYouField.removeAttribute('required');
                 whatScaresYouField.value = '';
+            }
+        });
+
+        // Show "How do you know?" question when "Yes" is selected for God question
+        document.getElementById('isGodReal').addEventListener('change', function() {
+            const howDoYouKnowGroup = document.getElementById('howDoYouKnowGroup');
+            const howDoYouKnowField = document.getElementById('howDoYouKnow');
+
+            if (this.value === 'Yes') {
+                howDoYouKnowGroup.style.display = 'block';
+                howDoYouKnowField.setAttribute('required', 'required');
+            } else {
+                howDoYouKnowGroup.style.display = 'none';
+                howDoYouKnowField.removeAttribute('required');
+                howDoYouKnowField.value = '';
             }
         });
 
