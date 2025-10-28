@@ -72,7 +72,7 @@ export function initializeHomePage() {
             },
             {
                 mp4: '/crystal.mp4',
-                name: 'Crystal Chen',
+                name: 'Crystal Desai',
             }
         ];
 
