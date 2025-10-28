@@ -589,7 +589,17 @@
                     .select('*')
                     .order('created_at', { ascending: false });
 
-                if (error) throw error;
+                if (error) {
+                    console.error('Error loading fun facts:', error);
+
+                    // Check if table doesn't exist
+                    if (error.message.includes('relation "public.fun_facts" does not exist')) {
+                        cardName.textContent = 'Database Not Set Up';
+                        cardFact.textContent = 'The fun_facts table needs to be created in Supabase. Please run the SQL setup from SETUP_FUNFACT_ROLODEX.md';
+                        return;
+                    }
+                    throw error;
+                }
 
                 allFacts = data || [];
                 updateCounter();
@@ -663,9 +673,22 @@
                         person_name: personName,
                         fun_fact: funFact,
                         submitted_by: submitterName
-                    }]);
+                    }])
+                    .select();
 
-                if (error) throw error;
+                if (error) {
+                    console.error('Supabase error:', error);
+
+                    // Check for common errors
+                    if (error.message.includes('relation "public.fun_facts" does not exist')) {
+                        alert('Database table not set up yet! Please ask Rithika to run the SQL setup from SETUP_FUNFACT_ROLODEX.md');
+                    } else if (error.message.includes('permission denied')) {
+                        alert('Permission error. The database needs to be configured properly.');
+                    } else {
+                        alert(`Error: ${error.message}`);
+                    }
+                    return;
+                }
 
                 // Reset form and close modal
                 submitForm.reset();
@@ -677,7 +700,7 @@
                 alert('Fun fact submitted successfully!');
             } catch (error) {
                 console.error('Error submitting fun fact:', error);
-                alert('Error submitting fun fact. Please try again.');
+                alert(`Unexpected error: ${error.message || 'Please try again.'}`);
             }
         });
 
