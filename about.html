@@ -238,10 +238,6 @@
                                 <div class="progress-bar" id="progressBar">
                                     <div class="progress-fill" id="progressFill"></div>
                                 </div>
-                                <div class="time-display">
-                                    <span id="currentTime">0:00</span>
-                                    <span id="duration">0:00</span>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -348,15 +344,6 @@
         const pauseIcon = document.getElementById('pauseIcon');
         const progressBar = document.getElementById('progressBar');
         const progressFill = document.getElementById('progressFill');
-        const currentTimeDisplay = document.getElementById('currentTime');
-        const durationDisplay = document.getElementById('duration');
-
-        // Format time in MM:SS
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
-        }
 
         // Play/Pause toggle
         playButton.addEventListener('click', () => {
@@ -373,30 +360,13 @@
             }
         });
 
-        // Update progress bar and time
+        // Update progress bar
         audioPlayer.addEventListener('timeupdate', () => {
             if (!isNaN(audioPlayer.duration)) {
                 const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
                 progressFill.style.width = `${progress}%`;
-                currentTimeDisplay.textContent = formatTime(audioPlayer.currentTime);
             }
         });
-
-        // Set duration when metadata loads
-        function updateDuration() {
-            if (!isNaN(audioPlayer.duration) && isFinite(audioPlayer.duration)) {
-                durationDisplay.textContent = formatTime(audioPlayer.duration);
-            }
-        }
-
-        audioPlayer.addEventListener('loadedmetadata', updateDuration);
-        audioPlayer.addEventListener('durationchange', updateDuration);
-        audioPlayer.addEventListener('canplay', updateDuration);
-
-        // Try to set duration immediately if already loaded
-        if (audioPlayer.readyState >= 1) {
-            updateDuration();
-        }
 
         // Seek functionality
         progressBar.addEventListener('click', (e) => {
