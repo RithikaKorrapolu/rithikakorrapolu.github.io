@@ -19,6 +19,66 @@
         .slide-content:first-child {
             margin-bottom: 40px;
         }
+
+        /* Music Player Styles */
+        .music-player-section {
+            margin: 2rem 0 3rem 0;
+            text-align: left;
+        }
+
+        .music-label {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            font-style: italic;
+        }
+
+        .audio-player {
+            width: 100%;
+            max-width: 350px;
+            height: 45px;
+            outline: none;
+            display: block;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 25px;
+            padding: 0 10px;
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        /* Custom audio player styling */
+        .audio-player::-webkit-media-controls-panel {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 25px;
+        }
+
+        .audio-player::-webkit-media-controls-play-button,
+        .audio-player::-webkit-media-controls-pause-button {
+            background-color: transparent;
+            border-radius: 50%;
+            filter: brightness(2);
+        }
+
+        .audio-player::-webkit-media-controls-timeline,
+        .audio-player::-webkit-media-controls-volume-slider {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+        }
+
+        .audio-player::-webkit-media-controls-current-time-display,
+        .audio-player::-webkit-media-controls-time-remaining-display {
+            color: white;
+            text-shadow: none;
+        }
+
+        @media (max-width: 768px) {
+            .audio-player {
+                max-width: 100%;
+            }
+
+            .music-player-section {
+                margin: 1.5rem 0 2rem 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -29,6 +89,16 @@
                 <div class="slide-header">
                     <h1>What I'm about</h1>
                 </div>
+
+                <!-- Music Player -->
+                <div class="music-player-section">
+                    <p class="music-label">Recommended Listening</p>
+                    <audio controls class="audio-player">
+                        <source src="/audio/recommended-song.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+
                 <div class="slide-main">
                     <div class="slide-column-left">
                         <img src="family.jpg" alt="Family photo" class="slide-image">
