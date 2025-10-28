@@ -974,6 +974,10 @@ video {
     display: block;
 }
 
+.fakejob-card img {
+    object-position: top;
+}
+
 .project-title {
     padding: 1rem;
     margin: 0;

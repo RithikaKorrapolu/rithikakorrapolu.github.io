@@ -5,11 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>About - Rithika's Website</title>
     <link rel="stylesheet" href="/style.css">
+    <style>
+        .content-container {
+            overflow-y: auto !important;
+            height: 100%;
+            padding-bottom: 100px;
+        }
+
+        .slide-content {
+            margin-bottom: 30px;
+        }
+
+        .slide-content:first-child {
+            margin-bottom: 40px;
+        }
+    </style>
 </head>
 <body>
     <div class="main-container">
         <div class="content-container">
-            <!-- Content will be inserted by JavaScript -->
+            <!-- Slide 1 -->
+            <div class="slide-content">
+                <div class="slide-header">
+                    <h1>What I'm about</h1>
+                </div>
+                <div class="slide-main">
+                    <div class="slide-column-left">
+                        <img src="family.jpg" alt="Family photo" class="slide-image">
+                    </div>
+                    <div class="slide-column-right">
+                        <h2>Who and where I'm from</h2>
+                        <p>Born in 1997, I was raised in <a href="https://en.wikipedia.org/wiki/New_Jersey" class="link" target="_blank" rel="noopener noreferrer">Paradise</a> by my earnest, loving family. The best parts of me came from them. I live in NYC now but still visit them often.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide-content">
+                <div class="slide-main">
+                    <div class="slide-column-left">
+                        <img src="weaknesses.jpg" alt="Childhood photo" class="slide-image">
+                    </div>
+                    <div class="slide-column-right">
+                        <h2>Weaknesses</h2>
+                        <p><em>"I'm so embarrassed. I'm not a real person yet" - Frances Ha</em></p>
+                        <br>
+                        <p>I'm allergic to tree nuts. I don't understand how the stock market works. When I get really frustrated, I'll just start crying. I need to learn how to communicate better when that happens. I also need to get better at handling feedback more objectively. I can be overly sensitive and not direct. I'll strive to be stronger in these areas.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide-content">
+                <div class="slide-main">
+                    <div class="slide-column-left">
+                        <img src="/images/suitme.jpg" alt="Photo in office" class="slide-image">
+                    </div>
+                    <div class="slide-column-right">
+                        <h2>Strengths</h2>
+                        <p>I know two magic tricks. I don't know how to have small dreams (my dad's fault). I am generally optimistic about people and humanity. A friend told me once I have a disarming personality. I hope that's true - I want people to feel safe and sincere and playful when they talk to me. I think I'm capable of that. Also, I'm pretty sure I can do the macarena to any song.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="slide-content">
+                <div class="slide-main">
+                    <div class="slide-column-left">
+                        <img src="work.jpg" alt="Big Suit Show photo" class="slide-image">
+                    </div>
+                    <div class="slide-column-right">
+                        <h2>Work</h2>
+                        <p>I'm working on a bunch of creative / tech / comedy <a href="portfolio.html" class="link">projects</a>. Previous work <a href="https://www.linkedin.com/in/rithikakorrapolu/" class="link" target="_blank" rel="noopener noreferrer">here</a>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="slide-content">
+                <div class="slide-main">
+                    <div class="slide-column-left">
+                        <h2>The End</h2>
+                        <p><em>"You don't meet the people you love. You recognize them." - Anna Gavalda</em></p>
+                        <p>If you want to chat, come <a href="contact.html" class="link" target="_blank" rel="noopener noreferrer">here</a></p>
+                    </div>
+                    <div class="slide-column-right">
+                    </div>
+                </div>
+            </div>
         </div>
 
         <nav class="navbar">
@@ -19,15 +102,14 @@
                         <img src="/images/logo.jpg" alt="Rithika's website" class="site-logo">
                     </a>
                     <span class="separator">|</span>
-                    <span class="current-page">about</span>
-
+                    <span class="current-page">about-page</span>
                 </div>
-                
+
                 <button class="menu-trigger">
                     <span>menu</span>
                 </button>
             </div>
-        
+
             <div class="menu-popup hidden">
                 <a href="about.html">about</a>
                 <a href="likes.html">likes</a>
