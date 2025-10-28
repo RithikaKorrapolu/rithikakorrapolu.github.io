@@ -69,6 +69,10 @@ export function initializeHomePage() {
             {
                 mp4: '/mahi.mp4',
                 name: 'Mahi Patel',
+            },
+            {
+                mp4: '/crystal.mp4',
+                name: 'Crystal Chen',
             }
         ];
 
