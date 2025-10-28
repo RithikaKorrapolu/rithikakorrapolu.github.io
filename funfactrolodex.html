@@ -103,52 +103,72 @@
 
         .rolodex-base {
             position: relative;
-            width: 320px;
-            height: 280px;
+            width: 400px;
+            height: 300px;
         }
 
-        /* Metal side spindles */
+        /* Metal side spindles with rotating wheels */
         .spindle {
             position: absolute;
-            width: 80px;
-            height: 280px;
-            background: linear-gradient(90deg,
-                #1a1a1a 0%,
-                #3a3a3a 20%,
-                #2a2a2a 50%,
-                #1a1a1a 100%);
-            border-radius: 40px;
+            width: 100px;
+            height: 300px;
             top: 0;
             z-index: 10;
-            box-shadow:
-                inset -2px 0 4px rgba(0, 0, 0, 0.5),
-                2px 0 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .spindle.left {
-            left: -60px;
+            left: -90px;
         }
 
         .spindle.right {
-            right: -60px;
+            right: -90px;
         }
 
-        /* Horizontal ridges on spindles */
+        /* Large rotating wheels */
         .spindle::before {
             content: '';
             position: absolute;
-            top: 10%;
-            left: 10%;
-            right: 10%;
-            bottom: 10%;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 8px,
-                rgba(0, 0, 0, 0.3) 8px,
-                rgba(0, 0, 0, 0.3) 9px
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle at 30% 30%, #2a2a2a, #0a0a0a);
+            border-radius: 50%;
+            box-shadow:
+                inset -3px -3px 8px rgba(255, 255, 255, 0.1),
+                inset 3px 3px 8px rgba(0, 0, 0, 0.8),
+                0 4px 12px rgba(0, 0, 0, 0.6);
+            border: 3px solid #1a1a1a;
+        }
+
+        /* Wheel grip ridges */
+        .spindle::after {
+            content: '';
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            background: repeating-conic-gradient(
+                from 0deg,
+                transparent 0deg 8deg,
+                rgba(0, 0, 0, 0.4) 8deg 10deg
             );
-            border-radius: 30px;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Metal support bar */
+        .spindle .support-bar {
+            position: absolute;
+            width: 12px;
+            height: 100%;
+            background: linear-gradient(90deg,
+                #2a2a2a 0%,
+                #3a3a3a 50%,
+                #2a2a2a 100%);
+            box-shadow:
+                inset -1px 0 2px rgba(0, 0, 0, 0.5),
+                1px 0 4px rgba(0, 0, 0, 0.3);
         }
 
         .card-stack {
@@ -161,21 +181,23 @@
 
         .rolodex-card {
             position: absolute;
-            width: 280px;
-            height: 160px;
-            background: linear-gradient(180deg, #f5f5dc 0%, #ebe7d5 100%);
-            border-radius: 8px;
+            width: 360px;
+            height: 200px;
+            background: linear-gradient(180deg, #fafafa 0%, #f0f0f0 100%);
+            border-radius: 4px;
             box-shadow:
-                0 2px 8px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            padding: 1rem;
+                0 4px 12px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+            padding: 1.25rem;
             left: 50%;
             top: 50%;
-            margin-left: -140px;
-            margin-top: -80px;
+            margin-left: -180px;
+            margin-top: -100px;
             transform-origin: center bottom;
             transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 2px solid #e0e0e0;
+            border-left: 3px solid #d0d0d0;
         }
 
         .rolodex-card.flipping {
@@ -203,35 +225,42 @@
         }
 
         .card-name {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
-            margin-bottom: 0.5rem;
-            border-bottom: 2px solid #2d2520;
-            padding-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: #1a1a1a;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 0.75rem;
         }
 
         .card-title {
-            font-size: 0.85rem;
-            color: #5a5a5a;
+            font-size: 0.9rem;
+            color: #666;
             margin-bottom: 1rem;
+            font-weight: 500;
         }
 
         .card-fact {
-            font-size: 0.9rem;
-            line-height: 1.5;
+            font-size: 1rem;
+            line-height: 1.6;
             flex: 1;
             overflow-y: auto;
+            color: #333;
         }
 
         .card-tabs {
             position: absolute;
-            right: 0;
-            top: -20px;
-            width: 80px;
-            height: 20px;
-            background: linear-gradient(180deg, #e5e1d0 0%, #d5d1c0 100%);
+            right: 15%;
+            top: -24px;
+            width: 100px;
+            height: 24px;
+            background: linear-gradient(180deg, #d0d0d0 0%, #c0c0c0 100%);
             border-radius: 4px 4px 0 0;
-            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+            box-shadow:
+                0 -2px 4px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            border: 1px solid #b0b0b0;
+            border-bottom: none;
         }
 
         .counter {
@@ -405,28 +434,48 @@
             }
 
             .rolodex-base {
-                width: 260px;
+                width: 300px;
                 height: 240px;
+                transform: scale(0.9);
             }
 
             .rolodex-card {
-                width: 240px;
-                height: 140px;
-                margin-left: -120px;
-                margin-top: -70px;
+                width: 280px;
+                height: 160px;
+                margin-left: -140px;
+                margin-top: -80px;
+                padding: 1rem;
             }
 
             .spindle {
-                width: 60px;
+                width: 80px;
                 height: 240px;
             }
 
             .spindle.left {
-                left: -50px;
+                left: -70px;
             }
 
             .spindle.right {
-                right: -50px;
+                right: -70px;
+            }
+
+            .spindle::before {
+                width: 70px;
+                height: 70px;
+            }
+
+            .spindle::after {
+                width: 70px;
+                height: 70px;
+            }
+
+            .card-name {
+                font-size: 1.1rem;
+            }
+
+            .card-fact {
+                font-size: 0.9rem;
             }
 
             .action-buttons {
@@ -467,8 +516,12 @@
                 <div class="desk-surface">
                     <div class="rolodex-3d">
                         <div class="rolodex-base">
-                            <div class="spindle left"></div>
-                            <div class="spindle right"></div>
+                            <div class="spindle left">
+                                <div class="support-bar"></div>
+                            </div>
+                            <div class="spindle right">
+                                <div class="support-bar"></div>
+                            </div>
                             <div class="card-stack" id="cardStack">
                                 <div class="rolodex-card">
                                     <div class="card-tabs"></div>
