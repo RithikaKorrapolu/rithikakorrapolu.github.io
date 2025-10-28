@@ -237,6 +237,25 @@
             user-select: none;
         }
 
+        /* For textareas, labels should be above the field */
+        .form-group:has(textarea) .form-label {
+            position: static;
+            display: block;
+            margin-bottom: 8px;
+            pointer-events: auto;
+        }
+
+        /* For the new select dropdowns (not in form-row), labels above */
+        .form-group:not(.form-row):has(select#laughALot) .form-label,
+        .form-group:not(.form-row):has(select#everGetScared) .form-label,
+        .form-group:not(.form-row):has(select#forgivingPerson) .form-label,
+        .form-group:not(.form-row):has(select#dreamSize) .form-label {
+            position: static;
+            display: block;
+            margin-bottom: 8px;
+            pointer-events: auto;
+        }
+
         .form-label .required {
             color: #d00;
             margin-left: 3px;
@@ -254,6 +273,20 @@
             box-sizing: border-box;
             background-color: #fff !important;
             color: #000 !important;
+        }
+
+        /* Remove extra top padding for textareas and new selects since labels are above */
+        textarea.form-input,
+        select#laughALot.form-input,
+        select#everGetScared.form-input,
+        select#forgivingPerson.form-input,
+        select#dreamSize.form-input {
+            padding: 10px 14px;
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 100px;
         }
 
         .form-input::placeholder {
@@ -538,6 +571,91 @@
                     <p class="file-note">Accepted file types: pdf, doc, docx, txt, rtf</p>
                 </div>
 
+                <div class="form-group">
+                    <label class="form-label" for="everGetScared">Do you ever get scared?<span class="required">*</span></label>
+                    <select id="everGetScared" name="everGetScared" class="form-input" required>
+                        <option value="">Select...</option>
+                        <option value="yes">yes</option>
+                        <option value="no">no</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="whatScaresYouGroup" style="display: none;">
+                    <label class="form-label" for="whatScaresYou">What makes you scared?<span class="required">*</span></label>
+                    <textarea id="whatScaresYou" name="whatScaresYou" class="form-input" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="howKnowLove">How do you know if someone loves you?<span class="required">*</span></label>
+                    <textarea id="howKnowLove" name="howKnowLove" class="form-input" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="someoneYouLove">Describe someone you love<span class="required">*</span></label>
+                    <textarea id="someoneYouLove" name="someoneYouLove" class="form-input" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="forgivingPerson">Are you a forgiving person?<span class="required">*</span></label>
+                    <select id="forgivingPerson" name="forgivingPerson" class="form-input" required>
+                        <option value="">Select...</option>
+                        <option value="I think so">I think so</option>
+                        <option value="it depends">it depends</option>
+                        <option value="I don't think so">I don't think so</option>
+                        <option value="not sure">not sure</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="isGodReal">Is God real, you think?<span class="required">*</span></label>
+                    <textarea id="isGodReal" name="isGodReal" class="form-input" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="laughALot">Do you laugh easily?<span class="required">*</span></label>
+                    <select id="laughALot" name="laughALot" class="form-input" required>
+                        <option value="">Select...</option>
+                        <option value="I think so">I think so</option>
+                        <option value="I don't think so">I don't think so</option>
+                        <option value="I don't know">I don't know</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="feelBetter">What makes you feel better when you're upset?<span class="required">*</span></label>
+                    <textarea id="feelBetter" name="feelBetter" class="form-input" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="interestingPeople">What makes some people more interesting than others?<span class="required">*</span></label>
+                    <textarea id="interestingPeople" name="interestingPeople" class="form-input" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="dreamSize">How big are your dreams?<span class="required">*</span></label>
+                    <select id="dreamSize" name="dreamSize" class="form-input" required>
+                        <option value="">Select...</option>
+                        <option value="small">small</option>
+                        <option value="medium">medium</option>
+                        <option value="big">big</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="describeDreamGroup" style="display: none;">
+                    <label class="form-label" for="describeDream">Describe one (or more) of your dreams<span class="required">*</span></label>
+                    <textarea id="describeDream" name="describeDream" class="form-input" rows="4"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="dontUnderstand">What's something you still don't understand?<span class="required">*</span></label>
+                    <textarea id="dontUnderstand" name="dontUnderstand" class="form-input" rows="4" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="anythingElse">Is there anything else you want to tell us?</label>
+                    <textarea id="anythingElse" name="anythingElse" class="form-input" rows="4"></textarea>
+                </div>
+
                 <div id="formMessage" class="form-message hidden"></div>
 
                 <button type="submit" class="submit-btn">Submit Application</button>
@@ -568,6 +686,36 @@
 
     <script type="module" src="/main.js"></script>
     <script>
+        // Show "What scares you?" question when "yes" is selected
+        document.getElementById('everGetScared').addEventListener('change', function() {
+            const whatScaresYouGroup = document.getElementById('whatScaresYouGroup');
+            const whatScaresYouField = document.getElementById('whatScaresYou');
+
+            if (this.value === 'yes') {
+                whatScaresYouGroup.style.display = 'block';
+                whatScaresYouField.setAttribute('required', 'required');
+            } else {
+                whatScaresYouGroup.style.display = 'none';
+                whatScaresYouField.removeAttribute('required');
+                whatScaresYouField.value = '';
+            }
+        });
+
+        // Show "Describe your dreams" question when dream size is selected
+        document.getElementById('dreamSize').addEventListener('change', function() {
+            const describeDreamGroup = document.getElementById('describeDreamGroup');
+            const describeDreamField = document.getElementById('describeDream');
+
+            if (this.value) {
+                describeDreamGroup.style.display = 'block';
+                describeDreamField.setAttribute('required', 'required');
+            } else {
+                describeDreamGroup.style.display = 'none';
+                describeDreamField.removeAttribute('required');
+                describeDreamField.value = '';
+            }
+        });
+
         document.getElementById('jobApplicationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
