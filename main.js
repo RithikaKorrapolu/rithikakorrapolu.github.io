@@ -156,14 +156,41 @@ export function initializeHomePage() {
             // Load the new video sources
             welcomeVideo.load();
 
-            // Play the video
-            welcomeVideo.play().catch(function(error) {
-                console.log("Video play failed:", error);
-                welcomeVideo.muted = true;
-                welcomeVideo.play();
-            }).finally(() => {
+            // Timeout to detect frozen/stuck videos (especially on mobile)
+            let playTimeout = setTimeout(() => {
+                console.log('Video loading timeout - attempting recovery');
+                welcomeVideo.load();
+                welcomeVideo.play().catch(err => console.log('Recovery play failed:', err));
+            }, 5000);
+
+            // Play the video with better mobile handling
+            const playPromise = welcomeVideo.play();
+
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    clearTimeout(playTimeout);
+                    isVideoEnding = false;
+                }).catch(function(error) {
+                    console.log("Video play failed:", error);
+                    // For mobile Safari - try forcing muted playback
+                    welcomeVideo.muted = true;
+
+                    // Small delay before retry for mobile
+                    setTimeout(() => {
+                        welcomeVideo.play().then(() => {
+                            clearTimeout(playTimeout);
+                            isVideoEnding = false;
+                        }).catch(err => {
+                            console.log('Retry failed:', err);
+                            clearTimeout(playTimeout);
+                            isVideoEnding = false;
+                        });
+                    }, 100);
+                });
+            } else {
+                clearTimeout(playTimeout);
                 isVideoEnding = false;
-            });
+            }
 
             // Preload the next video in background
             preloadNextVideo();
@@ -200,6 +227,38 @@ export function initializeHomePage() {
                 videoContainer.classList.remove('loading');
             }
         });
+
+        // Handle stalled/frozen video (common on mobile)
+        welcomeVideo.addEventListener('stalled', function() {
+            console.log('Video stalled, attempting to recover');
+            welcomeVideo.load();
+            welcomeVideo.play().catch(err => console.log('Stall recovery failed:', err));
+        });
+
+        // Handle waiting/buffering state
+        welcomeVideo.addEventListener('waiting', function() {
+            console.log('Video waiting/buffering');
+        });
+
+        // Detect if video is stuck and force reload
+        let lastTime = 0;
+        let stuckCount = 0;
+        setInterval(() => {
+            if (!welcomeVideo.paused && !welcomeVideo.ended) {
+                if (welcomeVideo.currentTime === lastTime) {
+                    stuckCount++;
+                    if (stuckCount > 3) {
+                        console.log('Video appears stuck, forcing reload');
+                        welcomeVideo.load();
+                        welcomeVideo.play().catch(err => console.log('Stuck recovery failed:', err));
+                        stuckCount = 0;
+                    }
+                } else {
+                    stuckCount = 0;
+                }
+                lastTime = welcomeVideo.currentTime;
+            }
+        }, 1000);
 
         // Start with the first video
         loadNextVideo();
